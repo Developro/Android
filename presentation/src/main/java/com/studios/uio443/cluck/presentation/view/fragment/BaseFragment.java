@@ -81,6 +81,7 @@ public abstract class BaseFragment extends Fragment implements FragmentNavigatio
     protected void replaceFragment(int containerViewId, Fragment fragment) {
         final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.replace(containerViewId, fragment);
+        fragmentTransaction.addToBackStack(null); //возврат на предыдующий фрагмент
         fragmentTransaction.commit();
     }
 

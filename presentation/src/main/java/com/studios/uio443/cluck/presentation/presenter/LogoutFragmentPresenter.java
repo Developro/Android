@@ -29,7 +29,8 @@ public class LogoutFragmentPresenter extends BasePresenter<UserHolder, LogoutFra
 
         // Let's not reload data if it's already here
         if (model == null && !isLoadingData) {
-            loadData();
+            setModel(UserHolder.getInstance());
+            //loadData(); // если нужен запрос к серверу
         }
     }
 

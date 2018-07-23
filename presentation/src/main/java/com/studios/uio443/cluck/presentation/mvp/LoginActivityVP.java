@@ -7,7 +7,6 @@ public interface LoginActivityVP {
         void setFragment(BaseFragment fragment);
 
         void startActivity(Class activityClass);
-
     }
 
     interface Presenter {

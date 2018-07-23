@@ -26,6 +26,8 @@ import butterknife.ButterKnife;
 
 public class LoginFragment extends BaseFragment implements LoginFragmentVP.View {
 
+    private static final String LOGIN = "LOGIN";
+    private static final String PASSWORD = "PASSWORD";
     LoginFragmentPresenter presenter;
 
     private static final String[] sMyScope = new String[]{
@@ -48,8 +50,8 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
     EditText loginEmailInput;
     @BindView(R.id.login_password_input)
     EditText loginPasswordInput;
-    @BindView(R.id.sign_in_button)
-    ImageButton btnSignIn;
+    @BindView(R.id.sign_in_button_VK)
+    ImageButton btnSignInVK;
     @BindView(R.id.btn_login)
     Button btnLogin;
     @BindView(R.id.link_signup)
@@ -70,16 +72,20 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        //TODO чтение последнего логина из префа
+
         if (savedInstanceState == null) {
             presenter = new LoginFragmentPresenter();
         } else {
+            loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
+            loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
         presenter.bindView(this);
 
         //Если у пользователя не установлено приложение ВКонтакте,
         // то SDK будет использовать авторизацию через новую Activity при помощи OAuth.
-        btnSignIn.setOnClickListener(v -> VKSdk.login(getActivity(), sMyScope));
+        btnSignInVK.setOnClickListener(v -> presenter.onSignInVK());
 
         btnLogin.setOnClickListener(v -> {
             String email = loginEmailInput.getText().toString();
@@ -88,27 +94,31 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
             presenter.onLogin(email, password);
         });
 
-        linkSignUp.setOnClickListener(v -> presenter.onSignin());
-
+        linkSignUp.setOnClickListener(v -> presenter.onSignUp());
     }
 
     @Override
     public void onResume() {
+        Log.d(Consts.TAG, "LoginFragment.onResume");
         super.onResume();
 
+        //TODO запись последнего логина в преф
         presenter.bindView(this);
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(Consts.TAG, "NoteFragment.onSaveInstanceState");
+        Log.d(Consts.TAG, "LoginFragment.onSaveInstanceState");
         super.onSaveInstanceState(outState);
+
+        outState.putString(LOGIN, loginEmailInput.getText().toString());
+        outState.putString(PASSWORD, loginPasswordInput.getText().toString());
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
     @Override
     public void onPause() {
-        Log.d(Consts.TAG, "NoteFragment.onPause");
+        Log.d(Consts.TAG, "LoginFragment.onPause");
         super.onPause();
 
         presenter.unbindView();
@@ -135,9 +145,9 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
         btnLogin.setEnabled(true);
     }
 
-
     @Override
     public void showLoginFailed() {
+        Log.e(Consts.TAG, "LoginFragment.showLoginFailed");
         Toast.makeText(getActivity(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
 
         btnLogin.setEnabled(true);
@@ -178,5 +188,10 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
             Log.e(Consts.TAG, "LoginFragment.setFragment\n" + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void VKSdkLogin() {
+        VKSdk.login(getActivity(), sMyScope);
     }
 }

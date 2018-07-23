@@ -8,6 +8,8 @@ public interface LoginFragmentVP {
 
         void startActivity(Class activityClass);
 
+        void VKSdkLogin();
+
         void showLoginSuccess();
 
         void showLoginFailed();
@@ -18,10 +20,11 @@ public interface LoginFragmentVP {
     }
 
     interface Presenter {
+        void onSignInVK();
 
         void onLogin(String email, String password);
 
-        void onSignin();
+        void onSignUp();
 
         void onLoginSuccess();
 
