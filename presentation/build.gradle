@@ -76,6 +76,10 @@ dependencies {
   //SDK упрощает использование API ВКонтакте в Android-приложениях
   implementation project(':vksdk_library')
 
+  //PinLockView - https://android-arsenal.com/details/1/3706
+  //A clean, minimalistic, easy-to-use and highly customizable pin lock custom view for Android.
+  implementation project(':pinlockview')
+
   implementation presentationDependencies.androidSupport
   implementation presentationDependencies.constraintLayout
   implementation presentationDependencies.recyclerView
@@ -93,6 +97,10 @@ dependencies {
   implementation presentationDependencies.arrow
 
   implementation 'com.google.guava:guava:22.0'
+
+  //One tool to manage key generation, key storing and encryption on different APIs of Android
+  //yakivmospan/scytale https://github.com/yakivmospan/scytale
+  implementation 'com.yakivmospan:scytale:1.0.1'
 
   testImplementation presentationTestDependencies.junit
   androidTestImplementation presentationTestDependencies.runner

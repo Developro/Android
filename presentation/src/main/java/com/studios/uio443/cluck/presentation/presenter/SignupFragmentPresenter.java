@@ -11,7 +11,7 @@ import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.SignupFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
-import com.studios.uio443.cluck.presentation.view.activity.ModeSelectActivity;
+import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 
 public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFragmentVP.View> implements
@@ -76,7 +76,8 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
     @Override
     public void onSignupSuccess() {
         view().showSignupSuccess();
-        view().startActivity(ModeSelectActivity.class); //start MainActivity
+        view().startActivityForResult(LoginPinActivity.class, Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY);
+        //view().startActivity(ModeSelectActivity.class); //start MainActivity
     }
 
     // It's OK for this class not to be static and to keep a reference to the Presenter, as this

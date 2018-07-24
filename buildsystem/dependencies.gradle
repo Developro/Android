@@ -7,7 +7,7 @@ allprojects {
 ext {
   //Android
   androidBuildToolsVersion = "27.0.3"
-  androidMinSdkVersion = 19
+  androidMinSdkVersion = 21
   androidTargetSdkVersion = 27
   androidCompileSdkVersion = 27
 
@@ -103,5 +103,11 @@ ext {
 
   developmentDependencies = [
       leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+  ]
+
+  pinlockviewDependencies = [
+      androidSupport:     "com.android.support:appcompat-v7:$androidSupportVersion",
+      recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+      junit:              "junit:junit:${jUnitVersion}",
   ]
 }

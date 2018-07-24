@@ -99,6 +99,18 @@ public class LoginActivity extends BaseActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(Consts.TAG, "LoginActivity.onActivityResult");
+        presenter.bindView(this);
+
+        switch (requestCode) {
+            case Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY: {
+                Log.i(Consts.TAG, "LoginActivity.onActivityResult.REQUEST_CODE_LOGIN_PIN_ACTIVITY");
+                if (resultCode == RESULT_OK) {
+                    presenter.startModeSelectActivity(); //start MainActivity
+                }
+                break;
+            }
+        }
+
         VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {

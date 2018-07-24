@@ -13,4 +13,15 @@
   <dimen name="lv_row_text_size">20sp</dimen>
   <dimen name="lv_row_icon_width">50dp</dimen>
   <dimen name="lv_row_icon_padding">5dp</dimen>
+
+    // fingerprint
+    <dimen name="finger_text_marginbottom">22dp</dimen>
+    <dimen name="finger_icon">60dp</dimen>
+    <dimen name="finger_icon_margintop">80dp</dimen>
+    <dimen name="finger_icon_marginbottom">10dp</dimen>
+    <dimen name="textsize_fingerprint">14sp</dimen>
+    //attempts
+    <dimen name="attempts_margintop">15dp</dimen>
+    <dimen name="textsize_attempts">13sp</dimen>
+
 </resources>

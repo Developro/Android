@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'pin-lock-view'
+
+    publishedGroupId = 'com.andrognito.pinlockview'
+    libraryName = 'pinlockview'
+    artifact = 'pinlockview'
+
+    libraryDescription = 'A clean, minimalistic, easy-to-use and highly customizable pin lock custom view'
+
+    siteUrl = 'https://github.com/aritraroy/PinLockView'
+    gitUrl = 'https://github.com/aritraroy/PinLockView.git'
+
+    libraryVersion = '2.1.0'
+
+    developerId = 'aritraroy'
+    developerName = 'Aritra Roy'
+    developerEmail = 'aritra.roy.in@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    def config = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion config["androidCompileSdkVersion"]
+    buildToolsVersion config["androidBuildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion config["androidMinSdkVersion"]
+        targetSdkVersion config["androidTargetSdkVersion"]
+        versionCode 5
+        versionName "2.1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def pinlockviewDependencies = rootProject.ext.pinlockviewDependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation pinlockviewDependencies.androidSupport
+    implementation pinlockviewDependencies.recyclerView
+    testImplementation pinlockviewDependencies.junit
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

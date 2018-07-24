@@ -15,7 +15,7 @@
 
   <string name="string_content_description">Non accessible view</string>
 
-  //Exception messages
+  <!--Exception messages-->
   <string name="exception_message_generic">There was an application error</string>
   <string name="exception_message_no_connection">There is no internet connection</string>
   <string name="exception_message_user_not_found">Cannot retrieve user data. Check your internet connection</string>
@@ -47,7 +47,7 @@
   <string name="name_length_error">at least 3 characters</string>
   <string name="password_do_not_match">Password Do not match</string>
 
-  //ID приложения
+  <!--ID приложения-->
   <integer name="com_vk_sdk_AppId">6635663</integer>
     <!-- Strings related to onLogin -->
   <string name="action_sign_in_short">Sign in with VK</string>
@@ -55,5 +55,17 @@
   <string name="continue_using_app">Continue using test application</string>
   <string name="logout">Logout</string>
   <string name="vk">vk</string>
+
+  <!--login-->
+  <!--pinlock-->
+  <string name="pinlock_title">Enter Pin Code</string>
+  <string name="pinlock_settitle">Set Pin Code</string>
+  <string name="pinlock_firsttry">Wrong Pin Code: First Try</string>
+  <string name="pinlock_secondtry">Wrong Pin Code: Second Try</string>
+  <string name="pinlock_wrongpin">Wrong Pin code</string>
+  <string name="pinlock_secondPin">Enter Pin Code Again</string>
+  <string name="pinlock_tryagain">Pin Codes Are Not The Same</string>
+  <string name="pinlock_fingerprint">Use Fingerprint</string>
+
 
 </resources>

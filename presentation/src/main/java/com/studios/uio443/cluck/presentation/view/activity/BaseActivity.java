@@ -40,21 +40,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     fragmentTransaction.commit();
   }
 
-    protected void replaceFragment(int containerViewId, Fragment fragment) {
-        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(containerViewId, fragment);
-        fragmentTransaction.commit();
-    }
+  protected void replaceFragment(int containerViewId, Fragment fragment) {
+    final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+    fragmentTransaction.replace(containerViewId, fragment);
+    fragmentTransaction.commit();
+  }
 
-    public void startActivity(Class activityClass) {
-        try {
-            Intent intent = new Intent(this, activityClass);
-            startActivity(intent);
-        } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "BaseActivity.setStartActivity\n" + e.getMessage());
-            e.printStackTrace();
-        }
+  public void startActivity(Class activityClass) {
+    try {
+      Intent intent = new Intent(this, activityClass);
+      startActivity(intent);
+    } catch (NullPointerException e) {
+      Log.e(Consts.TAG, "BaseActivity.setStartActivity\n" + e.getMessage());
+      e.printStackTrace();
     }
+  }
 
   /**
    * Get the Main Application component for dependency injection.
