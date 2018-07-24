@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.studios.uio443.cluck.presentation.model.User;
+import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;

@@ -2,6 +2,7 @@ package com.studios.uio443.cluck.presentation.model;
 
 import android.util.Log;
 
+import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 public class UserHolder {
@@ -19,7 +20,7 @@ public class UserHolder {
     }
 
     public int getId() {
-        return currentUser.getId();
+        return currentUser.getUserId();
     }
 
     public User getCurrentUser() {

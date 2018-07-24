@@ -29,8 +29,13 @@ public class User {
   private String coverUrl;
   private String fullName;
   private String email;
-  private String description;
-  private int followers;
+  private String login;
+  private String password;
+  private String accessToken;
+  private String refreshToken;
+  private int points;
+  private int votes;
+  private String nickName;
 
   public int getUserId() {
     return userId;
@@ -60,19 +65,59 @@ public class User {
     this.email = email;
   }
 
-  public String getDescription() {
-    return description;
+  public String getLogin() {
+    return login;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setLogin(String login) {
+    this.login = login;
   }
 
-  public int getFollowers() {
-    return followers;
+  public String getPassword() {
+    return password;
   }
 
-  public void setFollowers(int followers) {
-    this.followers = followers;
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getAccessToken() {
+    return accessToken;
+  }
+
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
+  }
+
+  public String getRefreshToken() {
+    return refreshToken;
+  }
+
+  public void setRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+  public int getPoints() {
+    return points;
+  }
+
+  public void setPoints(int points) {
+    this.points = points;
+  }
+
+  public int getVotes() {
+    return votes;
+  }
+
+  public void setVotes(int votes) {
+    this.votes = votes;
+  }
+
+  public String getNickName() {
+    return nickName;
+  }
+
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
   }
 }

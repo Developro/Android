@@ -2,7 +2,7 @@ package com.studios.uio443.cluck.presentation.services;
 
 import android.support.annotation.Nullable;
 
-import com.studios.uio443.cluck.presentation.model.User;
+import com.studios.uio443.cluck.domain.User;
 
 import org.json.JSONObject;
 
@@ -44,9 +44,8 @@ public class DataService {
         if(!login.equals("vasya@lol.com")) {
             return null;
         }
-        user = new User();
+        user = new User(1);
 
-        user.setId(1);
         user.setLogin(login);
         user.setPassword(password);
         user.setAccessToken("");
@@ -75,9 +74,8 @@ public class DataService {
         if(!login.equals("vasya@lol.com")) {
             return null;
         }
-        user = new User();
+        user = new User(1);
 
-        user.setId(1);
         user.setLogin(login);
         user.setPassword(password);
         user.setAccessToken("");
