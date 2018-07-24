@@ -78,7 +78,8 @@ dependencies {
 
   //PinLockView - https://android-arsenal.com/details/1/3706
   //A clean, minimalistic, easy-to-use and highly customizable pin lock custom view for Android.
-  implementation project(':pinlockview')
+  //implementation project(':pinlockview')
+  implementation 'com.andrognito.pinlockview:pinlockview:2.1.0'
 
   implementation presentationDependencies.androidSupport
   implementation presentationDependencies.constraintLayout
