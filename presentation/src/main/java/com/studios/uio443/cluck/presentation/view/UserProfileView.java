@@ -10,7 +10,7 @@ import com.studios.uio443.cluck.presentation.model.UserModel;
  * Interface representing a View in a model view presenter (MVP) pattern.
  * In this case is used as a view representing a user profile.
  */
-public interface UserDetailsView extends LoadDataView {
+public interface UserProfileView extends LoadDataView {
   /**
    * Render a user in the UI.
    *

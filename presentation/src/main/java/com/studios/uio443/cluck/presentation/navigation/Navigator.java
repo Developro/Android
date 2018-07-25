@@ -18,8 +18,8 @@ package com.studios.uio443.cluck.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.studios.uio443.cluck.presentation.view.activity.UserDetailsActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
+import com.studios.uio443.cluck.presentation.view.activity.UserProfileActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -54,7 +54,7 @@ public class Navigator {
    */
   public void navigateToUserDetails(Context context, int userId) {
     if (context != null) {
-      Intent intentToLaunch = UserDetailsActivity.getCallingIntent(context, userId);
+      Intent intentToLaunch = UserProfileActivity.getCallingIntent(context, userId);
       context.startActivity(intentToLaunch);
     }
   }

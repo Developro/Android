@@ -2,7 +2,7 @@ package com.studios.uio443.cluck.presentation.services;
 
 import android.support.annotation.Nullable;
 
-import com.studios.uio443.cluck.domain.User;
+import com.studios.uio443.cluck.presentation.model.UserModel;
 
 import org.json.JSONObject;
 
@@ -13,7 +13,7 @@ import org.json.JSONObject;
  */
 public class DataService {
     @Nullable
-    private User user;
+    private UserModel user;
 
     private static volatile DataService instance;
 
@@ -40,11 +40,11 @@ public class DataService {
      * @param password пароль
      * @return User
      */
-    public User authentication(String login, String password) {
+    public UserModel authentication(String login, String password) {
         if(!login.equals("vasya@lol.com")) {
             return null;
         }
-        user = new User(1);
+        user = new UserModel(1);
 
         user.setLogin(login);
         user.setPassword(password);
@@ -59,7 +59,7 @@ public class DataService {
      * @return User
      */
     @Nullable
-    public User getUser() {
+    public UserModel getUser() {
         return user;
     }
 
@@ -70,11 +70,11 @@ public class DataService {
      * @param username имя пользователя
      * @return User
      */
-    public User signup(String login, String password, String username) {
+    public UserModel signup(String login, String password, String username) {
         if(!login.equals("vasya@lol.com")) {
             return null;
         }
-        user = new User(1);
+        user = new UserModel(1);
 
         user.setLogin(login);
         user.setPassword(password);

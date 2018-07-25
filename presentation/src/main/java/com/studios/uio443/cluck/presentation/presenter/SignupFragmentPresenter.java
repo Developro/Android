@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
+import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.SignupFragmentVP;
 import com.studios.uio443.cluck.presentation.services.DataService;
@@ -54,7 +54,7 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
 
         // TODO: Implement your own signup logic here.
         DataService dataService = DataService.getInstance();
-        User user = dataService.signup(email, password, username);
+        UserModel user = dataService.signup(email, password, username);
 
         if (user == null) {
             view().showSignupFailed();

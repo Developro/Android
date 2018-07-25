@@ -27,7 +27,7 @@ import com.studios.uio443.cluck.presentation.exception.ErrorMessageFactory;
 import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.model.UserModel;
-import com.studios.uio443.cluck.presentation.view.UserDetailsView;
+import com.studios.uio443.cluck.presentation.view.UserProfileView;
 
 import javax.inject.Inject;
 
@@ -36,21 +36,21 @@ import javax.inject.Inject;
  * layer.
  */
 @PerActivity
-public class UserDetailsPresenter implements Presenter {
+public class UserProfilePresenter implements Presenter {
 
-  private UserDetailsView viewDetailsView;
+  private UserProfileView viewDetailsView;
 
   private final GetUserDetails getUserDetailsUseCase;
   private final UserModelDataMapper userModelDataMapper;
 
   @Inject
-  public UserDetailsPresenter(GetUserDetails getUserDetailsUseCase,
-      UserModelDataMapper userModelDataMapper) {
+  public UserProfilePresenter(GetUserDetails getUserDetailsUseCase,
+                              UserModelDataMapper userModelDataMapper) {
     this.getUserDetailsUseCase = getUserDetailsUseCase;
     this.userModelDataMapper = userModelDataMapper;
   }
 
-  public void setView(@NonNull UserDetailsView view) {
+  public void setView(@NonNull UserProfileView view) {
     this.viewDetailsView = view;
   }
 
@@ -107,17 +107,17 @@ public class UserDetailsPresenter implements Presenter {
   private final class UserDetailsObserver extends DefaultObserver<User> {
 
     @Override public void onComplete() {
-      UserDetailsPresenter.this.hideViewLoading();
+      UserProfilePresenter.this.hideViewLoading();
     }
 
     @Override public void onError(Throwable e) {
-      UserDetailsPresenter.this.hideViewLoading();
-      UserDetailsPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
-      UserDetailsPresenter.this.showViewRetry();
+      UserProfilePresenter.this.hideViewLoading();
+      UserProfilePresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+      UserProfilePresenter.this.showViewRetry();
     }
 
     @Override public void onNext(User user) {
-      UserDetailsPresenter.this.showUserDetailsInView(user);
+      UserProfilePresenter.this.showUserDetailsInView(user);
     }
   }
 }
