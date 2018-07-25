@@ -22,6 +22,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignupFragment extends BaseFragment implements SignupFragmentVP.View {
+    private static final String LOGIN = "LOGIN";
+    private static final String EMAIL = "EMAIL";
+    private static final String PASSWORD = "PASSWORD";
+    private static final String REPASSWORD = "REPASSWORD";
     SignupFragmentPresenter presenter;
 
     @BindView(R.id.signup_username_layout)
@@ -56,13 +60,17 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d(Consts.TAG, "LoginFragment.onCreateView");
+        Log.d(Consts.TAG, "SignupFragment.onCreateView");
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
         if (savedInstanceState == null) {
             presenter = new SignupFragmentPresenter();
         } else {
+            signupUsernameInput.setText(savedInstanceState.getString(LOGIN, ""));
+            signupEmailInput.setText(savedInstanceState.getString(EMAIL, ""));
+            signupPasswordInput.setText(savedInstanceState.getString(PASSWORD, ""));
+            signupReEnterPasswordInput.setText(savedInstanceState.getString(REPASSWORD, ""));
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
         presenter.bindView(this);
@@ -91,14 +99,19 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(Consts.TAG, "NoteFragment.onSaveInstanceState");
+        Log.d(Consts.TAG, "SignupFragment.onSaveInstanceState");
         super.onSaveInstanceState(outState);
+
+        outState.putString(LOGIN, signupUsernameInput.getText().toString());
+        outState.putString(EMAIL, signupEmailInput.getText().toString());
+        outState.putString(PASSWORD, signupPasswordInput.getText().toString());
+        outState.putString(REPASSWORD, signupReEnterPasswordInput.getText().toString());
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 
     @Override
     public void onPause() {
-        Log.d(Consts.TAG, "NoteFragment.onPause");
+        Log.d(Consts.TAG, "SignupFragment.onPause");
         super.onPause();
 
         presenter.unbindView();
@@ -127,6 +140,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 
     @Override
     public void showSignupFailed() {
+        Log.e(Consts.TAG, "SignupFragment.showSignupFailed");
         Toast.makeText(getActivity(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
 
         btnSignup.setEnabled(true);
@@ -182,7 +196,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
             //showing the presenter on screen
             replaceFragment(R.id.container, fragment);
         } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "LoginFragment.setFragment\n" + e.getMessage());
+            Log.e(Consts.TAG, "SignupFragment.setFragment\n" + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -3,14 +3,15 @@ package com.studios.uio443.cluck.presentation.presenter;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.studios.uio443.cluck.presentation.model.User;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.SignupFragmentVP;
-import com.studios.uio443.cluck.presentation.services.DataService;
+import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
-import com.studios.uio443.cluck.presentation.view.activity.ModeSelectActivity;
+import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 
 public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFragmentVP.View> implements
@@ -31,7 +32,8 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
 
         // Let's not reload data if it's already here
         if (model == null && !isLoadingData) {
-            loadData();
+            setModel(UserHolder.getInstance());
+            //loadData(); // если нужен запрос к серверу
         }
     }
 
@@ -47,14 +49,14 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
 
     @Override
     public void onSignup(String username, String email, String password) {
+        Log.d(Consts.TAG, "SignupFragmentPresenter.onSignup");
         if (!view().validate()) {
             view().showSignupFailed();
             return;
         }
 
         // TODO: Implement your own signup logic here.
-        DataService dataService = DataService.getInstance();
-        User user = dataService.signup(email, password, username);
+        User user = model.signup(email, password, username);
 
         if (user == null) {
             view().showSignupFailed();
@@ -62,18 +64,20 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
         }
 
         view().showSignupSuccess();
-        view().progressDialog();
+        view().progressDialog(); //start MainActivity
     }
 
     @Override
     public void linkLogin() {
+        //TODO проверить и заменить на finish fragment
         view().startActivity(LoginActivity.class);
     }
 
     @Override
     public void onSignupSuccess() {
         view().showSignupSuccess();
-        view().startActivity(ModeSelectActivity.class);
+        view().startActivityForResult(LoginPinActivity.class, Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY);
+        //view().startActivity(ModeSelectActivity.class); //start MainActivity
     }
 
     // It's OK for this class not to be static and to keep a reference to the Presenter, as this

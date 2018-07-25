@@ -81,15 +81,26 @@ public abstract class BaseFragment extends Fragment implements FragmentNavigatio
     protected void replaceFragment(int containerViewId, Fragment fragment) {
         final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.replace(containerViewId, fragment);
+        fragmentTransaction.addToBackStack(null); //возврат на предыдующий фрагмент
         fragmentTransaction.commit();
     }
 
     public void startActivity(Class activityClass) {
         try {
             Intent intent = new Intent(getActivity(), activityClass);
-            startActivity(intent);
+            getActivity().startActivity(intent);
         } catch (NullPointerException e) {
             Log.e(Consts.TAG, "BaseFragment.setStartActivity\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void startActivityForResult(Class activityClass, int requestCode) {
+        try {
+            Intent intent = new Intent(getActivity(), activityClass);
+            getActivity().startActivityForResult(intent, requestCode);
+        } catch (NullPointerException e) {
+            Log.e(Consts.TAG, "BaseFragment.startActivityForResult\n" + e.getMessage());
             e.printStackTrace();
         }
     }

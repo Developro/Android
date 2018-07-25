@@ -3,10 +3,12 @@ package com.studios.uio443.cluck.presentation.presenter;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginActivityVP;
+import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.ModeSelectActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.LoginFragment;
@@ -30,7 +32,8 @@ public class LoginActivityPresenter extends BasePresenter<UserHolder, LoginActiv
 
         // Let's not reload data if it's already here
         if (model == null && !isLoadingData) {
-            loadData();
+            setModel(UserHolder.getInstance());
+            //loadData(); // если нужен запрос к серверу
         }
     }
 
@@ -46,16 +49,19 @@ public class LoginActivityPresenter extends BasePresenter<UserHolder, LoginActiv
 
     @Override
     public void showLogin() {
+        Log.d(Consts.TAG, "LoginActivityPresenter.showLogin");
         view().setFragment(new LoginFragment());
     }
 
     @Override
     public void showLogout() {
+        Log.d(Consts.TAG, "LoginActivityPresenter.showLogout");
         view().setFragment(new LogoutFragment());
     }
 
     @Override
     public void startModeSelectActivity() {
+        Log.d(Consts.TAG, "LoginActivityPresenter.startModeSelectActivity");
         view().startActivity(ModeSelectActivity.class);
     }
 
@@ -66,7 +72,8 @@ public class LoginActivityPresenter extends BasePresenter<UserHolder, LoginActiv
         @Override
         protected Void doInBackground(Void... params) {
             //SystemClock.sleep(3000);
-            //TODO получение данных из интернета
+            //длительные процесс
+            //TODO получение данных от сервера
             return null;
         }
 
