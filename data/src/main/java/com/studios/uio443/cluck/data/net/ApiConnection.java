@@ -15,9 +15,9 @@
  */
 package com.studios.uio443.cluck.data.net;
 
-import android.support.annotation.Nullable;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,7 +51,7 @@ class ApiConnection implements Callable<String> {
    *
    * @return A string response
    */
-  @Nullable
+  //@Nullable
   String requestSyncCall() {
     connectToApi();
     return response;

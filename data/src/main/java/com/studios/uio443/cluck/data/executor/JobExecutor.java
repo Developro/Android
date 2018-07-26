@@ -15,14 +15,17 @@
  */
 package com.studios.uio443.cluck.data.executor;
 
-import android.support.annotation.NonNull;
 import com.studios.uio443.cluck.domain.executor.ThreadExecutor;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  * Decorated {@link java.util.concurrent.ThreadPoolExecutor}
