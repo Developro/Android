@@ -8,6 +8,8 @@ public interface SignupFragmentVP {
 
         void startActivity(Class activityClass);
 
+        void startActivityForResult(Class activityClass, int requestCode);
+
         void showSignupSuccess();
 
         void showSignupFailed();

@@ -21,6 +21,8 @@ import java.util.Map;
  * Парсит ответ сервера и возвращает JSONObject
  */
 public class RestService {
+    //TODO заменить на retrofit
+
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
     public static final String METHOD_PUT = "PUT";

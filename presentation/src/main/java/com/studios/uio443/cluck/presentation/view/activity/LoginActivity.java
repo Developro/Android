@@ -63,6 +63,7 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     protected void onResume() {
+        Log.d(Consts.TAG, "LoginActivity.onResume");
         super.onResume();
         presenter.bindView(this);
         isResumed = true;
@@ -91,20 +92,36 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     protected void onDestroy() {
+        Log.d(Consts.TAG, "LoginActivity.onDestroy");
         super.onDestroy();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(Consts.TAG, "LoginActivity.onActivityResult");
+        presenter.bindView(this);
+
+        switch (requestCode) {
+            case Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY: {
+                Log.i(Consts.TAG, "LoginActivity.onActivityResult.REQUEST_CODE_LOGIN_PIN_ACTIVITY");
+                if (resultCode == RESULT_OK) {
+                    presenter.startModeSelectActivity(); //start MainActivity
+                }
+                break;
+            }
+        }
+
         VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
+                Log.d(Consts.TAG, "LoginActivity.onActivityResult.VKCallback.onResult");
                 // User passed Authorization
-                presenter.startModeSelectActivity();
+                presenter.startModeSelectActivity(); //start MainActivity
             }
 
             @Override
             public void onError(VKError error) {
+                Log.d(Consts.TAG, "LoginActivity.onActivityResult.VKCallback.onError");
                 // User didn't pass Authorization
             }
         };

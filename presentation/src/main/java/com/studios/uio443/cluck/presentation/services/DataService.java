@@ -1,17 +1,14 @@
 package com.studios.uio443.cluck.presentation.services;
 
+
 import android.support.annotation.Nullable;
 
 import com.studios.uio443.cluck.presentation.model.UserModel;
 
 import org.json.JSONObject;
 
-/**
- * Класс DataService достаёт данные и заворачивает их в объекты-модели
- * Делаем класс синглтоном,
- * чтобы иметь везде доступ к одному и тому же объекту
- */
 public class DataService {
+
     @Nullable
     private UserModel user;
 
@@ -86,12 +83,15 @@ public class DataService {
 
     }
 
+
+    //TODO заменить на retrofit
+
     /**
      * Метод для отладки RestService
      * @return String
      */
     //TODO: надо вызывать в отдельном потоке, иначе будет исключение NetworkOnMainThreadException
-    public String testRest() {
+    public static String testRest() {
         RestService rs = new RestService();
 
         RestService.Request r = new RestService.Request();
@@ -112,5 +112,4 @@ public class DataService {
 
         return null;
     }
-
 }

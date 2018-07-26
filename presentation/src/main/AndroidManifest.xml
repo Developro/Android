@@ -3,6 +3,7 @@
     package="com.studios.uio443.cluck.presentation">
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
   <application
       android:allowBackup="true"
@@ -31,6 +32,10 @@
     <!--<activity android:name=".view.activity.SignupActivity" />-->
     <activity android:name=".view.activity.ModeSelectActivity" />
     <activity android:name=".view.activity.AboutPageActivity" />
+
+    <activity
+        android:name=".view.activity.LoginPinActivity"
+        android:label="@string/app_name"></activity>
 
     <activity
         android:name="com.vk.sdk.VKServiceActivity"

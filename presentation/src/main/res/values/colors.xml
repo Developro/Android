@@ -9,4 +9,10 @@
     <color name="colorSecondaryTexy">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
 
+    <!--fingerprint-->
+    <color name="text_fingerprint">#FF87898C</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="text_attempts">#bfc0c1</color>
+    <color name="text_title">#dcddde</color>
+
 </resources>

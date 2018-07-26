@@ -9,9 +9,8 @@ import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
-import com.studios.uio443.cluck.presentation.services.DataService;
 import com.studios.uio443.cluck.presentation.util.Consts;
-import com.studios.uio443.cluck.presentation.view.activity.ModeSelectActivity;
+import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.SignupFragment;
 
@@ -33,7 +32,8 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 
         // Let's not reload data if it's already here
         if (model == null && !isLoadingData) {
-            loadData();
+            setModel(UserHolder.getInstance());
+            //loadData(); // если нужен запрос к серверу
         }
     }
 
@@ -48,6 +48,11 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
     }
 
     @Override
+    public void onSignInVK() {
+        view().VKSdkLogin();
+    }
+
+    @Override
     public void onLogin(String email, String password) {
         Log.d(Consts.TAG, "LoginFragmentPresenter.onLogin");
 
@@ -57,30 +62,36 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
         }
 
         // TODO: Implement your own authentication logic here.
+
         DataService dataService = DataService.getInstance();
         UserModel user = dataService.authentication(email, password);
 
         dataService.testRest();
 
+        User user = model.authentication(email, password);
+
+
         if (user == null) {
             view().showLoginFailed();
             return;
         }
+
         view().showLoginSuccess();
-
-        view().progressDialog();
-
+        view().progressDialog(); //start MainActivity
     }
 
     @Override
-    public void onSignin() {
+    public void onSignUp() {
+        Log.d(Consts.TAG, "LoginFragmentPresenter.onSignUp");
         view().setFragment(new SignupFragment());
     }
 
     @Override
     public void onLoginSuccess() {
+        Log.d(Consts.TAG, "LoginFragmentPresenter.onLoginSuccess");
         view().showLoginSuccess();
-        view().startActivity(ModeSelectActivity.class);
+        view().startActivityForResult(LoginPinActivity.class, Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY);
+        //view().startActivity(ModeSelectActivity.class); //start MainActivity
     }
 
     // It's OK for this class not to be static and to keep a reference to the Presenter, as this
@@ -90,7 +101,7 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
         @Override
         protected Void doInBackground(Void... params) {
             //SystemClock.sleep(3000);
-            //TODO получение данных из интернета
+            //TODO получение данных из интернета с сервера
             return null;
         }
 
