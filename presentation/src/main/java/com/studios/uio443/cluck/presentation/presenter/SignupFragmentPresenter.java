@@ -56,10 +56,8 @@ public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFra
         }
 
         // TODO: Implement your own signup logic here.
-        DataService dataService = DataService.getInstance();
 
-        User user = model.signup(email, password, username);
-
+        UserModel user = model.signup(email, password, username);
 
         if (user == null) {
             view().showSignupFailed();

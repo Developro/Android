@@ -26,6 +26,11 @@ ext {
   okHttpVersion = '2.7.0'
   androidAnnotationsVersion = '27.1.1'
   arrowVersion = '1.0.0'
+  retrofitVersion = '2.4.0'
+  adapter_rxjavaVersion = '2.1.0'
+  commons_lang3Version = '3.6'
+  logging_interceptorVersion = '3.8.1'
+  guavaVersion = '22.0'
 
   //Testing
   runnerVersion = "1.0.2"
@@ -91,7 +96,13 @@ ext {
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-      androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"
+      androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
+      retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      retrofit_converter_gson:     "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+      retrofit_adapter_rxjava:     "com.squareup.retrofit2:adapter-rxjava:${adapter_rxjavaVersion}",
+      commons_lang3:      "org.apache.commons:commons-lang3:${commons_lang3Version}",
+      logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${logging_interceptorVersion}",
+      guava:              "com.google.guava:guava:${guavaVersion}"
   ]
 
   dataTestDependencies = [

@@ -63,13 +63,7 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 
         // TODO: Implement your own authentication logic here.
 
-        DataService dataService = DataService.getInstance();
-        UserModel user = dataService.authentication(email, password);
-
-        dataService.testRest();
-
-        User user = model.authentication(email, password);
-
+        UserModel user = model.authentication(email, password);
 
         if (user == null) {
             view().showLoginFailed();

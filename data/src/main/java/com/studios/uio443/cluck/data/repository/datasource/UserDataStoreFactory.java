@@ -16,13 +16,16 @@
 package com.studios.uio443.cluck.data.repository.datasource;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
 import com.studios.uio443.cluck.data.cache.UserCache;
 import com.studios.uio443.cluck.data.entity.mapper.UserEntityJsonMapper;
 import com.studios.uio443.cluck.data.net.RestApi;
 import com.studios.uio443.cluck.data.net.RestApiImpl;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  * Factory that creates different implementations of {@link UserDataStore}.

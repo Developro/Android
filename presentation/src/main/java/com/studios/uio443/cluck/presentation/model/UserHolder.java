@@ -3,17 +3,13 @@ package com.studios.uio443.cluck.presentation.model;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-
-import com.studios.uio443.cluck.domain.User;
-
 import com.studios.uio443.cluck.presentation.services.DataService;
-
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 public class UserHolder {
 
     @Nullable
-    private User user;
+    private UserModel user;
 
     private static volatile UserHolder instance;
 
@@ -37,17 +33,17 @@ public class UserHolder {
      * @return User
      */
     @Nullable
-    public User getUser() {
+    public UserModel getUser() {
         Log.d(Consts.TAG, "UserHolder.getUser");
         return user;
     }
 
-    private void setUser(User user) {
+    private void setUser(UserModel user) {
         Log.d(Consts.TAG, "UserHolder.setUser");
         this.user = user;
     }
 
-    private void addUser(User newUser) {
+    private void addUser(UserModel newUser) {
         Log.d(Consts.TAG, "UserHolder.addUser");
         if (newUser == null) return;
         //TODO signup - запрос к серверу на добавление аккаунта юзера
@@ -65,7 +61,7 @@ public class UserHolder {
      * @param password пароль
      * @return User
      */
-    public User authentication(String login, String password) {
+    public UserModel authentication(String login, String password) {
         if (!login.equals("vasya@lol.com")) {
             return null;
         }
@@ -74,9 +70,8 @@ public class UserHolder {
         //JSONObject
         String JSONObject = DataService.testRest();
 
-        user = new User();
+        user = new UserModel(1);
 
-        user.setId(1);
         user.setLogin(login);
         user.setPassword(password);
         user.setAccessToken("");
@@ -93,7 +88,7 @@ public class UserHolder {
      * @param username имя пользователя
      * @return User
      */
-    public User signup(String login, String password, String username) {
+    public UserModel signup(String login, String password, String username) {
         if (!login.equals("vasya@lol.com")) {
             return null;
         }
@@ -103,9 +98,8 @@ public class UserHolder {
         //JSONObject
         String JSONObject = DataService.testRest();
 
-        user = new User();
+        user = new UserModel(1);
 
-        user.setId(1);
         user.setLogin(login);
         user.setPassword(password);
         user.setAccessToken("");

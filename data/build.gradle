@@ -57,7 +57,12 @@ dependencies {
   implementation dataDependencies.gson
   implementation dataDependencies.rxJava
   implementation dataDependencies.rxAndroid
-  implementation dataDependencies.androidAnnotations
+
+  //  retrofit
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofit_converter_gson
+  implementation dataDependencies.retrofit_adapter_rxjava
+  implementation dataDependencies.logging_interceptor
 
   testImplementation testDependencies.junit
   testImplementation testDependencies.assertj
