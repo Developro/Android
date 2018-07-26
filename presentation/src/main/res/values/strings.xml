@@ -55,6 +55,8 @@
   <string name="continue_using_app">Continue using test application</string>
   <string name="logout">Logout</string>
   <string name="vk">vk</string>
+    <string name="view_text_points">Points:</string>
+    <string name="view_text_votes">Votes:</string>
 
   <!--login-->
   <!--pinlock-->

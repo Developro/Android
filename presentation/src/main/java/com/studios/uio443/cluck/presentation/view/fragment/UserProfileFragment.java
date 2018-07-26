@@ -15,8 +15,8 @@ import com.fernandocejas.arrow.checks.Preconditions;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.model.UserModel;
-import com.studios.uio443.cluck.presentation.presenter.UserDetailsPresenter;
-import com.studios.uio443.cluck.presentation.view.UserDetailsView;
+import com.studios.uio443.cluck.presentation.presenter.UserProfilePresenter;
+import com.studios.uio443.cluck.presentation.view.UserProfileView;
 import com.studios.uio443.cluck.presentation.view.component.AutoLoadImageView;
 
 import javax.inject.Inject;
@@ -29,31 +29,33 @@ import butterknife.Unbinder;
 /**
  * Fragment that shows details of a certain user.
  */
-public class UserDetailsFragment extends BaseFragment implements UserDetailsView {
+public class UserProfileFragment extends BaseFragment implements UserProfileView {
   private static final String PARAM_USER_ID = "param_user_id";
 
-  @Inject UserDetailsPresenter userDetailsPresenter;
+    @Inject
+    UserProfilePresenter userProfilePresenter;
 
   @BindView(R.id.iv_cover) AutoLoadImageView iv_cover;
   @BindView(R.id.tv_fullname) TextView tv_fullname;
-  @BindView(R.id.tv_email) TextView tv_email;
-  @BindView(R.id.tv_followers) TextView tv_followers;
-  @BindView(R.id.tv_description) TextView tv_description;
+    @BindView(R.id.tv_points)
+    TextView tv_points;
+    @BindView(R.id.tv_votes)
+    TextView tv_votes;
   @BindView(R.id.rl_progress) RelativeLayout rl_progress;
   @BindView(R.id.rl_retry) RelativeLayout rl_retry;
   @BindView(R.id.bt_retry) Button bt_retry;
   private Unbinder unbinder;
 
-  public static UserDetailsFragment forUser(int userId) {
-    final UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
+    public UserProfileFragment() {
+        setRetainInstance(true);
+    }
+
+    public static UserProfileFragment forUser(int userId) {
+        final UserProfileFragment userDetailsFragment = new UserProfileFragment();
     final Bundle arguments = new Bundle();
     arguments.putInt(PARAM_USER_ID, userId);
     userDetailsFragment.setArguments(arguments);
     return userDetailsFragment;
-  }
-
-  public UserDetailsFragment() {
-    setRetainInstance(true);
   }
 
   @Override public void onCreate(Bundle savedInstanceState) {
@@ -63,13 +65,13 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Override
   protected int getLayout() {
-    return R.layout.fragment_user_details;
+      return R.layout.fragment_user_profile;
   }
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, view);
-    this.userDetailsPresenter.setView(this);
+      this.userProfilePresenter.setView(this);
     if (savedInstanceState == null) {
       this.loadUserDetails();
     }
@@ -77,12 +79,12 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Override public void onResume() {
     super.onResume();
-    this.userDetailsPresenter.resume();
+      this.userProfilePresenter.resume();
   }
 
   @Override public void onPause() {
     super.onPause();
-    this.userDetailsPresenter.pause();
+      this.userProfilePresenter.pause();
   }
 
   @Override public void onDestroyView() {
@@ -92,16 +94,15 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @Override public void onDestroy() {
     super.onDestroy();
-    this.userDetailsPresenter.destroy();
+      this.userProfilePresenter.destroy();
   }
 
   @Override public void renderUser(UserModel user) {
     if (user != null) {
       this.iv_cover.setImageUrl(user.getCoverUrl());
       this.tv_fullname.setText(user.getFullName());
-      this.tv_email.setText(user.getEmail());
-      this.tv_followers.setText(String.valueOf(user.getFollowers()));
-      this.tv_description.setText(user.getDescription());
+        this.tv_points.setText(user.getPoints());
+        this.tv_votes.setText(user.getVotes());
     }
   }
 
@@ -135,8 +136,8 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
    * Load user details.
    */
   private void loadUserDetails() {
-    if (this.userDetailsPresenter != null) {
-      this.userDetailsPresenter.initialize(currentUserId());
+      if (this.userProfilePresenter != null) {
+          this.userProfilePresenter.initialize(currentUserId());
     }
   }
 
@@ -151,6 +152,6 @@ public class UserDetailsFragment extends BaseFragment implements UserDetailsView
 
   @OnClick(R.id.bt_retry)
   void onButtonRetryClick() {
-    UserDetailsFragment.this.loadUserDetails();
+      UserProfileFragment.this.loadUserDetails();
   }
 }

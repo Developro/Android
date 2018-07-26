@@ -31,14 +31,26 @@ public class UserEntity {
   @SerializedName("full_name")
   private String fullname;
 
-  @SerializedName("description")
-  private String description;
-
-  @SerializedName("followers")
-  private int followers;
-
   @SerializedName("email")
   private String email;
+
+  @SerializedName("login")
+  private String login;
+
+  @SerializedName("accessToken")
+  private String accessToken;
+
+  @SerializedName("refreshToken")
+  private String refreshToken;
+
+  @SerializedName("points")
+  private int points;
+
+  @SerializedName("votes")
+  private int votes;
+
+  @SerializedName("nickName")
+  private String nickName;
 
   public UserEntity() {
     //empty
@@ -64,15 +76,55 @@ public class UserEntity {
     this.fullname = fullname;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public int getFollowers() {
-    return followers;
-  }
-
   public String getEmail() {
     return email;
+  }
+
+  public String getLogin() {
+    return login;
+  }
+
+  public void setLogin(String login) {
+    this.login = login;
+  }
+
+  public String getAccessToken() {
+    return accessToken;
+  }
+
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
+  }
+
+  public String getRefreshToken() {
+    return refreshToken;
+  }
+
+  public void setRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+  public int getPoints() {
+    return points;
+  }
+
+  public void setPoints(int points) {
+    this.points = points;
+  }
+
+  public int getVotes() {
+    return votes;
+  }
+
+  public void setVotes(int votes) {
+    this.votes = votes;
+  }
+
+  public String getNickName() {
+    return nickName;
+  }
+
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
   }
 }

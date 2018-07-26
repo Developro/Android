@@ -17,9 +17,11 @@ package com.studios.uio443.cluck.data.entity.mapper;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.domain.User;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -45,9 +47,13 @@ public class UserEntityDataMapper {
       user = new User(userEntity.getUserId());
       user.setCoverUrl(userEntity.getCoverUrl());
       user.setFullName(userEntity.getFullname());
-      user.setDescription(userEntity.getDescription());
-      user.setFollowers(userEntity.getFollowers());
       user.setEmail(userEntity.getEmail());
+      user.setAccessToken(userEntity.getAccessToken());
+      user.setLogin(userEntity.getLogin());
+      user.setNickName(userEntity.getNickName());
+      user.setAccessToken(userEntity.getAccessToken());
+      user.setPoints(userEntity.getPoints());
+      user.setVotes(userEntity.getVotes());
     }
     return user;
   }

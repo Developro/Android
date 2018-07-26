@@ -14,18 +14,18 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.internal.di.HasComponent;
 import com.studios.uio443.cluck.presentation.internal.di.components.DaggerUserComponent;
 import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
-import com.studios.uio443.cluck.presentation.view.fragment.UserDetailsFragment;
+import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
 
 /**
  * Activity that shows details of a certain user.
  */
-public class UserDetailsActivity extends BaseActivity implements HasComponent<UserComponent> {
+public class UserProfileActivity extends BaseActivity implements HasComponent<UserComponent> {
 
   private static final String INTENT_EXTRA_PARAM_USER_ID = "org.android10.INTENT_PARAM_USER_ID";
   private static final String INSTANCE_STATE_PARAM_USER_ID = "org.android10.STATE_PARAM_USER_ID";
 
   public static Intent getCallingIntent(Context context, int userId) {
-    Intent callingIntent = new Intent(context, UserDetailsActivity.class);
+    Intent callingIntent = new Intent(context, UserProfileActivity.class);
     callingIntent.putExtra(INTENT_EXTRA_PARAM_USER_ID, userId);
     return callingIntent;
   }
@@ -55,7 +55,7 @@ public class UserDetailsActivity extends BaseActivity implements HasComponent<Us
   private void initializeActivity(Bundle savedInstanceState) {
     if (savedInstanceState == null) {
       this.userId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
-      addFragment(R.id.fragmentContainer, UserDetailsFragment.forUser(userId));
+      addFragment(R.id.fragmentContainer, UserProfileFragment.forUser(userId));
     } else {
       this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);
     }

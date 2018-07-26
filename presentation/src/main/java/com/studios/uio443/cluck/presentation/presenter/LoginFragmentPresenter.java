@@ -5,8 +5,8 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.studios.uio443.cluck.presentation.model.User;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
+import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
@@ -62,7 +62,14 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
         }
 
         // TODO: Implement your own authentication logic here.
+
+        DataService dataService = DataService.getInstance();
+        UserModel user = dataService.authentication(email, password);
+
+        dataService.testRest();
+
         User user = model.authentication(email, password);
+
 
         if (user == null) {
             view().showLoginFailed();

@@ -20,8 +20,8 @@ import android.content.Context;
 import com.studios.uio443.cluck.domain.interactor.GetUserDetails;
 import com.studios.uio443.cluck.domain.interactor.GetUserDetails.Params;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
-import com.studios.uio443.cluck.presentation.presenter.UserDetailsPresenter;
-import com.studios.uio443.cluck.presentation.view.UserDetailsView;
+import com.studios.uio443.cluck.presentation.presenter.UserProfilePresenter;
+import com.studios.uio443.cluck.presentation.view.UserProfileView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,32 +36,33 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserDetailsPresenterTest {
+public class UserProfilePresenterTest {
 
   private static final int USER_ID = 1;
 
-  private UserDetailsPresenter userDetailsPresenter;
+    private UserProfilePresenter userProfilePresenter;
 
   @Mock private Context mockContext;
-  @Mock private UserDetailsView mockUserDetailsView;
+    @Mock
+    private UserProfileView mockUserProfileView;
   @Mock private GetUserDetails mockGetUserDetails;
   @Mock private UserModelDataMapper mockUserModelDataMapper;
 
   @Before
   public void setUp() {
-    userDetailsPresenter = new UserDetailsPresenter(mockGetUserDetails, mockUserModelDataMapper);
-    userDetailsPresenter.setView(mockUserDetailsView);
+      userProfilePresenter = new UserProfilePresenter(mockGetUserDetails, mockUserModelDataMapper);
+      userProfilePresenter.setView(mockUserProfileView);
   }
 
   @Test
   @SuppressWarnings("unchecked")
   public void testUserDetailsPresenterInitialize() {
-    given(mockUserDetailsView.context()).willReturn(mockContext);
+      given(mockUserProfileView.context()).willReturn(mockContext);
 
-    userDetailsPresenter.initialize(USER_ID);
+      userProfilePresenter.initialize(USER_ID);
 
-    verify(mockUserDetailsView).hideRetry();
-    verify(mockUserDetailsView).showLoading();
+      verify(mockUserProfileView).hideRetry();
+      verify(mockUserProfileView).showLoading();
     verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
   }
 }

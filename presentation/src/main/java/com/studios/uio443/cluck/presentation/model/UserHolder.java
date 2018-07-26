@@ -3,7 +3,11 @@ package com.studios.uio443.cluck.presentation.model;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+
+import com.studios.uio443.cluck.domain.User;
+
 import com.studios.uio443.cluck.presentation.services.DataService;
+
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 public class UserHolder {
