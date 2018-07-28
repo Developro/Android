@@ -24,6 +24,10 @@ import com.vk.sdk.VKSdk;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by zundarik
+ */
+
 public class LoginFragment extends BaseFragment implements LoginFragmentVP.View {
 
     private static final String LOGIN = "LOGIN";

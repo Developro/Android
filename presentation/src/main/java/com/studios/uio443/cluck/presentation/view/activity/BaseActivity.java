@@ -17,7 +17,10 @@ import javax.inject.Inject;
 
 /**
  * Base {@link android.support.v7.app.AppCompatActivity} class for every Activity in this application.
+ *
+ * Created by zundarik
  */
+
 public abstract class BaseActivity extends AppCompatActivity {
 
   @Inject Navigator navigator;

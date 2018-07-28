@@ -6,6 +6,10 @@ import android.util.Log;
 import com.studios.uio443.cluck.presentation.services.DataService;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
+/**
+ * Created by zundarik
+ */
+
 public class UserHolder {
 
     @Nullable

@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="login_pin_switch"
+        android:summaryOff="@string/description_pref_title_login_pin_switch_off"
+        android:summaryOn="@string/description_pref_title_login_pin"
+        android:title="@string/pref_title_login_pin"
+        tools:summaryOn="@string/description_pref_title_login_pin"
+        tools:title="@string/pref_title_login_pin" />
+
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_login_pin"
+        android:inputType="text"
+        android:key="login_pin_name"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_login_pin_name"
+        tools:defaultValue="@string/pref_default_login_pin"
+        tools:title="@string/pref_title_login_pin" />
+
+</PreferenceScreen>
