@@ -7,6 +7,10 @@ import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.MainFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
+/**
+ * Created by zundarik
+ */
+
 public class MainFragmentPresenter extends BasePresenter<UserHolder, MainFragmentVP.View>
         implements MainFragmentVP.Presenter {
 

@@ -9,6 +9,10 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by zundarik
+ */
+
 public class ArrayAdapterFactory implements TypeAdapterFactory {
 
     @Override

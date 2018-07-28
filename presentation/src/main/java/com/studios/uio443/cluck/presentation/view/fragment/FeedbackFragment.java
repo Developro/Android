@@ -12,6 +12,10 @@ import android.widget.EditText;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
+/**
+ * Created by zundarik
+ */
+
 public class FeedbackFragment extends BaseFragment {
 
     @Override

@@ -9,6 +9,10 @@ import android.view.View;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
+/**
+ * Created by zundarik
+ */
+
 public class AboutFragment extends BaseFragment {
 
     @Override

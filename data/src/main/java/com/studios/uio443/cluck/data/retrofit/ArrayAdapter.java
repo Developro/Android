@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by zundarik
+ */
+
 class ArrayAdapter<T> extends TypeAdapter<List<T>> {
 
     private Class<T> adapterclass;

@@ -4,6 +4,11 @@ import android.support.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Created by zundarik
+ */
+
+
 public abstract class BasePresenter<M, V> {
     protected M model;
     private WeakReference<V> view;

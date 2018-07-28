@@ -32,6 +32,10 @@ import butterknife.ButterKnife;
 
 import static com.studios.uio443.cluck.presentation.util.Consts.PERMISSION_REQUEST_CODE;
 
+/**
+ * Created by zundarik on 29.07.2018
+ */
+
 public class MainActivity extends BaseActivity implements
         MainActivityVP.View,
         NavigationView.OnNavigationItemSelectedListener {
@@ -50,28 +54,28 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-      Log.d(Consts.TAG, "MainActivity.onCreate");
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Log.d(Consts.TAG, "MainActivity.onCreate");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-      if (savedInstanceState == null) {
-          fragmentId = R.id.nav_main;
-          presenter = new MainActivityPresenter();
-      } else {
-          fragmentId = savedInstanceState.getInt(FRAGMENT_ID, R.id.nav_main);
-          presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-      }
+        if (savedInstanceState == null) {
+            fragmentId = R.id.nav_main;
+            presenter = new MainActivityPresenter();
+        } else {
+            fragmentId = savedInstanceState.getInt(FRAGMENT_ID, R.id.nav_main);
+            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+        }
 
-      presenter.bindView(this);
+        presenter.bindView(this);
 
-      //вызов активити блокировки приложения/экрана
-      //presenter.getLoginActivity();
+        //вызов активити блокировки приложения/экрана
+        //presenter.getLoginActivity();
 
-      initDrawer();
-      initNavigationView();
+        initDrawer();
+        initNavigationView();
 
 /*
     persmissionsGranted = checkMultiplePermissions(new String[]{
@@ -80,10 +84,10 @@ public class MainActivity extends BaseActivity implements
     });
 */
 
-      /*Select startup fragment*/
-      //int fragmentId = pref.getInt(FRAGMENT_ID, R.id.nav_notes);
-      navigationView.getMenu().performIdentifierAction(fragmentId, 0);
-  }
+        /*Select startup fragment*/
+        //int fragmentId = pref.getInt(FRAGMENT_ID, R.id.nav_notes);
+        navigationView.getMenu().performIdentifierAction(fragmentId, 0);
+    }
 
     private void initDrawer() {
         setSupportActionBar(toolbar);
@@ -265,5 +269,5 @@ public class MainActivity extends BaseActivity implements
         if (persmissionsGranted) {
             recreate();
         }
-  }
+    }
 }

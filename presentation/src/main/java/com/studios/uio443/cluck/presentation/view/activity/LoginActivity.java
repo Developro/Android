@@ -16,6 +16,10 @@ import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
+/**
+ * Created by zundarik
+ */
+
 public class LoginActivity extends BaseActivity implements
         LoginActivityVP.View {
 

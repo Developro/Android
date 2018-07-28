@@ -13,6 +13,10 @@ import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.FeedbackFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.MainFragment;
 
+/**
+ * Created by zundarik
+ */
+
 public class MainActivityPresenter extends BasePresenter<UserHolder, MainActivityVP.View> implements
         MainActivityVP.Presenter,
         FragmentNavigation.Presenter {

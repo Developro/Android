@@ -11,6 +11,10 @@ import com.studios.uio443.cluck.presentation.view.activity.ModeSelectActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.LoginFragment;
 
+/**
+ * Created by zundarik
+ */
+
 public class LogoutFragmentPresenter extends BasePresenter<UserHolder, LogoutFragmentVP.View> implements
         LogoutFragmentVP.Presenter,
         FragmentNavigation.Presenter {

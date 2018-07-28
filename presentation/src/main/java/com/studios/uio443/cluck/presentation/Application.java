@@ -30,48 +30,53 @@ import com.vk.sdk.VKSdk;
 /**
  * Android Main Application
  */
+
+/**
+ * Created by zundarik
+ */
+
 public class Application extends android.app.Application {
 
-  private ApplicationComponent applicationComponent;
+    //Handling "AccessToken invalid"
+    //Для обработки ситуаций, когда AccessToken становится невалиден (например, пользователь сменил пароль)
+    VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
+        @Override
+        public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
+            if (newToken == null) {
+                // VKAccessToken is invalid
+                Toast.makeText(Application.this, "AccessToken invalidated", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Application.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        }
+    };
+    private ApplicationComponent applicationComponent;
 
-  //Handling "AccessToken invalid"
-  //Для обработки ситуаций, когда AccessToken становится невалиден (например, пользователь сменил пароль)
-  VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
     @Override
-    public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
-      if (newToken == null) {
-        // VKAccessToken is invalid
-        Toast.makeText(Application.this, "AccessToken invalidated", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(Application.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-      }
+    public void onCreate() {
+        super.onCreate();
+        this.initializeInjector();
+        this.initializeLeakDetection();
+
+        vkAccessTokenTracker.startTracking();
+        VKSdk.initialize(this);
+
     }
-  };
 
-  @Override public void onCreate() {
-    super.onCreate();
-    this.initializeInjector();
-    this.initializeLeakDetection();
-
-    vkAccessTokenTracker.startTracking();
-    VKSdk.initialize(this);
-
-  }
-
-  private void initializeInjector() {
-    this.applicationComponent = DaggerApplicationComponent.builder()
-        .applicationModule(new ApplicationModule(this))
-        .build();
-  }
-
-  public ApplicationComponent getApplicationComponent() {
-    return this.applicationComponent;
-  }
-
-  private void initializeLeakDetection() {
-    if (BuildConfig.DEBUG) {
-      LeakCanary.install(this);
+    private void initializeInjector() {
+        this.applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
     }
-  }
+
+    public ApplicationComponent getApplicationComponent() {
+        return this.applicationComponent;
+    }
+
+    private void initializeLeakDetection() {
+        if (BuildConfig.DEBUG) {
+            LeakCanary.install(this);
+        }
+    }
 }

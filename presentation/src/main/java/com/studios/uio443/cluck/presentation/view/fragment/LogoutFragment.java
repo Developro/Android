@@ -17,6 +17,10 @@ import com.vk.sdk.VKSdk;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by zundarik
+ */
+
 public class LogoutFragment extends BaseFragment implements LogoutFragmentVP.View {
     LogoutFragmentPresenter presenter;
 

@@ -19,6 +19,10 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by zundarik
+ */
+
 public class MainFragment extends BaseFragment implements MainFragmentVP.View {
 
     MainFragmentPresenter presenter;
