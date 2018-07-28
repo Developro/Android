@@ -25,6 +25,9 @@ dependencies {
   implementation domainDependencies.rxJava
   implementation domainDependencies.arrow
 
+  //  retrofit
+  implementation domainDependencies.retrofit
+
   testImplementation domainTestDependencies.junit
   testImplementation domainTestDependencies.mockito
   testImplementation domainTestDependencies.assertj
