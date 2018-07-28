@@ -8,6 +8,7 @@ import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.data.util.Consts;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,6 +17,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+/**
+ * Created by zundarik
+ */
 
 public class GetUser {
     private static volatile GetUser instance;
@@ -81,7 +86,7 @@ public class GetUser {
                     user = null;
                     Log.d(Consts.TAG, "GetUser.getUserFromServer: USER RESPONSE IS BAD!");
                     if (response.body() != null) {
-                        Log.d(Consts.TAG, response.body().toString());
+                        Log.d(Consts.TAG, Objects.requireNonNull(response.body()).toString());
                     }
                 }
 

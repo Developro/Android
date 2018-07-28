@@ -32,11 +32,17 @@ import com.yakivmospan.scytale.Crypto;
 import com.yakivmospan.scytale.Options;
 import com.yakivmospan.scytale.Store;
 
+import java.util.Objects;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+/**
+ * Created by zundarik
+ */
 
 public class LoginPinActivity extends AppCompatActivity {
 
@@ -216,7 +222,8 @@ public class LoginPinActivity extends AppCompatActivity {
 
     //встряхивание экрана
     private void shake() {
-        ObjectAnimator objectAnimator = new ObjectAnimator().ofFloat(mPinLockView, "translationX",
+        new ObjectAnimator();
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mPinLockView, "translationX",
                 0, 25, -25, 25, -25, 15, -15, 6, -6, 0).setDuration(1000);
         objectAnimator.start();
     }
@@ -336,12 +343,12 @@ public class LoginPinActivity extends AppCompatActivity {
             // из которого можем достать объект Cipher c уже подтвержденным ключом
             Cipher cipher = result.getCryptoObject().getCipher();
             String encoded = mPreferences.getString(PIN_FP, null);
-            String decoded = CryptoUtils.decode(encoded, cipher);
+            String decoded = CryptoUtils.decode(encoded, Objects.requireNonNull(cipher));
             //Toast.makeText(mContext, "success", Toast.LENGTH_SHORT).show();
             Animate.animate(mImageViewFingerView, fingerprintToTick);
             final Handler handler = new Handler();
 //            handler.postDelayed(LoginPinActivity.this::finish, 750);
-            handler.postDelayed(() -> prepareLogin(decoded), 750);
+            handler.postDelayed(() -> prepareLogin(Objects.requireNonNull(decoded)), 750);
         }
 
         @Override

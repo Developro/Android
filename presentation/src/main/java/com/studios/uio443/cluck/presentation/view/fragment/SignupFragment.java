@@ -21,6 +21,10 @@ import com.studios.uio443.cluck.presentation.util.Consts;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by zundarik
+ */
+
 public class SignupFragment extends BaseFragment implements SignupFragmentVP.View {
     private static final String LOGIN = "LOGIN";
     private static final String EMAIL = "EMAIL";

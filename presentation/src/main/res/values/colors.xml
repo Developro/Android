@@ -8,6 +8,11 @@
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryTexy">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
+    <color name="accent">#fc5133</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#615F57</color>
+
 
     <!--fingerprint-->
     <color name="text_fingerprint">#FF87898C</color>
