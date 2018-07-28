@@ -1,14 +1,4 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-//  dependencies {
-//    classpath 'me.tatarka:gradle-retrolambda:3.6.1'
-//  }
-}
-
 apply plugin: 'com.android.library'
-//apply plugin: 'me.tatarka.retrolambda'
 
 android {
   defaultPublishConfig "debug"
@@ -22,11 +12,6 @@ android {
     minSdkVersion config["androidMinSdkVersion"]
     targetSdkVersion config["androidTargetSdkVersion"]
     versionCode config["androidVersionCode"]
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
   }
 
   packagingOptions {
@@ -44,6 +29,10 @@ android {
     disable 'InvalidPackage'  // Some libraries have issues with this
     disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
   }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
