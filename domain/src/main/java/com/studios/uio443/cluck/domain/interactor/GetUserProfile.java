@@ -9,12 +9,15 @@ import com.studios.uio443.cluck.domain.executor.PostExecutionThread;
 import com.studios.uio443.cluck.domain.executor.ThreadExecutor;
 import com.studios.uio443.cluck.domain.repository.UserRepository;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class GetUserProfile  extends UseCase<User, GetUserProfile.Params>  {
 
     private final UserRepository userRepository;
 
+    @Inject
     GetUserProfile(UserRepository userRepository, ThreadExecutor threadExecutor,
                    PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
