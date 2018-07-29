@@ -32,25 +32,23 @@ import butterknife.Unbinder;
 public class UserProfileFragment extends BaseFragment implements UserProfileView {
   private static final String PARAM_USER_ID = "param_user_id";
 
-    @Inject
-    UserProfilePresenter userProfilePresenter;
+  @Inject
+  UserProfilePresenter userProfilePresenter;
 
   @BindView(R.id.iv_cover) AutoLoadImageView iv_cover;
   @BindView(R.id.tv_fullname) TextView tv_fullname;
-    @BindView(R.id.tv_points)
-    TextView tv_points;
-    @BindView(R.id.tv_votes)
-    TextView tv_votes;
+  @BindView(R.id.tv_points)  TextView tv_points;
+  @BindView(R.id.tv_votes)  TextView tv_votes;
   @BindView(R.id.rl_progress) RelativeLayout rl_progress;
   @BindView(R.id.rl_retry) RelativeLayout rl_retry;
   @BindView(R.id.bt_retry) Button bt_retry;
   private Unbinder unbinder;
 
-    public UserProfileFragment() {
+  public UserProfileFragment() {
         setRetainInstance(true);
     }
 
-    public static UserProfileFragment forUser(int userId) {
+  public static UserProfileFragment forUser(int userId) {
         final UserProfileFragment userDetailsFragment = new UserProfileFragment();
     final Bundle arguments = new Bundle();
     arguments.putInt(PARAM_USER_ID, userId);
