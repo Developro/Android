@@ -7,11 +7,11 @@ import android.support.annotation.NonNull;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.MainActivityVP;
-import com.studios.uio443.cluck.presentation.view.activity.SettingsActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.AboutFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.FeedbackFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.MainFragment;
+import com.studios.uio443.cluck.presentation.view.fragment.SettingsFragment;
 
 /**
  * Created by zundarik
@@ -67,7 +67,8 @@ public class MainActivityPresenter extends BasePresenter<UserHolder, MainActivit
                 view().setFragment(new MainFragment());
                 break;
             case "nav_settings":
-                view().startActivity(SettingsActivity.class);
+                view().setFragment(new SettingsFragment());
+                //view().startActivity(SettingsActivity.class);
                 break;
             case "nav_about":
                 view().setFragment(new AboutFragment());

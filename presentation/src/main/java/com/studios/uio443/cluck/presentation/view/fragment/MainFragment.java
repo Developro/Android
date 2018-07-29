@@ -1,6 +1,5 @@
 package com.studios.uio443.cluck.presentation.view.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,12 +8,9 @@ import android.view.View;
 
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.MainFragmentVP;
-import com.studios.uio443.cluck.presentation.navigation.Navigator;
 import com.studios.uio443.cluck.presentation.presenter.MainFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.util.Consts;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,9 +22,6 @@ import butterknife.OnClick;
 public class MainFragment extends BaseFragment implements MainFragmentVP.View {
 
     MainFragmentPresenter presenter;
-
-    @Inject
-    Navigator navigator;
 
     public MainFragment() {
     }
@@ -78,8 +71,6 @@ public class MainFragment extends BaseFragment implements MainFragmentVP.View {
      */
     @OnClick(R.id.btn_LoadData)
     void navigateToUserList() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            this.navigator.navigateToUserList(getContext());
-        }
+        //this.navigator.navigateToUserList(getContext());
     }
 }

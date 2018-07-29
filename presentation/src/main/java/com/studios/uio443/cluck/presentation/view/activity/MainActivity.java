@@ -1,5 +1,6 @@
 package com.studios.uio443.cluck.presentation.view.activity;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -213,6 +214,16 @@ public class MainActivity extends BaseActivity implements
             //ataching to fragment the navigation presenter
             fragment.atachPresenter(presenter);
             //showing the presenter on screen
+            replaceFragment(R.id.main_container, fragment);
+        } catch (NullPointerException e) {
+            Log.e(Consts.TAG, "MainActivity.setFragment\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setFragment(Fragment fragment) {
+        try {
             replaceFragment(R.id.main_container, fragment);
         } catch (NullPointerException e) {
             Log.e(Consts.TAG, "MainActivity.setFragment\n" + e.getMessage());
