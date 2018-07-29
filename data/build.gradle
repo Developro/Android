@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+
+android {
+  defaultPublishConfig "debug"
+
+  def config = rootProject.extensions.getByName("ext")
+
+  compileSdkVersion config["androidCompileSdkVersion"]
+  buildToolsVersion config["androidBuildToolsVersion"]
+
+  defaultConfig {
+    minSdkVersion config["androidMinSdkVersion"]
+    targetSdkVersion config["androidTargetSdkVersion"]
+    versionCode config["androidVersionCode"]
+  }
+
+  packagingOptions {
+    exclude 'LICENSE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/ASL2.0'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+  }
+
+  lintOptions {
+    quiet true
+    abortOnError false
+    ignoreWarnings true
+    disable 'InvalidPackage'  // Some libraries have issues with this
+    disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
+  }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+  def dataDependencies = rootProject.ext.dataDependencies
+  def testDependencies = rootProject.ext.dataTestDependencies
+
+  implementation project(':domain')
+  compileOnly dataDependencies.javaxAnnotation
+  implementation dataDependencies.javaxInject
+  implementation dataDependencies.okHttp
+  implementation dataDependencies.gson
+  implementation dataDependencies.rxJava
+  implementation dataDependencies.rxAndroid
+
+  //  retrofit
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofit_converter_gson
+  implementation dataDependencies.retrofit_adapter_rxjava
+  implementation dataDependencies.logging_interceptor
+
+  testImplementation testDependencies.junit
+  testImplementation testDependencies.assertj
+  testImplementation testDependencies.mockito
+  testImplementation testDependencies.robolectric
+}

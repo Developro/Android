@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="login_pin_switch"
+        android:summaryOff="@string/description_pref_title_login_pin_switch_off"
+        android:summaryOn="@string/description_pref_title_login_pin"
+        android:title="@string/pref_title_login_pin"
+        tools:summaryOn="@string/description_pref_title_login_pin"
+        tools:title="@string/pref_title_login_pin" />
+
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_login_pin"
+        android:inputType="text"
+        android:key="login_pin_name"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_login_pin_name"
+        tools:defaultValue="@string/pref_default_login_pin"
+        tools:title="@string/pref_title_login_pin" />
+
+    <!--test-->
+    <CheckBoxPreference
+        android:key="chb1"
+        android:summary="@string/checkbox1_summary"
+        android:title="@string/checkbox1_title"></CheckBoxPreference>
+
+    <EditTextPreference
+        android:key="address1"
+        android:summary="@string/edittext1_summary"
+        android:title="@string/edittext1_title"></EditTextPreference>
+
+    <ListPreference
+        android:entries="@array/entries"
+        android:entryValues="@array/entry_values"
+        android:key="list1"
+        android:summary="@string/list1_summary"
+        android:title="@string/list1_title"></ListPreference>
+
+</PreferenceScreen>
