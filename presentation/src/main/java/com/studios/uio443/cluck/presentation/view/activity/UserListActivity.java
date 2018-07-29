@@ -29,7 +29,8 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
 
   private UserComponent userComponent;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
     setContentView(R.layout.activity_layout);
@@ -47,11 +48,13 @@ public class UserListActivity extends BaseActivity implements HasComponent<UserC
         .build();
   }
 
-  @Override public UserComponent getComponent() {
+  @Override
+  public UserComponent getComponent() {
     return userComponent;
   }
 
-  @Override public void onUserClicked(UserModel userModel) {
+  @Override
+  public void onUserClicked(UserModel userModel) {
     this.navigator.navigateToUserDetails(this, userModel.getUserId());
   }
 }

@@ -55,8 +55,27 @@
   <string name="pref_title_login_pin_name">Screen lock</string>
   <string name="pref_default_login_pin">Screen lock pin</string>
 
+    <!--test-->
+    <string name="checkbox1_title">CheckBox 1</string>
+    <string name="checkbox1_summary">Summary of CheckBox 1</string>
+    <string name="edittext1_title">EditText 1</string>
+    <string name="edittext1_summary">Summary of EditText 1</string>
+    <string name="list1_title">List 1</string>
+    <string name="list1_summary">Summary of List 1</string>
+    <string-array name="entries">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+    </string-array>
+    <string-array name="entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <!--test-->
 
-  <!--Clucky-->
+
+    <!--Clucky-->
   <string name="action_settings">Settings</string>
   <string name="our_team">Our Team</string>
   <string name="about_company">About Company</string>

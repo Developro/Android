@@ -7,7 +7,7 @@ allprojects {
 ext {
   //Android
   androidBuildToolsVersion = "27.0.3"
-  androidMinSdkVersion = 21
+  androidMinSdkVersion = 23
   androidTargetSdkVersion = 27
   androidCompileSdkVersion = 27
 
@@ -51,7 +51,6 @@ ext {
       constraintLayout:   "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
       recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
       design:             "com.android.support:design:$androidSupportVersion",
-
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
       daggerAndroidProcessor:     "com.google.dagger:dagger-android-processor:${daggerVersion}",
       dagger:             "com.google.dagger:dagger:${daggerVersion}",
