@@ -17,6 +17,7 @@ package com.studios.uio443.cluck.domain.repository;
 
 import com.studios.uio443.cluck.domain.User;
 import io.reactivex.Observable;
+
 import java.util.List;
 
 /**
@@ -34,4 +35,6 @@ public interface UserRepository {
    * @param userId The user id used to retrieve user data.
    */
   Observable<User> user(final int userId);
+
+  Observable<User> userProfile(final int userId);
 }

@@ -6,10 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.data.util.Consts;
+import com.studios.uio443.cluck.domain.User;
 
 import java.io.IOException;
 import java.util.Objects;
 
+import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -30,7 +32,7 @@ public class GetUser {
     private UserEntity user = null;
     private OnGetUserListener listener = null;
 
-    private GetUser() {
+    public GetUser() {
         Log.d(Consts.TAG, "GetUser constructor");
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -60,6 +62,12 @@ public class GetUser {
 
     public UserEntity getUser() {
         return user;
+    }
+
+    public Observable<User> getUserById(int userId) {
+        CluckyAPI service = client.create(CluckyAPI.class);
+
+        return service.getUserRx(userId, API_KEY);
     }
 
     public void getUserFromServer(int idUser) {
