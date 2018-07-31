@@ -21,8 +21,8 @@ import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.exception.DefaultErrorBundle;
 import com.studios.uio443.cluck.domain.exception.ErrorBundle;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
-import com.studios.uio443.cluck.domain.interactor.GetUserDetails;
-import com.studios.uio443.cluck.domain.interactor.GetUserDetails.Params;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
 import com.studios.uio443.cluck.presentation.exception.ErrorMessageFactory;
 import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
@@ -40,13 +40,13 @@ public class UserProfilePresenter implements Presenter {
 
   private UserProfileView viewDetailsView;
 
-  private final GetUserDetails getUserDetailsUseCase;
+  private final GetUserProfile getUserProfileUseCase;
   private final UserModelDataMapper userModelDataMapper;
 
   @Inject
-  public UserProfilePresenter(GetUserDetails getUserDetailsUseCase,
+  public UserProfilePresenter(GetUserProfile getUserProfileUseCase,
                               UserModelDataMapper userModelDataMapper) {
-    this.getUserDetailsUseCase = getUserDetailsUseCase;
+    this.getUserProfileUseCase = getUserProfileUseCase;
     this.userModelDataMapper = userModelDataMapper;
   }
 
@@ -59,7 +59,7 @@ public class UserProfilePresenter implements Presenter {
   @Override public void pause() {}
 
   @Override public void destroy() {
-    this.getUserDetailsUseCase.dispose();
+    this.getUserProfileUseCase.dispose();
     this.viewDetailsView = null;
   }
 
@@ -74,7 +74,7 @@ public class UserProfilePresenter implements Presenter {
   }
 
   private void getUserDetails(int userId) {
-    this.getUserDetailsUseCase.execute(new UserDetailsObserver(), Params.forUser(userId));
+    this.getUserProfileUseCase.execute(new UserProfileObserver(), Params.forUser(userId));
   }
 
   private void showViewLoading() {
@@ -104,7 +104,7 @@ public class UserProfilePresenter implements Presenter {
     this.viewDetailsView.renderUser(userModel);
   }
 
-  private final class UserDetailsObserver extends DefaultObserver<User> {
+  private final class UserProfileObserver extends DefaultObserver<User> {
 
     @Override public void onComplete() {
       UserProfilePresenter.this.hideViewLoading();

@@ -18,9 +18,12 @@ package com.studios.uio443.cluck.data.repository;
 import com.studios.uio443.cluck.data.entity.mapper.UserEntityDataMapper;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStore;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStoreFactory;
+import com.studios.uio443.cluck.data.retrofit.GetUser;
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.repository.UserRepository;
 import io.reactivex.Observable;
+import retrofit2.Call;
+
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -56,5 +59,11 @@ public class UserDataRepository implements UserRepository {
   @Override public Observable<User> user(int userId) {
     final UserDataStore userDataStore = this.userDataStoreFactory.create(userId);
     return userDataStore.userEntityDetails(userId).map(this.userEntityDataMapper::transform);
+  }
+
+  @Override
+  public Observable<User> userProfile(int userId) {
+    GetUser getUser = new GetUser();
+    return getUser.getUserById(userId);
   }
 }

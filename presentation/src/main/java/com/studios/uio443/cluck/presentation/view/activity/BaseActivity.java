@@ -23,11 +23,14 @@ import javax.inject.Inject;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-  @Inject Navigator navigator;
+  @Inject
+  Navigator navigator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    //Даггер получает объекты из своих модулей и подставляет их
+    // в соответствующие переменные переданного ему экземпляра Activity
     this.getApplicationComponent().inject(this);
   }
 
