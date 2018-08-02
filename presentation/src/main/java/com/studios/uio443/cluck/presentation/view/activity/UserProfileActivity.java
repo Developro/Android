@@ -11,15 +11,12 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.internal.di.HasComponent;
-import com.studios.uio443.cluck.presentation.internal.di.components.DaggerUserComponent;
-import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
 
 /**
  * Activity that shows details of a certain user.
  */
-public class UserProfileActivity extends BaseActivity implements HasComponent<UserComponent> {
+public class UserProfileActivity extends BaseActivity {
 
   private static final String INTENT_EXTRA_PARAM_USER_ID = "org.android10.INTENT_PARAM_USER_ID";
   private static final String INSTANCE_STATE_PARAM_USER_ID = "org.android10.STATE_PARAM_USER_ID";
@@ -31,7 +28,6 @@ public class UserProfileActivity extends BaseActivity implements HasComponent<Us
   }
 
   private int userId;
-  private UserComponent userComponent;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,7 +35,7 @@ public class UserProfileActivity extends BaseActivity implements HasComponent<Us
     setContentView(R.layout.activity_layout);
 
     this.initializeActivity(savedInstanceState);
-    this.initializeInjector();
+//    this.initializeInjector();
   }
 
   @Override protected void onSaveInstanceState(Bundle outState) {
@@ -61,14 +57,10 @@ public class UserProfileActivity extends BaseActivity implements HasComponent<Us
     }
   }
 
-  private void initializeInjector() {
-    this.userComponent = DaggerUserComponent.builder()
-        .applicationComponent(getApplicationComponent())
-        .activityModule(getActivityModule())
-        .build();
-  }
-
-  @Override public UserComponent getComponent() {
-    return userComponent;
-  }
+//  private void initializeInjector() {
+//    this.userComponent = DaggerUserComponent.builder()
+//        .applicationComponent(getApplicationComponent())
+//        .activityModule(getActivityModule())
+//        .build();
+//  }
 }

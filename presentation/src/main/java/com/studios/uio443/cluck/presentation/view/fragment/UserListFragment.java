@@ -5,7 +5,6 @@
  */
 package com.studios.uio443.cluck.presentation.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.presenter.UserListPresenter;
 import com.studios.uio443.cluck.presentation.view.UserListView;
@@ -57,16 +55,17 @@ public class UserListFragment extends BaseFragment implements UserListView {
     setRetainInstance(true);
   }
 
-  @Override public void onAttach(Activity activity) {
-    super.onAttach(activity);
-    if (activity instanceof UserListListener) {
-      this.userListListener = (UserListListener) activity;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof UserListListener) {
+            this.userListListener = (UserListListener) context;
     }
   }
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.getComponent(UserComponent.class).inject(this);
+      //this.getComponent(UserComponent.class).inject(this);
   }
 
   @Override

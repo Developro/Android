@@ -12,9 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.studios.uio443.cluck.presentation.internal.di.HasComponent;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.util.Consts;
+
+import dagger.android.DaggerFragment;
 
 /**
  * Base {@link android.app.Fragment} class for every fragment in this application.
@@ -24,7 +25,7 @@ import com.studios.uio443.cluck.presentation.util.Consts;
  * the base fragment implements the navigation view
  * to set the default methods implementation
  */
-public abstract class BaseFragment extends Fragment implements FragmentNavigation.View {
+public abstract class BaseFragment extends DaggerFragment implements FragmentNavigation.View {
 
     // the root view
     protected View rootView;
@@ -49,22 +50,14 @@ public abstract class BaseFragment extends Fragment implements FragmentNavigatio
         navigationPresenter = presenter;
     }
 
-  /**
-   * Shows a {@link android.widget.Toast} message.
-   *
-   * @param message An string representing a message to be shown.
-   */
-  protected void showToastMessage(String message) {
+    /**
+     * Shows a {@link android.widget.Toast} message.
+     *
+     * @param message An string representing a message to be shown.
+     */
+    protected void showToastMessage(String message) {
     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-  }
-
-  /**
-   * Gets a component for dependency injection by its type.
-   */
-  @SuppressWarnings("unchecked")
-  protected <C> C getComponent(Class<C> componentType) {
-    return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
-  }
+    }
 
     /**
      * Adds a {@link Fragment} to this activity's layout.

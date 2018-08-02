@@ -3,17 +3,14 @@ package com.studios.uio443.cluck.presentation.view.activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.studios.uio443.cluck.presentation.Application;
-import com.studios.uio443.cluck.presentation.internal.di.components.ApplicationComponent;
-import com.studios.uio443.cluck.presentation.internal.di.modules.ActivityModule;
 import com.studios.uio443.cluck.presentation.navigation.Navigator;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * Base {@link android.support.v7.app.AppCompatActivity} class for every Activity in this application.
@@ -21,18 +18,10 @@ import javax.inject.Inject;
  * Created by zundarik
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
 
   @Inject
   Navigator navigator;
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    //Даггер получает объекты из своих модулей и подставляет их
-    // в соответствующие переменные переданного ему экземпляра Activity
-    this.getApplicationComponent().inject(this);
-  }
 
   /**
    * Adds a {@link Fragment} to this activity's layout.
@@ -60,23 +49,5 @@ public abstract class BaseActivity extends AppCompatActivity {
       Log.e(Consts.TAG, "BaseActivity.setStartActivity\n" + e.getMessage());
       e.printStackTrace();
     }
-  }
-
-  /**
-   * Get the Main Application component for dependency injection.
-   *
-   * @return {@link com.studios.uio443.cluck.presentation.internal.di.components.ApplicationComponent}
-   */
-  protected ApplicationComponent getApplicationComponent() {
-    return ((Application) getApplication()).getApplicationComponent();
-  }
-
-  /**
-   * Get an Activity module for dependency injection.
-   *
-   * @return {@link com.studios.uio443.cluck.presentation.internal.di.modules.ActivityModule}
-   */
-  protected ActivityModule getActivityModule() {
-    return new ActivityModule(this);
   }
 }

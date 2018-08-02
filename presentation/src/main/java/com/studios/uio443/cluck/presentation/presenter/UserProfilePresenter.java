@@ -21,10 +21,10 @@ import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.exception.DefaultErrorBundle;
 import com.studios.uio443.cluck.domain.exception.ErrorBundle;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
-import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.presentation.exception.ErrorMessageFactory;
-import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
+import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.view.UserProfileView;
@@ -35,7 +35,7 @@ import javax.inject.Inject;
  * {@link Presenter} that controls communication between views and models of the presentation
  * layer.
  */
-@PerActivity
+@ActivityScope
 public class UserProfilePresenter implements Presenter {
 
   private UserProfileView viewDetailsView;

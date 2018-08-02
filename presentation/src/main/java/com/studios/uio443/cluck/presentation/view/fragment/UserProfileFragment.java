@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.fernandocejas.arrow.checks.Preconditions;
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.presenter.UserProfilePresenter;
 import com.studios.uio443.cluck.presentation.view.UserProfileView;
@@ -60,7 +59,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.getComponent(UserComponent.class).inject(this);
+      //this.getComponent(UserComponent.class).inject(this);
   }
 
   @Override

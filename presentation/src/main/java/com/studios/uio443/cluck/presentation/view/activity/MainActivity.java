@@ -22,11 +22,14 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.MainActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.MainActivityPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
+import com.studios.uio443.cluck.presentation.structure.router.MainRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,12 +44,16 @@ public class MainActivity extends BaseActivity implements
         MainActivityVP.View,
         NavigationView.OnNavigationItemSelectedListener {
 
+    @Inject
+    MainRouter router;
+
     public static final String FRAGMENT_ID = "fragment_id";
     public static final int RESULT_BACK_PRESSED = RESULT_FIRST_USER;
     private static long back_pressed;
-    MainActivityPresenter presenter;
     int fragmentId;
     boolean persmissionsGranted = false;
+
+    MainActivityPresenter presenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
