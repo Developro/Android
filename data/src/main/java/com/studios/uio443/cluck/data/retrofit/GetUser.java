@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetUser {
     private static volatile GetUser instance;
-    private String BASE_URL = "http://api.185.244.173.142";
+    private String BASE_URL = "http://185.244.173.142";
     private String API_KEY = "cf8546gh5678jbd6182a837f232c43";
     private Retrofit client;
     private UserEntity user = null;

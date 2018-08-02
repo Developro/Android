@@ -11,6 +11,7 @@ import retrofit2.http.Query;
 
 public interface CluckyAPI {
     //TODO здесь всё временно пока не заработает Api на сервере
+    String BASE_URL = "http://185.244.173.142";
 
     @GET("/data/user")
     Call<UserEntity> getUser(@Query("id") int id, @Query("APPID") String key);
@@ -19,5 +20,5 @@ public interface CluckyAPI {
     Observable<User> getUserRx(@Query("id") int id, @Query("APPID") String key);
 
     @POST("/api/auth/login")
-    Observable<User> auth(@Query("login") String login, @Query("password") String password);
+    Observable<UserEntity> auth(@Query("login") String login, @Query("password") String password);
 }
