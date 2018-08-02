@@ -20,13 +20,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.studios.uio443.cluck.data.retrofit.CluckyAPI.BASE_URL;
+
 /**
  * Created by zundarik
  */
 
 public class GetUser {
     private static volatile GetUser instance;
-    private String BASE_URL = "http://185.244.173.142";
     private String API_KEY = "cf8546gh5678jbd6182a837f232c43";
     private Retrofit client;
     private UserEntity user = null;
@@ -68,6 +69,12 @@ public class GetUser {
         CluckyAPI service = client.create(CluckyAPI.class);
 
         return service.getUserRx(userId, API_KEY);
+    }
+
+    public Observable<UserEntity> auth(String user, String login) {
+        CluckyAPI service = client.create(CluckyAPI.class);
+
+        return service.auth(user, login);
     }
 
     public void getUserFromServer(int idUser) {

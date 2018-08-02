@@ -21,12 +21,13 @@ import com.studios.uio443.cluck.data.repository.datasource.UserDataStoreFactory;
 import com.studios.uio443.cluck.data.retrofit.GetUser;
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.repository.UserRepository;
-import io.reactivex.Observable;
-import retrofit2.Call;
 
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.Observable;
 
 /**
  * {@link UserRepository} for retrieving user data.
@@ -65,5 +66,10 @@ public class UserDataRepository implements UserRepository {
   public Observable<User> userProfile(int userId) {
     GetUser getUser = new GetUser();
     return getUser.getUserById(userId);
+  }
+
+  @Override
+  public Observable<User> auth(String user, String password) {
+    return this.userDataStoreFactory.getCluckyApiImpl().auth(user, password).map(this.userEntityDataMapper::transform);
   }
 }
