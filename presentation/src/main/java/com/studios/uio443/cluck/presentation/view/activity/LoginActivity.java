@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.studios.uio443.cluck.presentation.R;
+import com.studios.uio443.cluck.presentation.internal.di.HasComponent;
+import com.studios.uio443.cluck.presentation.internal.di.components.DaggerUserComponent;
+import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.mvp.LoginActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginActivityPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
@@ -21,16 +24,18 @@ import com.vk.sdk.api.VKError;
  */
 
 public class LoginActivity extends BaseActivity implements
-        LoginActivityVP.View {
+        LoginActivityVP.View, HasComponent<UserComponent> {
 
     LoginActivityPresenter presenter;
     private boolean isResumed = false;
+    private UserComponent userComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(Consts.TAG, "LoginActivity.onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        this.initializeInjector();
 
         if (savedInstanceState == null) {
             presenter = new LoginActivityPresenter();
@@ -146,5 +151,17 @@ public class LoginActivity extends BaseActivity implements
             Log.e(Consts.TAG, "LoginActivity.setFragment\n" + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void initializeInjector() {
+        this.userComponent = DaggerUserComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
+    }
+
+    @Override
+    public UserComponent getComponent() {
+        return userComponent;
     }
 }
