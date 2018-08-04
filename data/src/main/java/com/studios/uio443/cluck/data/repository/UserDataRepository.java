@@ -70,6 +70,7 @@ public class UserDataRepository implements UserRepository {
 
   @Override
   public Observable<User> auth(String user, String password) {
+    // т.к. у нас максимально тонкий клиент, то юзать UserDataStore не будем
     return this.userDataStoreFactory.getCluckyApiImpl().auth(user, password).map(this.userEntityDataMapper::transform);
   }
 }
