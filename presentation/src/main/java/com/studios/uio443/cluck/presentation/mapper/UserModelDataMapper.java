@@ -16,7 +16,7 @@
 package com.studios.uio443.cluck.presentation.mapper;
 
 import com.studios.uio443.cluck.domain.User;
-import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
+import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.presentation.model.UserModel;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import javax.inject.Inject;
  * Mapper class used to transform {@link User} (in the domain layer) to {@link UserModel} in the
  * presentation layer.
  */
-@PerActivity
+@ActivityScope
 public class UserModelDataMapper {
 
   @Inject

@@ -89,10 +89,14 @@ dependencies {
   annotationProcessor presentationDependencies.daggerAndroidProcessor
   implementation presentationDependencies.dagger
   implementation presentationDependencies.daggerAndroid
+  implementation presentationDependencies.daggerAndroidSupport
+
   implementation presentationDependencies.butterKnife
   annotationProcessor presentationDependencies.butterKnifeCompiler
+
   implementation presentationDependencies.rxJava
   implementation presentationDependencies.rxAndroid
+
   compileOnly presentationDependencies.javaxAnnotation
   implementation presentationDependencies.arrow
 

@@ -11,197 +11,184 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.SignupFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.presenter.SignupFragmentPresenter;
+import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import javax.inject.Inject;
 
 /**
  * Created by zundarik
  */
 
 public class SignupFragment extends BaseFragment implements SignupFragmentVP.View {
-    private static final String LOGIN = "LOGIN";
-    private static final String EMAIL = "EMAIL";
-    private static final String PASSWORD = "PASSWORD";
-    private static final String REPASSWORD = "REPASSWORD";
-    SignupFragmentPresenter presenter;
 
-    @BindView(R.id.signup_username_layout)
-    TextInputLayout signupUsernameLayout;
-    @BindView(R.id.signup_email_layout)
-    TextInputLayout signupEmailLayout;
-    @BindView(R.id.signup_password_layout)
-    TextInputLayout signupPasswordLayout;
-    @BindView(R.id.signup_reEnterPassword_layout)
-    TextInputLayout signupReEnterPasswordLayout;
-    @BindView(R.id.signup_username_input)
-    EditText signupUsernameInput;
-    @BindView(R.id.signup_email_input)
-    EditText signupEmailInput;
-    @BindView(R.id.signup_password_input)
-    EditText signupPasswordInput;
-    @BindView(R.id.signup_reEnterPassword_input)
-    EditText signupReEnterPasswordInput;
-    @BindView(R.id.btn_signup)
-    Button btnSignup;
-    @BindView(R.id.link_login)
-    TextView linkLogin;
+	@Inject
+	LoginRouter router;
+	@Inject
+	SignupFragmentPresenter signupFragmentPresenter;
 
-    public SignupFragment() {
-        super();
-    }
+	private static final String LOGIN = "LOGIN";
+	private static final String EMAIL = "EMAIL";
+	private static final String PASSWORD = "PASSWORD";
+	private static final String REPASSWORD = "REPASSWORD";
 
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_signup;
-    }
+	@BindView(R.id.signup_username_layout)
+	TextInputLayout signupUsernameLayout;
+	@BindView(R.id.signup_email_layout)
+	TextInputLayout signupEmailLayout;
+	@BindView(R.id.signup_password_layout)
+	TextInputLayout signupPasswordLayout;
+	@BindView(R.id.signup_reEnterPassword_layout)
+	TextInputLayout signupReEnterPasswordLayout;
+	@BindView(R.id.signup_username_input)
+	EditText signupUsernameInput;
+	@BindView(R.id.signup_email_input)
+	EditText signupEmailInput;
+	@BindView(R.id.signup_password_input)
+	EditText signupPasswordInput;
+	@BindView(R.id.signup_reEnterPassword_input)
+	EditText signupReEnterPasswordInput;
+	@BindView(R.id.btn_signup)
+	Button btnSignup;
+	@BindView(R.id.link_login)
+	TextView linkLogin;
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d(Consts.TAG, "SignupFragment.onCreateView");
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+	public SignupFragment() {
+		super();
+	}
 
-        if (savedInstanceState == null) {
-            presenter = new SignupFragmentPresenter();
-        } else {
-            signupUsernameInput.setText(savedInstanceState.getString(LOGIN, ""));
-            signupEmailInput.setText(savedInstanceState.getString(EMAIL, ""));
-            signupPasswordInput.setText(savedInstanceState.getString(PASSWORD, ""));
-            signupReEnterPasswordInput.setText(savedInstanceState.getString(REPASSWORD, ""));
-            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-        }
-        presenter.bindView(this);
+	@Override
+	protected int getLayout() {
+		return R.layout.fragment_signup;
+	}
 
-        btnSignup.setOnClickListener(v -> {
-            String username = signupUsernameInput.getText().toString();
-            String email = signupEmailInput.getText().toString();
-            String password = signupPasswordInput.getText().toString();
-            //String reEnterPassword = signupReEnterPasswordInput.getText().toString();
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		Log.d(Consts.TAG, "SignupFragment.onCreateView");
+		super.onViewCreated(view, savedInstanceState);
+		ButterKnife.bind(this, view);
 
-            presenter.onSignup(username, email, password);
-        });
+		if (savedInstanceState != null) {
+			signupUsernameInput.setText(savedInstanceState.getString(LOGIN, ""));
+			signupEmailInput.setText(savedInstanceState.getString(EMAIL, ""));
+			signupPasswordInput.setText(savedInstanceState.getString(PASSWORD, ""));
+			signupReEnterPasswordInput.setText(savedInstanceState.getString(REPASSWORD, ""));
+		}
+		signupFragmentPresenter.bindView(this);
 
-        linkLogin.setOnClickListener(v -> {
-            presenter.linkLogin();
-            getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-        });
-    }
+		btnSignup.setOnClickListener(v -> {
+			String username = signupUsernameInput.getText().toString();
+			String email = signupEmailInput.getText().toString();
+			String password = signupPasswordInput.getText().toString();
+			//String reEnterPassword = signupReEnterPasswordInput.getText().toString();
 
-    @Override
-    public void onResume() {
-        super.onResume();
+			signupFragmentPresenter.onSignup(username, email, password);
+		});
 
-        presenter.bindView(this);
-    }
+		linkLogin.setOnClickListener(v -> {
+			router.showLoginActivity();
+			getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+		});
+	}
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(Consts.TAG, "SignupFragment.onSaveInstanceState");
-        super.onSaveInstanceState(outState);
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        outState.putString(LOGIN, signupUsernameInput.getText().toString());
-        outState.putString(EMAIL, signupEmailInput.getText().toString());
-        outState.putString(PASSWORD, signupPasswordInput.getText().toString());
-        outState.putString(REPASSWORD, signupReEnterPasswordInput.getText().toString());
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
+		//presenter.bindView(this);
+	}
 
-    @Override
-    public void onPause() {
-        Log.d(Consts.TAG, "SignupFragment.onPause");
-        super.onPause();
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		Log.d(Consts.TAG, "SignupFragment.onSaveInstanceState");
+		super.onSaveInstanceState(outState);
 
-        presenter.unbindView();
-    }
+		outState.putString(LOGIN, signupUsernameInput.getText().toString());
+		outState.putString(EMAIL, signupEmailInput.getText().toString());
+		outState.putString(PASSWORD, signupPasswordInput.getText().toString());
+		outState.putString(REPASSWORD, signupReEnterPasswordInput.getText().toString());
+		PresenterManager.getInstance().savePresenter(signupFragmentPresenter, outState);
+	}
 
-    @Override
-    public void progressDialog() {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage(getString(R.string.authenticating));
-        progressDialog.show();
+	@Override
+	public void onPause() {
+		Log.d(Consts.TAG, "SignupFragment.onPause");
+		super.onPause();
 
-        new android.os.Handler().postDelayed(
-                () -> {
-                    // On complete call either onLoginSuccess or onLoginFailed
-                    presenter.onSignupSuccess();
-                    // onLoginFailed();
-                    progressDialog.dismiss();
-                }, 3000);
-    }
+		//presenter.unbindView();
+	}
 
-    @Override
-    public void showSignupSuccess() {
-        btnSignup.setEnabled(true);
-    }
+	@Override
+	public void progressDialog() {
+		btnSignup.setEnabled(true);
+		final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme);
+		progressDialog.setIndeterminate(true);
+		progressDialog.setMessage(getString(R.string.authenticating));
+		progressDialog.show();
 
-    @Override
-    public void showSignupFailed() {
-        Log.e(Consts.TAG, "SignupFragment.showSignupFailed");
-        Toast.makeText(getActivity(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+		new android.os.Handler().postDelayed(
+						() -> {
+							// On complete call either onLoginSuccess or onLoginFailed
+							btnSignup.setEnabled(true);
+							router.showLoginPinActivity();
+							// onLoginFailed();
+							progressDialog.dismiss();
+						}, 3000);
+	}
 
-        btnSignup.setEnabled(true);
-    }
+	@Override
+	public void showSignupFailed() {
+		Log.e(Consts.TAG, "SignupFragment.showSignupFailed");
+		Toast.makeText(getActivity(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
 
-    @Override
-    public boolean validate() {
-        boolean valid = true;
+		btnSignup.setEnabled(false);
+	}
 
-        String name = signupUsernameInput.getText().toString();
-        String email = signupEmailInput.getText().toString();
-        String password = signupPasswordInput.getText().toString();
-        String reEnterPassword = signupReEnterPasswordInput.getText().toString();
+	@Override
+	public boolean validate() {
+		boolean valid = true;
 
-        if (name.isEmpty() || name.length() < 3) {
-            signupUsernameInput.setError(getString(R.string.name_length_error));
-            valid = false;
-        } else {
-            signupUsernameInput.setError(null);
-        }
+		String name = signupUsernameInput.getText().toString();
+		String email = signupEmailInput.getText().toString();
+		String password = signupPasswordInput.getText().toString();
+		String reEnterPassword = signupReEnterPasswordInput.getText().toString();
 
-
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            signupEmailInput.setError(getString(R.string.enter_valid_email));
-            valid = false;
-        } else {
-            signupEmailInput.setError(null);
-        }
+		if (name.isEmpty() || name.length() < 3) {
+			signupUsernameInput.setError(getString(R.string.name_length_error));
+			valid = false;
+		} else {
+			signupUsernameInput.setError(null);
+		}
 
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            signupPasswordInput.setError(getString(R.string.password_length_error));
-            valid = false;
-        } else {
-            signupPasswordInput.setError(null);
-        }
+		if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+			signupEmailInput.setError(getString(R.string.enter_valid_email));
+			valid = false;
+		} else {
+			signupEmailInput.setError(null);
+		}
 
-        if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
-            signupReEnterPasswordInput.setError(getString(R.string.password_do_not_match));
-            valid = false;
-        } else {
-            signupReEnterPasswordInput.setError(null);
-        }
 
-        return valid;
-    }
+		if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+			signupPasswordInput.setError(getString(R.string.password_length_error));
+			valid = false;
+		} else {
+			signupPasswordInput.setError(null);
+		}
 
-    @Override
-    public void setFragment(BaseFragment fragment) {
-        try {
-            //ataching to fragment the navigation presenter
-            fragment.attachPresenter(presenter);
-            //showing the presenter on screen
-            replaceFragment(R.id.container, fragment);
-        } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "SignupFragment.setFragment\n" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+		if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
+			signupReEnterPasswordInput.setError(getString(R.string.password_do_not_match));
+			valid = false;
+		} else {
+			signupReEnterPasswordInput.setError(null);
+		}
+
+		return valid;
+	}
 }
