@@ -47,29 +47,6 @@ public class LoginActivityPresenter extends BasePresenter<UserHolder, LoginActiv
 		new LoadDataTask().execute();
 	}
 
-//    @Override
-//    public void addFragment(BaseFragment fragment) {
-//        view().setFragment(fragment);
-//    }
-
-//    @Override
-//    public void showLogin() {
-//        Log.d(Consts.TAG, "LoginActivityPresenter.showLogin");
-//        view().setFragment(new LoginFragment());
-//    }
-//
-//    @Override
-//    public void showLogout() {
-//        Log.d(Consts.TAG, "LoginActivityPresenter.showLogout");
-//        view().setFragment(new LogoutFragment());
-//    }
-
-//    @Override
-//    public void startModeSelectActivity() {
-//        Log.d(Consts.TAG, "LoginActivityPresenter.startModeSelectActivity");
-//        view().startActivity(ModeSelectActivity.class);
-//    }
-
 	// It's OK for this class not to be static and to keep a reference to the Presenter, as this
 	// is retained during orientation changes and is lightweight (has no activity/view reference)
 	@SuppressLint("StaticFieldLeak")

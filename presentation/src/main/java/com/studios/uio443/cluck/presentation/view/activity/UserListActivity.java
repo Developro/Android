@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.Window;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.model.UserModel;
-import com.studios.uio443.cluck.presentation.structure.router.UserListRouter;
+import com.studios.uio443.cluck.presentation.router.UserListRouter;
 import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
 
 import javax.inject.Inject;

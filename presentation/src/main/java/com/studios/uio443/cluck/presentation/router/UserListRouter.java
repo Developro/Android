@@ -1,4 +1,4 @@
-package com.studios.uio443.cluck.presentation.structure.router;
+package com.studios.uio443.cluck.presentation.router;
 
 import android.content.Context;
 

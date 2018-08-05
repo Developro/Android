@@ -16,66 +16,66 @@ import javax.inject.Inject;
 
 @ActivityScope
 public class MainActivityPresenter extends BasePresenter<UserHolder, MainActivityVP.View> implements
-        MainActivityVP.Presenter,
-        FragmentNavigation.Presenter {
+				MainActivityVP.Presenter,
+				FragmentNavigation.Presenter {
 
-    private boolean isLoadingData = false;
+	private boolean isLoadingData = false;
 
 	@Inject
 	public MainActivityPresenter() {
 	}
 
-    @Override
-    protected void updateView() {
-        // Business logic is in the presenter
-        //view().updateText(model.getText() + " " + count);
-    }
+	@Override
+	protected void updateView() {
+		// Business logic is in the presenter
+		//view().updateText(model.getText() + " " + count);
+	}
 
-    @Override
-    public void bindView(@NonNull MainActivityVP.View view) {
-        super.bindView(view);
+	@Override
+	public void bindView(@NonNull MainActivityVP.View view) {
+		super.bindView(view);
 
-        // Let's not reload data if it's already here
-        if (model == null && !isLoadingData) {
-            loadData();
-        }
-    }
+		// Let's not reload data if it's already here
+		if (model == null && !isLoadingData) {
+			loadData();
+		}
+	}
 
-    private void loadData() {
-        isLoadingData = true;
-        new LoadDataTask().execute();
-    }
+	private void loadData() {
+		isLoadingData = true;
+		new LoadDataTask().execute();
+	}
 
-    public void buttonClick(String nameButton) {
-        switch (nameButton) {
-            case "buttonArchitecture":
-                //model.setText("hi");
-                updateView();
-                break;
-            default:
-                break;
-        }
-    }
+	public void buttonClick(String nameButton) {
+		switch (nameButton) {
+			case "buttonArchitecture":
+				//model.setText("hi");
+				updateView();
+				break;
+			default:
+				break;
+		}
+	}
 
 //    @Override
 //    public void addFragment(BaseFragment fragment) {
 //        view().setFragment(fragment);
 //    }
 
-    // It's OK for this class not to be static and to keep a reference to the Presenter, as this
-    // is retained during orientation changes and is lightweight (has no activity/view reference)
-    @SuppressLint("StaticFieldLeak")
-    private class LoadDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            //SystemClock.sleep(3000);
-            return null;
-        }
+	// It's OK for this class not to be static and to keep a reference to the Presenter, as this
+	// is retained during orientation changes and is lightweight (has no activity/view reference)
+	@SuppressLint("StaticFieldLeak")
+	private class LoadDataTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... params) {
+			//SystemClock.sleep(3000);
+			return null;
+		}
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            //setModel(new MainModel());
-            isLoadingData = false;
-        }
-    }
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			//setModel(new MainModel());
+			isLoadingData = false;
+		}
+	}
 }

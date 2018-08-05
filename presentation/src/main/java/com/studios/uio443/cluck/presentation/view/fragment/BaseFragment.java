@@ -26,7 +26,7 @@ public abstract class BaseFragment extends DaggerFragment implements FragmentNav
 	 * navigation presenter instance
 	 * declared in base for easier access
 	 */
-	protected FragmentNavigation.Presenter navigationPresenter;
+	//protected FragmentNavigation.Presenter navigationPresenter;
 
 	@Nullable
 	@Override
@@ -38,10 +38,10 @@ public abstract class BaseFragment extends DaggerFragment implements FragmentNav
 
 	protected abstract int getLayout();
 
-	//@Override
-	public void atachPresenter(FragmentNavigation.Presenter presenter) {
-		navigationPresenter = presenter;
-	}
+//	@Override
+//	public void atachPresenter(FragmentNavigation.Presenter presenter) {
+//		navigationPresenter = presenter;
+//	}
 
 	/**
 	 * Shows a {@link android.widget.Toast} message.
@@ -62,32 +62,5 @@ public abstract class BaseFragment extends DaggerFragment implements FragmentNav
 //        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
 //        fragmentTransaction.add(containerViewId, fragment);
 //        fragmentTransaction.commit();
-//    }
-//
-//    protected void replaceFragment(int containerViewId, Fragment fragment) {
-//        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(containerViewId, fragment);
-//        fragmentTransaction.addToBackStack(null); //возврат на предыдующий фрагмент
-//        fragmentTransaction.commit();
-//    }
-//
-//    public void startActivity(Class activityClass) {
-//        try {
-//            Intent intent = new Intent(getActivity(), activityClass);
-//            getActivity().startActivity(intent);
-//        } catch (NullPointerException e) {
-//            Log.e(Consts.TAG, "BaseFragment.setStartActivity\n" + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void startActivityForResult(Class activityClass, int requestCode) {
-//        try {
-//            Intent intent = new Intent(getActivity(), activityClass);
-//            getActivity().startActivityForResult(intent, requestCode);
-//        } catch (NullPointerException e) {
-//            Log.e(Consts.TAG, "BaseFragment.startActivityForResult\n" + e.getMessage());
-//            e.printStackTrace();
-//        }
 //    }
 }

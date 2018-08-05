@@ -14,7 +14,7 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
-import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
+import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
@@ -29,10 +29,9 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 	@Inject
 	LoginRouter router;
-
 	@Inject
-	LoginFragmentPresenter presenter;
-	
+	LoginFragmentPresenter loginFragmentPresenter;
+
 	private static final String LOGIN = "LOGIN";
 	private static final String PASSWORD = "PASSWORD";
 	private static final String[] sMyScope = new String[]{
@@ -80,20 +79,20 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		//TODO чтение последнего логина из префа
 
 		if (savedInstanceState != null) {
-            loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
-            loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
-        }
-		presenter.bindView(this);
+			loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
+			loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
+		}
+		loginFragmentPresenter.bindView(this);
 
 		//Если у пользователя не установлено приложение ВКонтакте,
 		// то SDK будет использовать авторизацию через новую Activity при помощи OAuth.
-		btnSignInVK.setOnClickListener(v -> presenter.onSignInVK());
+		btnSignInVK.setOnClickListener(v -> loginFragmentPresenter.onSignInVK());
 
 		btnLogin.setOnClickListener(v -> {
 			String email = loginEmailInput.getText().toString();
 			String password = loginPasswordInput.getText().toString();
 
-			presenter.onLogin(email, password);
+			loginFragmentPresenter.onLogin(email, password);
 		});
 
 		linkSignUp.setOnClickListener(v -> router.showSignupFragment());
@@ -115,7 +114,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 		outState.putString(LOGIN, loginEmailInput.getText().toString());
 		outState.putString(PASSWORD, loginPasswordInput.getText().toString());
-		PresenterManager.getInstance().savePresenter(presenter, outState);
+		PresenterManager.getInstance().savePresenter(loginFragmentPresenter, outState);
 	}
 
 	@Override
@@ -161,9 +160,9 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		String password = loginPasswordInput.getText().toString();
 
 		if (email.isEmpty()
-            // del email validate (def user is "user")
-            //|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-                ) {
+			// del email validate (def user is "user")
+			//|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+						) {
 			loginEmailInput.setError(getString(R.string.enter_valid_email));
 			valid = false;
 		} else {

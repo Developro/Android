@@ -19,72 +19,72 @@ import javax.inject.Inject;
 
 @ActivityScope
 public class SignupFragmentPresenter extends BasePresenter<UserHolder, SignupFragmentVP.View> implements
-        SignupFragmentVP.Presenter,
-        FragmentNavigation.Presenter {
+				SignupFragmentVP.Presenter,
+				FragmentNavigation.Presenter {
 
-    private boolean isLoadingData = false;
+	private boolean isLoadingData = false;
 
 	@Inject
 	public SignupFragmentPresenter() {
 	}
 
-    @Override
-    protected void updateView() {
-        // Business logic is in the presenter
-        //view().updateText(model.getText() + " " + count);
-    }
+	@Override
+	protected void updateView() {
+		// Business logic is in the presenter
+		//view().updateText(model.getText() + " " + count);
+	}
 
-    @Override
-    public void bindView(@NonNull SignupFragmentVP.View view) {
-        super.bindView(view);
+	@Override
+	public void bindView(@NonNull SignupFragmentVP.View view) {
+		super.bindView(view);
 
-        // Let's not reload data if it's already here
-        if (model == null && !isLoadingData) {
-            setModel(UserHolder.getInstance());
-            //loadData(); // если нужен запрос к серверу
-        }
-    }
+		// Let's not reload data if it's already here
+		if (model == null && !isLoadingData) {
+			setModel(UserHolder.getInstance());
+			//loadData(); // если нужен запрос к серверу
+		}
+	}
 
-    private void loadData() {
-        isLoadingData = true;
-        new LoadDataTask().execute();
-    }
+	private void loadData() {
+		isLoadingData = true;
+		new LoadDataTask().execute();
+	}
 
-    @Override
-    public void onSignup(String username, String email, String password) {
-        Log.d(Consts.TAG, "SignupFragmentPresenter.onSignup");
-        if (!view().validate()) {
-            view().showSignupFailed();
-            return;
-        }
+	@Override
+	public void onSignup(String username, String email, String password) {
+		Log.d(Consts.TAG, "SignupFragmentPresenter.onSignup");
+		if (!view().validate()) {
+			view().showSignupFailed();
+			return;
+		}
 
-        // TODO: Implement your own signup logic here.
+		// TODO: Implement your own signup logic here.
 
-        UserModel user = model.signup(email, password, username);
+		UserModel user = model.signup(email, password, username);
 
-        if (user == null) {
-            view().showSignupFailed();
-            return;
-        }
+		if (user == null) {
+			view().showSignupFailed();
+			return;
+		}
 
-        view().progressDialog(); //start MainActivity
-    }
+		view().progressDialog(); //start MainActivity
+	}
 
-    // It's OK for this class not to be static and to keep a reference to the Presenter, as this
-    // is retained during orientation changes and is lightweight (has no activity/view reference)
-    @SuppressLint("StaticFieldLeak")
-    private class LoadDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            //SystemClock.sleep(3000);
-            //TODO получение данных из интернета
-            return null;
-        }
+	// It's OK for this class not to be static and to keep a reference to the Presenter, as this
+	// is retained during orientation changes and is lightweight (has no activity/view reference)
+	@SuppressLint("StaticFieldLeak")
+	private class LoadDataTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... params) {
+			//SystemClock.sleep(3000);
+			//TODO получение данных из интернета
+			return null;
+		}
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            //setModel(new MainModel());
-            isLoadingData = false;
-        }
-    }
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			//setModel(new MainModel());
+			isLoadingData = false;
+		}
+	}
 }

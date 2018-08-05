@@ -11,8 +11,6 @@ import com.studios.uio443.cluck.domain.repository.UserRepository;
 import com.studios.uio443.cluck.presentation.App;
 import com.studios.uio443.cluck.presentation.UIThread;
 import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
-import com.studios.uio443.cluck.presentation.structure.repo.Repository;
-import com.studios.uio443.cluck.presentation.structure.repo.RepositoryImpl;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
 import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
@@ -37,12 +35,6 @@ public abstract class AppModule {
 //    public static UserRepository userRepository(Context context) {
 //        return new UserRepositoryImpl(context);
 //    }
-
-	@Singleton
-	@Provides
-	public static Repository repository(RepositoryImpl repository) {
-		return new RepositoryImpl();
-	}
 
 	@Provides
 	@Singleton

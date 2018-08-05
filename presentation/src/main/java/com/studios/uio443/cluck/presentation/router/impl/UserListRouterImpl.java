@@ -1,9 +1,9 @@
-package com.studios.uio443.cluck.presentation.structure.router.impl;
+package com.studios.uio443.cluck.presentation.router.impl;
 
 import android.content.Context;
 import android.content.Intent;
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.structure.router.UserListRouter;
+import com.studios.uio443.cluck.presentation.router.UserListRouter;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserProfileActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
@@ -27,12 +27,4 @@ public class UserListRouterImpl extends BaseRouterImpl<UserListActivity> impleme
 		Intent intentToLaunch = UserProfileActivity.getCallingIntent(context, userId);
 		startActivity(intentToLaunch);
 	}
-
-//    public void showUserDetails(Context context, int userId) {
-//        if (context != null) {
-//            Intent intentToLaunch = UserProfileActivity.getCallingIntent(context, userId);
-//            startActivity(intentToLaunch);
-//        }
-//    }
-
 }

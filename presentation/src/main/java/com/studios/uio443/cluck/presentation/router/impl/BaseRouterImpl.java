@@ -1,4 +1,4 @@
-package com.studios.uio443.cluck.presentation.structure.router.impl;
+package com.studios.uio443.cluck.presentation.router.impl;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

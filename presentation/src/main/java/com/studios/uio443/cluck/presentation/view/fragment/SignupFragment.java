@@ -17,7 +17,7 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.SignupFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.presenter.SignupFragmentPresenter;
-import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
+import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 import javax.inject.Inject;
@@ -30,8 +30,8 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 
 	@Inject
 	LoginRouter router;
-	
-	SignupFragmentPresenter presenter;
+	@Inject
+	SignupFragmentPresenter signupFragmentPresenter;
 
 	private static final String LOGIN = "LOGIN";
 	private static final String EMAIL = "EMAIL";
@@ -74,16 +74,13 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 		super.onViewCreated(view, savedInstanceState);
 		ButterKnife.bind(this, view);
 
-		if (savedInstanceState == null) {
-			//presenter = new SignupFragmentPresenter();
-		} else {
+		if (savedInstanceState != null) {
 			signupUsernameInput.setText(savedInstanceState.getString(LOGIN, ""));
 			signupEmailInput.setText(savedInstanceState.getString(EMAIL, ""));
 			signupPasswordInput.setText(savedInstanceState.getString(PASSWORD, ""));
 			signupReEnterPasswordInput.setText(savedInstanceState.getString(REPASSWORD, ""));
-			presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
 		}
-		presenter.bindView(this);
+		signupFragmentPresenter.bindView(this);
 
 		btnSignup.setOnClickListener(v -> {
 			String username = signupUsernameInput.getText().toString();
@@ -91,7 +88,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 			String password = signupPasswordInput.getText().toString();
 			//String reEnterPassword = signupReEnterPasswordInput.getText().toString();
 
-			presenter.onSignup(username, email, password);
+			signupFragmentPresenter.onSignup(username, email, password);
 		});
 
 		linkLogin.setOnClickListener(v -> {
@@ -104,7 +101,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 	public void onResume() {
 		super.onResume();
 
-		presenter.bindView(this);
+		//presenter.bindView(this);
 	}
 
 	@Override
@@ -116,7 +113,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 		outState.putString(EMAIL, signupEmailInput.getText().toString());
 		outState.putString(PASSWORD, signupPasswordInput.getText().toString());
 		outState.putString(REPASSWORD, signupReEnterPasswordInput.getText().toString());
-		PresenterManager.getInstance().savePresenter(presenter, outState);
+		PresenterManager.getInstance().savePresenter(signupFragmentPresenter, outState);
 	}
 
 	@Override
@@ -124,7 +121,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
 		Log.d(Consts.TAG, "SignupFragment.onPause");
 		super.onPause();
 
-		presenter.unbindView();
+		//presenter.unbindView();
 	}
 
 	@Override

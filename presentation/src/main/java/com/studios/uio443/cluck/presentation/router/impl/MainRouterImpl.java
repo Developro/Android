@@ -1,7 +1,7 @@
-package com.studios.uio443.cluck.presentation.structure.router.impl;
+package com.studios.uio443.cluck.presentation.router.impl;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.structure.router.MainRouter;
+import com.studios.uio443.cluck.presentation.router.MainRouter;
 import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.AboutFragment;

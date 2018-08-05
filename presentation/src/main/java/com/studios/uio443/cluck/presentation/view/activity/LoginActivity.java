@@ -8,7 +8,7 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.LoginActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginActivityPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
-import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
+import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
@@ -28,6 +28,7 @@ public class LoginActivity extends BaseActivity implements
 	LoginRouter router;
 	@Inject
 	LoginActivityPresenter presenter;
+
 	private boolean isResumed = false;
 
 	@Override
@@ -36,11 +37,6 @@ public class LoginActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 
-		if (savedInstanceState == null) {
-			//presenter = new LoginActivityPresenter();
-		} else {
-			presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-		}
 		presenter.bindView(this);
 
 		VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
@@ -73,13 +69,11 @@ public class LoginActivity extends BaseActivity implements
 	protected void onResume() {
 		Log.d(Consts.TAG, "LoginActivity.onResume");
 		super.onResume();
-		presenter.bindView(this);
+		//presenter.bindView(this);
 		isResumed = true;
 		if (VKSdk.isLoggedIn()) {
-			//presenter.showLogout();
 			router.showLogoutFragment();
 		} else {
-			//presenter.showLogin();
 			router.showLoginFragment();
 		}
 	}
@@ -97,7 +91,7 @@ public class LoginActivity extends BaseActivity implements
 		Log.d(Consts.TAG, "LoginActivity.onPause");
 		isResumed = false;
 		super.onPause();
-		presenter.unbindView();
+		//presenter.unbindView();
 	}
 
 	@Override
@@ -115,7 +109,6 @@ public class LoginActivity extends BaseActivity implements
 			case Consts.REQUEST_CODE_LOGIN_PIN_ACTIVITY: {
 				Log.i(Consts.TAG, "LoginActivity.onActivityResult.REQUEST_CODE_LOGIN_PIN_ACTIVITY");
 				if (resultCode == RESULT_OK) {
-					//presenter.startModeSelectActivity(); //start MainActivity
 					router.showModeSelectActivity();
 				}
 				break;
@@ -127,7 +120,6 @@ public class LoginActivity extends BaseActivity implements
 			public void onResult(VKAccessToken res) {
 				Log.d(Consts.TAG, "LoginActivity.onActivityResult.VKCallback.onResult");
 				// User passed Authorization
-				//presenter.startModeSelectActivity(); //start MainActivity
 				router.showModeSelectActivity();
 			}
 

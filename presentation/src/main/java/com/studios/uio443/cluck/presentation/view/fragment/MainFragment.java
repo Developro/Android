@@ -11,7 +11,7 @@ import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.MainFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.MainFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
-import com.studios.uio443.cluck.presentation.structure.router.MainRouter;
+import com.studios.uio443.cluck.presentation.router.MainRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 import javax.inject.Inject;
@@ -24,58 +24,54 @@ public class MainFragment extends BaseFragment implements MainFragmentVP.View {
 
 	@Inject
 	MainRouter router;
-    @Inject
-    MainFragmentPresenter presenter; //@FragmentScope
+	@Inject
+	MainFragmentPresenter mainFragmentPresenter; //@FragmentScope
 
 	public MainFragment() {
 	}
 
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_main;
-    }
+	@Override
+	protected int getLayout() {
+		return R.layout.fragment_main;
+	}
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d(Consts.TAG, "MainFragment.onViewCreated");
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		Log.d(Consts.TAG, "MainFragment.onViewCreated");
+		super.onViewCreated(view, savedInstanceState);
+		ButterKnife.bind(this, view);
 
-			if (savedInstanceState == null) {
-				//presenter = new MainFragmentPresenter();
-			} else {
-				presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-			}
-    }
+		mainFragmentPresenter.bindView(this);
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
+	@Override
+	public void onResume() {
+		super.onResume();
 
-        presenter.bindView(this);
-    }
+		//presenter.bindView(this);
+	}
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(Consts.TAG, "MainFragment.onSaveInstanceState");
-        super.onSaveInstanceState(outState);
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		Log.d(Consts.TAG, "MainFragment.onSaveInstanceState");
+		super.onSaveInstanceState(outState);
+		PresenterManager.getInstance().savePresenter(mainFragmentPresenter, outState);
+	}
 
-    @Override
-    public void onPause() {
-        Log.d(Consts.TAG, "MainFragment.onPause");
-        super.onPause();
+	@Override
+	public void onPause() {
+		Log.d(Consts.TAG, "MainFragment.onPause");
+		super.onPause();
 
-        presenter.unbindView();
-    }
+		//presenter.unbindView();
+	}
 
-    /**
-     * Goes to the user list screen.
-     */
-    @OnClick(R.id.btn_LoadData)
-    void navigateToUserList() {
-			//this.navigator.navigateToUserList(getActivity());
-			router.showUserList();
-    }
+	/**
+	 * Goes to the user list screen.
+	 */
+	@OnClick(R.id.btn_LoadData)
+	void navigateToUserList() {
+		//this.navigator.navigateToUserList(getActivity());
+		router.showUserList();
+	}
 }

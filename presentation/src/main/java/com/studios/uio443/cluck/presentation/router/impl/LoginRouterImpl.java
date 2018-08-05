@@ -1,7 +1,7 @@
-package com.studios.uio443.cluck.presentation.structure.router.impl;
+package com.studios.uio443.cluck.presentation.router.impl;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
+import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
 import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
