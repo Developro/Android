@@ -6,10 +6,8 @@ package com.studios.uio443.cluck.presentation.mvp;
 
 public interface MainFragmentVP {
     interface View {
-        void onResult(String result);
     }
 
     interface Presenter {
-        void doSometing();
     }
 }

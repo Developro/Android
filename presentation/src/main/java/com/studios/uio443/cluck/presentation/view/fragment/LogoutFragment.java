@@ -6,93 +6,84 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.LogoutFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LogoutFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
+import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.vk.sdk.VKSdk;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import javax.inject.Inject;
 
 /**
  * Created by zundarik
  */
 
 public class LogoutFragment extends BaseFragment implements LogoutFragmentVP.View {
-    LogoutFragmentPresenter presenter;
+	@Inject
+	LoginRouter router;
 
-    @BindView(R.id.continue_button)
-    Button btnContinue;
-    @BindView(R.id.logout)
-    Button btnLogout;
+	LogoutFragmentPresenter presenter;
 
-    public LogoutFragment() {
-        super();
-    }
+	@BindView(R.id.continue_button)
+	Button btnContinue;
+	@BindView(R.id.logout)
+	Button btnLogout;
 
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_logout;
-    }
+	public LogoutFragment() {
+		super();
+	}
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d(Consts.TAG, "LoginFragment.onCreateView");
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+	@Override
+	protected int getLayout() {
+		return R.layout.fragment_logout;
+	}
 
-        if (savedInstanceState == null) {
-            presenter = new LogoutFragmentPresenter();
-        } else {
-            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-        }
-        presenter.bindView(this);
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		Log.d(Consts.TAG, "LoginFragment.onCreateView");
+		super.onViewCreated(view, savedInstanceState);
+		ButterKnife.bind(this, view);
 
-        btnContinue.setOnClickListener(v -> presenter.startModeSelectActivity());
+		if (savedInstanceState == null) {
+			presenter = new LogoutFragmentPresenter();
+		} else {
+			presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+		}
+		presenter.bindView(this);
 
-        btnLogout.setOnClickListener(v -> {
-            VKSdk.logout();
-            if (!VKSdk.isLoggedIn()) {
-                presenter.showLogin();
-            }
-        });
-    }
+		btnContinue.setOnClickListener(v -> router.showModeSelectActivity());
 
-    @Override
-    public void onResume() {
-        super.onResume();
+		btnLogout.setOnClickListener(v -> {
+			VKSdk.logout();
+			if (!VKSdk.isLoggedIn()) {
+				router.showLoginFragment();
+			}
+		});
+	}
 
-        presenter.bindView(this);
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(Consts.TAG, "NoteFragment.onSaveInstanceState");
-        super.onSaveInstanceState(outState);
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
+		presenter.bindView(this);
+	}
 
-    @Override
-    public void onPause() {
-        Log.d(Consts.TAG, "NoteFragment.onPause");
-        super.onPause();
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		Log.d(Consts.TAG, "NoteFragment.onSaveInstanceState");
+		super.onSaveInstanceState(outState);
+		PresenterManager.getInstance().savePresenter(presenter, outState);
+	}
 
-        presenter.unbindView();
-    }
+	@Override
+	public void onPause() {
+		Log.d(Consts.TAG, "NoteFragment.onPause");
+		super.onPause();
 
-    @Override
-    public void setFragment(BaseFragment fragment) {
-        try {
-            //ataching to fragment the navigation presenter
-            fragment.atachPresenter(presenter);
-            //showing the presenter on screen
-            replaceFragment(R.id.container, fragment);
-        } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "LoginFragment.setFragment\n" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+		presenter.unbindView();
+	}
 }

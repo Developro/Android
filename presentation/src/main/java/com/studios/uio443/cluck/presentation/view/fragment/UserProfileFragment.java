@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.fernandocejas.arrow.checks.Preconditions;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.model.UserModel;
@@ -20,37 +23,32 @@ import com.studios.uio443.cluck.presentation.view.component.AutoLoadImageView;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
 /**
  * Fragment that shows details of a certain user.
  */
 public class UserProfileFragment extends BaseFragment implements UserProfileView {
   private static final String PARAM_USER_ID = "param_user_id";
 
-    @Inject
-    UserProfilePresenter userProfilePresenter;
+	@Inject
+	UserProfilePresenter userProfilePresenter;
 
   @BindView(R.id.iv_cover) AutoLoadImageView iv_cover;
   @BindView(R.id.tv_fullname) TextView tv_fullname;
-    @BindView(R.id.tv_points)
-    TextView tv_points;
-    @BindView(R.id.tv_votes)
-    TextView tv_votes;
+	@BindView(R.id.tv_points)
+	TextView tv_points;
+	@BindView(R.id.tv_votes)
+	TextView tv_votes;
   @BindView(R.id.rl_progress) RelativeLayout rl_progress;
   @BindView(R.id.rl_retry) RelativeLayout rl_retry;
   @BindView(R.id.bt_retry) Button bt_retry;
   private Unbinder unbinder;
 
-    public UserProfileFragment() {
+	public UserProfileFragment() {
         setRetainInstance(true);
     }
 
-    public static UserProfileFragment forUser(int userId) {
-        final UserProfileFragment userDetailsFragment = new UserProfileFragment();
+	public static UserProfileFragment forUser(int userId) {
+		final UserProfileFragment userDetailsFragment = new UserProfileFragment();
     final Bundle arguments = new Bundle();
     arguments.putInt(PARAM_USER_ID, userId);
     userDetailsFragment.setArguments(arguments);
@@ -59,7 +57,6 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-      //this.getComponent(UserComponent.class).inject(this);
   }
 
   @Override

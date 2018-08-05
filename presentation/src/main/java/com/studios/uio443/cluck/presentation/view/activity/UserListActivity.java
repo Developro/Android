@@ -9,41 +9,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.model.UserModel;
+import com.studios.uio443.cluck.presentation.structure.router.UserListRouter;
 import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
+
+import javax.inject.Inject;
 
 /**
  * Activity that shows a list of Users.
  */
 public class UserListActivity extends BaseActivity implements UserListFragment.UserListListener {
 
-  public static Intent getCallingIntent(Context context) {
-    return new Intent(context, UserListActivity.class);
-  }
+	@Inject
+	UserListRouter router;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-    setContentView(R.layout.activity_layout);
+	public static Intent getCallingIntent(Context context) {
+		return new Intent(context, UserListActivity.class);
+	}
 
-//    this.initializeInjector();
-    if (savedInstanceState == null) {
-      addFragment(R.id.fragmentContainer, new UserListFragment());
-    }
-  }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setContentView(R.layout.activity_layout);
 
-//  private void initializeInjector() {
-//    this.userComponent = DaggerUserComponent.builder()
-//        .applicationComponent(getApplicationComponent())
-//        .activityModule(getActivityModule())
-//        .build();
-//  }
+		if (savedInstanceState == null) {
+			router.showUserListFragment();
+		}
+	}
 
-  @Override
-  public void onUserClicked(UserModel userModel) {
-    this.navigator.navigateToUserDetails(this, userModel.getUserId());
-  }
+	@Override
+	public void onUserClicked(UserModel userModel) {
+		//this.navigator.navigateToUserDetails(this, userModel.getUserId());
+		router.showUserDetails(this, userModel.getUserId());
+	}
 }

@@ -9,8 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-
 import com.studios.uio443.cluck.presentation.R;
+import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
 
 /**
@@ -34,21 +34,6 @@ public class UserProfileActivity extends BaseActivity {
     requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
     setContentView(R.layout.activity_layout);
 
-    this.initializeActivity(savedInstanceState);
-//    this.initializeInjector();
-  }
-
-  @Override protected void onSaveInstanceState(Bundle outState) {
-    if (outState != null) {
-      outState.putInt(INSTANCE_STATE_PARAM_USER_ID, this.userId);
-    }
-    super.onSaveInstanceState(outState);
-  }
-
-  /**
-   * Initializes this activity.
-   */
-  private void initializeActivity(Bundle savedInstanceState) {
     if (savedInstanceState == null) {
       this.userId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_USER_ID, -1);
       addFragment(R.id.fragmentContainer, UserProfileFragment.forUser(userId));
@@ -57,10 +42,17 @@ public class UserProfileActivity extends BaseActivity {
     }
   }
 
-//  private void initializeInjector() {
-//    this.userComponent = DaggerUserComponent.builder()
-//        .applicationComponent(getApplicationComponent())
-//        .activityModule(getActivityModule())
-//        .build();
-//  }
+	protected void addFragment(int containerViewId, BaseFragment fragment) {
+		this.getFragmentManager().beginTransaction()
+						.add(containerViewId, fragment)
+						.commit();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if (outState != null) {
+			outState.putInt(INSTANCE_STATE_PARAM_USER_ID, this.userId);
+		}
+		super.onSaveInstanceState(outState);
+	}
 }

@@ -1,6 +1,5 @@
 package com.studios.uio443.cluck.presentation.view.activity;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,22 +16,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.MainActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.MainActivityPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.structure.router.MainRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
-import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.studios.uio443.cluck.presentation.util.Consts.PERMISSION_REQUEST_CODE;
 
@@ -46,6 +41,8 @@ public class MainActivity extends BaseActivity implements
 
     @Inject
     MainRouter router;
+	@Inject
+	MainActivityPresenter presenter;
 
     public static final String FRAGMENT_ID = "fragment_id";
     public static final int RESULT_BACK_PRESSED = RESULT_FIRST_USER;
@@ -53,7 +50,6 @@ public class MainActivity extends BaseActivity implements
     int fragmentId;
     boolean persmissionsGranted = false;
 
-    MainActivityPresenter presenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -144,30 +140,29 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void selectDrawerNavItem(int id) {
-        String nameItem = "";
         switch (id) {
             case R.id.nav_main: {
-                nameItem = "nav_main";
+							router.showMainFragment(presenter);
                 break;
             }
             case R.id.nav_settings: {
-                nameItem = "nav_settings";
+							router.showSettingsFragment();
                 break;
             }
             case R.id.nav_about: {
-                nameItem = "nav_about";
+							router.showAboutFragment();
                 break;
             }
             case R.id.nav_feedback: {
-                nameItem = "nav_notes";
+							router.showFeedbackFragment();
                 break;
             }
         }
         invalidateOptionsMenu();
-        presenter.selectDrawerNavItem(nameItem);
     }
 
-    @Override
+
+	@Override
     protected void onResume() {
         super.onResume();
 
@@ -212,29 +207,6 @@ public class MainActivity extends BaseActivity implements
             } else
                 Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
             back_pressed = System.currentTimeMillis();
-        }
-    }
-
-    @Override
-    public void setFragment(BaseFragment fragment) {
-        try {
-            //ataching to fragment the navigation presenter
-            fragment.atachPresenter(presenter);
-            //showing the presenter on screen
-            replaceFragment(R.id.main_container, fragment);
-        } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "MainActivity.setFragment\n" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setFragment(Fragment fragment) {
-        try {
-            replaceFragment(R.id.main_container, fragment);
-        } catch (NullPointerException e) {
-            Log.e(Consts.TAG, "MainActivity.setFragment\n" + e.getMessage());
-            e.printStackTrace();
         }
     }
 
