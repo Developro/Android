@@ -21,8 +21,8 @@ import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.exception.DefaultErrorBundle;
 import com.studios.uio443.cluck.domain.exception.ErrorBundle;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
-import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.presentation.exception.ErrorMessageFactory;
 import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
@@ -38,7 +38,7 @@ import javax.inject.Inject;
 @PerActivity
 public class UserProfilePresenter implements Presenter {
 
-  private UserProfileView viewDetailsView;
+  private UserProfileView viewProfileView;
 
   private final GetUserProfile getUserProfileUseCase;
   private final UserModelDataMapper userModelDataMapper;
@@ -51,7 +51,7 @@ public class UserProfilePresenter implements Presenter {
   }
 
   public void setView(@NonNull UserProfileView view) {
-    this.viewDetailsView = view;
+    this.viewProfileView = view;
   }
 
   @Override public void resume() {}
@@ -60,7 +60,7 @@ public class UserProfilePresenter implements Presenter {
 
   @Override public void destroy() {
     this.getUserProfileUseCase.dispose();
-    this.viewDetailsView = null;
+    this.viewProfileView = null;
   }
 
   /**
@@ -78,30 +78,30 @@ public class UserProfilePresenter implements Presenter {
   }
 
   private void showViewLoading() {
-    this.viewDetailsView.showLoading();
+    this.viewProfileView.showLoading();
   }
 
   private void hideViewLoading() {
-    this.viewDetailsView.hideLoading();
+    this.viewProfileView.hideLoading();
   }
 
   private void showViewRetry() {
-    this.viewDetailsView.showRetry();
+    this.viewProfileView.showRetry();
   }
 
   private void hideViewRetry() {
-    this.viewDetailsView.hideRetry();
+    this.viewProfileView.hideRetry();
   }
 
   private void showErrorMessage(ErrorBundle errorBundle) {
-    String errorMessage = ErrorMessageFactory.create(this.viewDetailsView.context(),
+    String errorMessage = ErrorMessageFactory.create(this.viewProfileView.context(),
         errorBundle.getException());
-    this.viewDetailsView.showError(errorMessage);
+    this.viewProfileView.showError(errorMessage);
   }
 
   private void showUserDetailsInView(User user) {
     final UserModel userModel = this.userModelDataMapper.transform(user);
-    this.viewDetailsView.renderUser(userModel);
+    this.viewProfileView.renderUser(userModel);
   }
 
   private final class UserProfileObserver extends DefaultObserver<User> {

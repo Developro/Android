@@ -45,7 +45,7 @@ public abstract class BaseFragment extends Fragment implements FragmentNavigatio
     protected abstract int getLayout();
 
     @Override
-    public void atachPresenter(FragmentNavigation.Presenter presenter) {
+    public void attachPresenter(FragmentNavigation.Presenter presenter) {
         navigationPresenter = presenter;
     }
 

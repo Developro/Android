@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.studios.uio443.cluck.presentation.R;
+import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +35,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
     private static final String LOGIN = "LOGIN";
     private static final String PASSWORD = "PASSWORD";
+    @Inject
     LoginFragmentPresenter presenter;
 
     private static final String[] sMyScope = new String[]{
@@ -62,7 +66,13 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
     TextView linkSignUp;
 
     public LoginFragment() {
-        super();
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getComponent(UserComponent.class).inject(this);
     }
 
     @Override
@@ -78,12 +88,9 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
         //TODO чтение последнего логина из префа
 
-        if (savedInstanceState == null) {
-            presenter = new LoginFragmentPresenter();
-        } else {
+        if (savedInstanceState != null) {
             loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
             loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
-            presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
         presenter.bindView(this);
 
@@ -107,7 +114,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
         super.onResume();
 
         //TODO запись последнего логина в преф
-        presenter.bindView(this);
+        //presenter.bindView(this);
     }
 
     @Override
@@ -125,7 +132,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
         Log.d(Consts.TAG, "LoginFragment.onPause");
         super.onPause();
 
-        presenter.unbindView();
+        //presenter.unbindView();
     }
 
     @Override
@@ -164,7 +171,10 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
         String email = loginEmailInput.getText().toString();
         String password = loginPasswordInput.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (email.isEmpty()
+            // del email validate (def user is "user")
+            //|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                ) {
             loginEmailInput.setError(getString(R.string.enter_valid_email));
             valid = false;
         } else {
@@ -185,7 +195,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
     public void setFragment(BaseFragment fragment) {
         try {
             //ataching to fragment the navigation presenter
-            fragment.atachPresenter(presenter);
+            fragment.attachPresenter(presenter);
             //showing the presenter on screen
             replaceFragment(R.id.container, fragment);
         } catch (NullPointerException e) {

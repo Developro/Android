@@ -87,7 +87,7 @@ public class LogoutFragment extends BaseFragment implements LogoutFragmentVP.Vie
     public void setFragment(BaseFragment fragment) {
         try {
             //ataching to fragment the navigation presenter
-            fragment.atachPresenter(presenter);
+            fragment.attachPresenter(presenter);
             //showing the presenter on screen
             replaceFragment(R.id.container, fragment);
         } catch (NullPointerException e) {

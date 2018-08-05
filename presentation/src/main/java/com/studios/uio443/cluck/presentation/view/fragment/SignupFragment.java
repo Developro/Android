@@ -196,7 +196,7 @@ public class SignupFragment extends BaseFragment implements SignupFragmentVP.Vie
     public void setFragment(BaseFragment fragment) {
         try {
             //ataching to fragment the navigation presenter
-            fragment.atachPresenter(presenter);
+            fragment.attachPresenter(presenter);
             //showing the presenter on screen
             replaceFragment(R.id.container, fragment);
         } catch (NullPointerException e) {

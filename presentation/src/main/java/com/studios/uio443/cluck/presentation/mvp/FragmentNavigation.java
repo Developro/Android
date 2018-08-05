@@ -8,7 +8,7 @@ import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 
 public interface FragmentNavigation {
     interface View {
-        void atachPresenter(Presenter presenter);
+        void attachPresenter(Presenter presenter);
     }
 
     interface Presenter {

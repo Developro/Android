@@ -18,6 +18,7 @@ package com.studios.uio443.cluck.presentation.internal.di.components;
 import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
 import com.studios.uio443.cluck.presentation.internal.di.modules.ActivityModule;
 import com.studios.uio443.cluck.presentation.internal.di.modules.UserModule;
+import com.studios.uio443.cluck.presentation.view.fragment.LoginFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
 
@@ -33,4 +34,6 @@ public interface UserComponent extends ActivityComponent {
   void inject(UserListFragment userListFragment);
 
     void inject(UserProfileFragment userDetailsFragment);
+
+  void inject(LoginFragment loginFragment);
 }
