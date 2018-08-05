@@ -11,6 +11,7 @@ import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.studios.uio443.cluck.presentation.R;
+import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
@@ -27,6 +28,10 @@ import javax.inject.Inject;
 
 public class LoginFragment extends BaseFragment implements LoginFragmentVP.View {
 
+	@Inject
+	LoginRouter router;
+	LoginFragmentPresenter presenter;
+	
 	private static final String LOGIN = "LOGIN";
 	private static final String PASSWORD = "PASSWORD";
 	private static final String[] sMyScope = new String[]{
@@ -37,9 +42,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 					VKScope.MESSAGES,
 					VKScope.DOCS
 	};
-	@Inject
-	LoginRouter router;
-	LoginFragmentPresenter presenter;
+
 	//используем butterknife
 	//https://jakewharton.github.io/butterknife/
 	//Обзор Butter Knife - https://startandroid.ru/ru/blog/470-butter-knife.html
@@ -75,13 +78,10 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 		//TODO чтение последнего логина из префа
 
-		if (savedInstanceState == null) {
-			//presenter = new LoginFragmentPresenter();
-		} else {
-			loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
-			loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
-			presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
-		}
+		if (savedInstanceState != null) {
+            loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
+            loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));
+        }
 		presenter.bindView(this);
 
 		//Если у пользователя не установлено приложение ВКонтакте,
@@ -104,7 +104,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		super.onResume();
 
 		//TODO запись последнего логина в преф
-		presenter.bindView(this);
+		//presenter.bindView(this);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		Log.d(Consts.TAG, "LoginFragment.onPause");
 		super.onPause();
 
-		presenter.unbindView();
+		//presenter.unbindView();
 	}
 
 	@Override
@@ -159,7 +159,10 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		String email = loginEmailInput.getText().toString();
 		String password = loginPasswordInput.getText().toString();
 
-		if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+		if (email.isEmpty()
+            // del email validate (def user is "user")
+            //|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                ) {
 			loginEmailInput.setError(getString(R.string.enter_valid_email));
 			valid = false;
 		} else {

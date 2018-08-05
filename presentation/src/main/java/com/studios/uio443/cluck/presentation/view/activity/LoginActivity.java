@@ -49,11 +49,9 @@ public class LoginActivity extends BaseActivity implements
 				if (isResumed) {
 					switch (res) {
 						case LoggedOut:
-							//presenter.showLogin();
 							router.showLoginFragment();
 							break;
 						case LoggedIn:
-							//presenter.showLogout();
 							router.showLogoutFragment();
 							break;
 						case Pending:
@@ -144,17 +142,4 @@ public class LoginActivity extends BaseActivity implements
 			super.onActivityResult(requestCode, resultCode, data);
 		}
 	}
-
-//    @Override
-//    public void setFragment(BaseFragment fragment) {
-//        try {
-//            //ataching to fragment the navigation presenter
-//            fragment.atachPresenter(presenter);
-//            //showing the presenter on screen
-//            replaceFragment(R.id.container, fragment);
-//        } catch (NullPointerException e) {
-//            Log.e(Consts.TAG, "LoginActivity.setFragment\n" + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
 }

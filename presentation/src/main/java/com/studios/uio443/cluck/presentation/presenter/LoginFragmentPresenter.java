@@ -4,12 +4,21 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
+import com.studios.uio443.cluck.domain.User;
+import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
+import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
+import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
-import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
+import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
+import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
+import com.studios.uio443.cluck.presentation.view.fragment.SignupFragment;
 
 import javax.inject.Inject;
 
@@ -24,9 +33,16 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 
 	private boolean isLoadingData = false;
 
-	@Inject
-	public LoginFragmentPresenter() {
-	}
+	private final GetUserProfile getUserProfileUseCase;
+    private final UserModelDataMapper userModelDataMapper;
+
+	// инжектим фрагмент презентер
+    @Inject
+    LoginFragmentPresenter(GetUserProfile getUserProfileUseCase,
+                           UserModelDataMapper userModelDataMapper) {
+        this.getUserProfileUseCase = getUserProfileUseCase;
+        this.userModelDataMapper = userModelDataMapper;
+    }
 
 	@Override
 	protected void updateView() {
@@ -56,7 +72,7 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 	}
 
 	@Override
-	public void onLogin(String email, String password) {
+	public void onLogin(String user, String password) {
 		Log.d(Consts.TAG, "LoginFragmentPresenter.onLogin");
 
 		if (!view().validate()) {
@@ -64,18 +80,34 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 			return;
 		}
 
-		// TODO: Implement your own authentication logic here.
+		this.getUserProfileUseCase.execute(new UserProfileObserver(), Params.auth(user, password));
 
-		UserModel user = model.authentication(email, password);
+	private final class UserProfileObserver extends DefaultObserver<User> {
 
-		if (user == null) {
-			view().showLoginFailed();
-			return;
-		}
+        @Override
+        public void onComplete() {
+            // если все успешно, то у нас есть userModel в userHolder, можно действовать дальше
+            if (UserHolder.getInstance().getUser() == null) {
+                view().showLoginFailed();
+                return;
+            }
 
-		view().showProgressDialog(); //start MainActivity
-	}
+            view().showProgressDialog(); //start MainActivity
+        }
 
+        @Override
+        public void onError(Throwable e) {
+            // пришел кривой статус, ругаемся на логин
+            view().showLoginFailed();
+        }
+
+        @Override
+        public void onNext(User user) {
+            // тут берем юзера из ретрофита и добавляем его в юзерхолдер
+            UserHolder.getInstance().setUser(LoginFragmentPresenter.this.userModelDataMapper.transform(user));
+        }
+    }
+    
 	// It's OK for this class not to be static and to keep a reference to the Presenter, as this
 	// is retained during orientation changes and is lightweight (has no activity/view reference)
 	@SuppressLint("StaticFieldLeak")

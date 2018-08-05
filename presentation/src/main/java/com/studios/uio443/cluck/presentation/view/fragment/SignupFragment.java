@@ -28,13 +28,16 @@ import javax.inject.Inject;
 
 public class SignupFragment extends BaseFragment implements SignupFragmentVP.View {
 
+	@Inject
+	LoginRouter router;
+	
+	SignupFragmentPresenter presenter;
+
 	private static final String LOGIN = "LOGIN";
 	private static final String EMAIL = "EMAIL";
 	private static final String PASSWORD = "PASSWORD";
 	private static final String REPASSWORD = "REPASSWORD";
-	@Inject
-	LoginRouter router;
-	SignupFragmentPresenter presenter;
+
 	@BindView(R.id.signup_username_layout)
 	TextInputLayout signupUsernameLayout;
 	@BindView(R.id.signup_email_layout)

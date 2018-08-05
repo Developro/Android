@@ -27,19 +27,37 @@ public class GetUserProfile  extends UseCase<User, GetUserProfile.Params>  {
     @Override
     Observable<User> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return this.userRepository.userProfile(params.userId);
+        if (params.isAuth)
+            return this.userRepository.auth(params.user, params.password);
+        else
+            return this.userRepository.userProfile(params.userId);
     }
 
+    // тут делаем фактически два вида параметров, для аутентификации один,
+    // другой когда будем просто обновлять юзера
     public static final class Params {
 
-        private final int userId;
+        private int userId;
+        private boolean isAuth = false;
+        private String user;
+        private String password;
 
         private Params(int userId) {
             this.userId = userId;
         }
 
+        private Params(String user, String password) {
+            this.isAuth = true;
+            this.user = user;
+            this.password = password;
+        }
+
         public static Params forUser(int userId) {
             return new Params(userId);
+        }
+
+        public static Params auth(String user, String password) {
+            return new Params(user, password);
         }
     }
 }
