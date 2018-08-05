@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.util.Log;
-import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.BaseActivity;
 import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
@@ -36,19 +35,19 @@ abstract public class BaseRouterImpl<A extends BaseActivity> {
 						.commit();
 	}
 
-	protected void addFragment(int containerViewId, BaseFragment fragment, FragmentNavigation.Presenter presenter) {
-		try {
-			//ataching to fragment the navigation presenter
-			fragment.atachPresenter(presenter);
-			//showing the presenter on screen
-			fragmentManager.beginTransaction()
-							.add(containerViewId, fragment)
-							.commit();
-		} catch (NullPointerException e) {
-			Log.e(Consts.TAG, "BaseRouterImpl.addFragment\n" + e.getMessage());
-			e.printStackTrace();
-		}
-	}
+//	protected void addFragment(int containerViewId, BaseFragment fragment, FragmentNavigation.Presenter presenter) {
+//		try {
+//			//ataching to fragment the navigation presenter
+//			fragment.atachPresenter(presenter);
+//			//showing the presenter on screen
+//			fragmentManager.beginTransaction()
+//							.add(containerViewId, fragment)
+//							.commit();
+//		} catch (NullPointerException e) {
+//			Log.e(Consts.TAG, "BaseRouterImpl.addFragment\n" + e.getMessage());
+//			e.printStackTrace();
+//		}
+//	}
 
 	protected void replaceFragment(int containerViewId, Fragment fragment) {
 		fragmentManager.beginTransaction()
@@ -69,19 +68,19 @@ abstract public class BaseRouterImpl<A extends BaseActivity> {
 						.commit();
 	}
 
-	protected void replaceFragment(int containerViewId, BaseFragment fragment, FragmentNavigation.Presenter presenter) {
-		try {
-			//ataching to fragment the navigation presenter
-			fragment.atachPresenter(presenter);
-			//showing the presenter on screen
-			fragmentManager.beginTransaction()
-							.replace(containerViewId, fragment)
-							.commit();
-		} catch (NullPointerException e) {
-			Log.e(Consts.TAG, "BaseRouterImpl.addFragment\n" + e.getMessage());
-			e.printStackTrace();
-		}
-	}
+//	protected void replaceFragment(int containerViewId, BaseFragment fragment, FragmentNavigation.Presenter presenter) {
+//		try {
+//			//ataching to fragment the navigation presenter
+//			fragment.atachPresenter(presenter);
+//			//showing the presenter on screen
+//			fragmentManager.beginTransaction()
+//							.replace(containerViewId, fragment)
+//							.commit();
+//		} catch (NullPointerException e) {
+//			Log.e(Consts.TAG, "BaseRouterImpl.addFragment\n" + e.getMessage());
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void startActivity(Class activityClass) {
 		try {

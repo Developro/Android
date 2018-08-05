@@ -6,7 +6,7 @@ package com.studios.uio443.cluck.presentation.mvp;
 
 public interface FragmentNavigation {
     interface View {
-        void attachPresenter(Presenter presenter);
+			//void attachPresenter(Presenter presenter);
     }
 
     interface Presenter {

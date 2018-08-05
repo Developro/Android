@@ -11,7 +11,6 @@ import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
@@ -30,6 +29,8 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 	@Inject
 	LoginRouter router;
+
+	@Inject
 	LoginFragmentPresenter presenter;
 	
 	private static final String LOGIN = "LOGIN";
@@ -95,7 +96,7 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 			presenter.onLogin(email, password);
 		});
 
-		linkSignUp.setOnClickListener(v -> router.showSignupFragment(presenter));
+		linkSignUp.setOnClickListener(v -> router.showSignupFragment());
 	}
 
 	@Override

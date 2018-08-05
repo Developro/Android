@@ -1,7 +1,6 @@
 package com.studios.uio443.cluck.presentation.structure.router.impl;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.structure.router.MainRouter;
 import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
@@ -20,8 +19,8 @@ public class MainRouterImpl extends BaseRouterImpl<MainActivity> implements Main
 	}
 
 	@Override
-	public void showMainFragment(FragmentNavigation.Presenter presenter) {
-		replaceFragment(R.id.main_container, new MainFragment(), presenter);
+	public void showMainFragment() {
+		replaceFragment(R.id.main_container, new MainFragment());
 	}
 
 	@Override

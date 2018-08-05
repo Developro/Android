@@ -38,7 +38,7 @@ public abstract class BaseFragment extends DaggerFragment implements FragmentNav
 
 	protected abstract int getLayout();
 
-	@Override
+	//@Override
 	public void atachPresenter(FragmentNavigation.Presenter presenter) {
 		navigationPresenter = presenter;
 	}

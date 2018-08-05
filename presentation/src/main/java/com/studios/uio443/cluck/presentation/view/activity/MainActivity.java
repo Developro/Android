@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity implements
     private void selectDrawerNavItem(int id) {
         switch (id) {
             case R.id.nav_main: {
-							router.showMainFragment(presenter);
+                router.showMainFragment();
                 break;
             }
             case R.id.nav_settings: {

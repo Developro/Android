@@ -4,21 +4,16 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
-import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
-import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
+import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
-import com.studios.uio443.cluck.presentation.view.activity.LoginPinActivity;
-import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
-import com.studios.uio443.cluck.presentation.view.fragment.SignupFragment;
 
 import javax.inject.Inject;
 
@@ -81,6 +76,7 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 		}
 
 		this.getUserProfileUseCase.execute(new UserProfileObserver(), Params.auth(user, password));
+	}
 
 	private final class UserProfileObserver extends DefaultObserver<User> {
 

@@ -1,7 +1,6 @@
 package com.studios.uio443.cluck.presentation.structure.router.impl;
 
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.structure.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
@@ -22,17 +21,17 @@ public class LoginRouterImpl extends BaseRouterImpl<LoginActivity> implements Lo
 
 	@Override
 	public void showLoginFragment() {
-		replaceFragment(R.id.container, new LoginFragment());//? atachPresenter(presenter)
+		replaceFragment(R.id.container, new LoginFragment());
 	}
 
 	@Override
 	public void showLogoutFragment() {
-		replaceFragment(R.id.container, new LogoutFragment());//? atachPresenter(presenter)
+		replaceFragment(R.id.container, new LogoutFragment());
 	}
 
 	@Override
-	public void showSignupFragment(FragmentNavigation.Presenter presenter) {
-		addFragment(R.id.container, new SignupFragment(), presenter);
+	public void showSignupFragment() {
+		addFragment(R.id.container, new SignupFragment());
 	}
 
 	@Override
