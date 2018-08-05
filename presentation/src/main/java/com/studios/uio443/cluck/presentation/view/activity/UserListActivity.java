@@ -9,52 +9,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-
 import com.studios.uio443.cluck.presentation.R;
-import com.studios.uio443.cluck.presentation.internal.di.HasComponent;
-import com.studios.uio443.cluck.presentation.internal.di.components.DaggerUserComponent;
-import com.studios.uio443.cluck.presentation.internal.di.components.UserComponent;
 import com.studios.uio443.cluck.presentation.model.UserModel;
+import com.studios.uio443.cluck.presentation.router.UserListRouter;
 import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
+
+import javax.inject.Inject;
 
 /**
  * Activity that shows a list of Users.
  */
-public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
-    UserListFragment.UserListListener {
+public class UserListActivity extends BaseActivity implements UserListFragment.UserListListener {
 
-  public static Intent getCallingIntent(Context context) {
-    return new Intent(context, UserListActivity.class);
-  }
+	@Inject
+	UserListRouter router;
 
-  private UserComponent userComponent;
+	public static Intent getCallingIntent(Context context) {
+		return new Intent(context, UserListActivity.class);
+	}
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-    setContentView(R.layout.activity_layout);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setContentView(R.layout.activity_layout);
 
-    this.initializeInjector();
-    if (savedInstanceState == null) {
-      addFragment(R.id.fragmentContainer, new UserListFragment());
-    }
-  }
+		if (savedInstanceState == null) {
+			router.showUserListFragment();
+		}
+	}
 
-  private void initializeInjector() {
-    this.userComponent = DaggerUserComponent.builder()
-        .applicationComponent(getApplicationComponent())
-        .activityModule(getActivityModule())
-        .build();
-  }
-
-  @Override
-  public UserComponent getComponent() {
-    return userComponent;
-  }
-
-  @Override
-  public void onUserClicked(UserModel userModel) {
-    this.navigator.navigateToUserDetails(this, userModel.getUserId());
-  }
+	@Override
+	public void onUserClicked(UserModel userModel) {
+		//this.navigator.navigateToUserDetails(this, userModel.getUserId());
+		router.showUserDetails(this, userModel.getUserId());
+	}
 }

@@ -1,7 +1,5 @@
 package com.studios.uio443.cluck.presentation.mvp;
 
-import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
-
 /**
  * Created by zundarik
  */
@@ -9,16 +7,16 @@ import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
 
 public interface LoginActivityVP {
     interface View {
-        void setFragment(BaseFragment fragment);
+			//void setFragment(BaseFragment fragment);
 
-        void startActivity(Class activityClass);
+			//void startActivity(Class activityClass);
     }
 
     interface Presenter {
-        void showLogin();
+			//void showLogin();
 
-        void showLogout();
+			//void showLogout();
 
-        void startModeSelectActivity();
+			//void startModeSelectActivity();
     }
 }

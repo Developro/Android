@@ -1,39 +1,23 @@
 package com.studios.uio443.cluck.presentation.mvp;
 
-import com.studios.uio443.cluck.presentation.view.fragment.BaseFragment;
-
 /**
  * Created by zundarik
  */
 
-
 public interface LoginFragmentVP {
-    interface View {
-        void setFragment(BaseFragment fragment);
+	interface View {
+		void VKSdkLogin();
 
-        void startActivity(Class activityClass);
+		void showLoginFailed();
 
-        void startActivityForResult(Class activityClass, int requestCode);
+		void showProgressDialog();
 
-        void VKSdkLogin();
+		boolean validate();
+	}
 
-        void showLoginSuccess();
+	interface Presenter {
+		void onSignInVK();
 
-        void showLoginFailed();
-
-        void progressDialog();
-
-        boolean validate();
-    }
-
-    interface Presenter {
-        void onSignInVK();
-
-        void onLogin(String email, String password);
-
-        void onSignUp();
-
-        void onLoginSuccess();
-
-    }
+		void onLogin(String email, String password);
+	}
 }
