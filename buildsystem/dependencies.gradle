@@ -7,7 +7,7 @@ allprojects {
 ext {
   //Android
   androidBuildToolsVersion = "27.0.3"
-  androidMinSdkVersion = 23
+  androidMinSdkVersion = 21
   androidTargetSdkVersion = 27
   androidCompileSdkVersion = 27
 
@@ -28,6 +28,7 @@ ext {
   arrowVersion = '1.0.0'
   retrofitVersion = '2.4.0'
   adapter_rxjavaVersion = '2.1.0'
+  adapter_rxjava2Version = '1.0.0'
   commons_lang3Version = '3.6'
   logging_interceptorVersion = '3.8.1'
   guavaVersion = '22.0'
@@ -51,14 +52,19 @@ ext {
       constraintLayout:   "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
       recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
       design:             "com.android.support:design:$androidSupportVersion",
-      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-      daggerAndroidProcessor:     "com.google.dagger:dagger-android-processor:${daggerVersion}",
+
       dagger:             "com.google.dagger:dagger:${daggerVersion}",
       daggerAndroid:      "com.google.dagger:dagger-android:${daggerVersion}",
+      daggerAndroidSupport:      "com.google.dagger:dagger-android-support:${daggerVersion}",
+      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+      daggerAndroidProcessor:     "com.google.dagger:dagger-android-processor:${daggerVersion}",
+
       butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
       butterKnifeCompiler:        "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+
       rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+
       javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
       arrow:              "com.fernandocejas:arrow:${arrowVersion}"
   ]
@@ -100,6 +106,7 @@ ext {
       retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
       retrofit_converter_gson:     "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
       retrofit_adapter_rxjava:     "com.squareup.retrofit2:adapter-rxjava:${adapter_rxjavaVersion}",
+      retrofit_adapter_rxjava2:    "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${adapter_rxjava2Version}",
       commons_lang3:      "org.apache.commons:commons-lang3:${commons_lang3Version}",
       logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${logging_interceptorVersion}",
       guava:              "com.google.guava:guava:${guavaVersion}"

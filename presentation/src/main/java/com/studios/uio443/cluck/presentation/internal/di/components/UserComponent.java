@@ -15,22 +15,16 @@
  */
 package com.studios.uio443.cluck.presentation.internal.di.components;
 
-import com.studios.uio443.cluck.presentation.internal.di.PerActivity;
-import com.studios.uio443.cluck.presentation.internal.di.modules.ActivityModule;
-import com.studios.uio443.cluck.presentation.internal.di.modules.UserModule;
-import com.studios.uio443.cluck.presentation.view.fragment.UserListFragment;
-import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
-
-import dagger.Component;
-
-/**
- * A scope {@link com.studios.uio443.cluck.presentation.internal.di.PerActivity} component.
- * Injects user specific Fragments.
- */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, UserModule.class})
-public interface UserComponent extends ActivityComponent {
-  void inject(UserListFragment userListFragment);
-
-    void inject(UserProfileFragment userDetailsFragment);
+///**
+// * A scope {@link com.studios.uio443.cluck.presentation.internal.di.ActivityScope} component.
+// * Injects user specific Fragments.
+// */
+//@ActivityScope
+//@Component(dependencies = AppComponent.class, modules = {ActivityModule.class, UserModule.class})
+public interface UserComponent { //extends ActivityComponent {
+//  void inject(UserListFragment userListFragment);
+//
+//  void inject(UserProfileFragment userDetailsFragment);
+//
+//  void inject(LoginFragment loginFragment);
 }

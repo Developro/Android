@@ -16,9 +16,10 @@
 package com.studios.uio443.cluck.domain.repository;
 
 import com.studios.uio443.cluck.domain.User;
-import io.reactivex.Observable;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * Interface that represents a Repository for getting {@link User} related data.
@@ -37,4 +38,6 @@ public interface UserRepository {
   Observable<User> user(final int userId);
 
   Observable<User> userProfile(final int userId);
+
+  Observable<User> auth(final String user, final String password);
 }

@@ -42,46 +42,18 @@ public class UserHolder {
         return user;
     }
 
-    private void setUser(UserModel user) {
+    public void setUser(UserModel user) {
         Log.d(Consts.TAG, "UserHolder.setUser");
         this.user = user;
     }
 
     private void addUser(UserModel newUser) {
         Log.d(Consts.TAG, "UserHolder.addUser");
-        if (newUser == null) return;
-        //TODO signup - запрос к серверу на добавление аккаунта юзера
     }
 
     private void deleteUser(int index) {
         Log.d(Consts.TAG, "UserHolder.deleteUser");
         //TODO запрос к серверу на удаление аккаунта
-    }
-
-    /**
-     * Метод для авторизации и получаения сущности пользователя
-     *
-     * @param login    логин
-     * @param password пароль
-     * @return User
-     */
-    public UserModel authentication(String login, String password) {
-        if (!login.equals("vasya@lol.com")) {
-            return null;
-        }
-        //login - запрос к серверу
-        //TODO заменить на retrofit
-        //JSONObject
-        String JSONObject = DataService.testRest();
-
-        user = new UserModel(1);
-
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setAccessToken("");
-        user.setRefreshToken("");
-
-        return user;
     }
 
     /**
