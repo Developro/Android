@@ -12,6 +12,8 @@ public interface LoginFragmentVP {
 
 		void showProgressDialog();
 
+		void showLoginSuccess();
+
 		boolean validate();
 	}
 

@@ -51,7 +51,7 @@ public class UserEntityDataMapper {
       user.setAccessToken(userEntity.getAccessToken());
       user.setLogin(userEntity.getLogin());
       user.setNickName(userEntity.getNickName());
-      user.setAccessToken(userEntity.getAccessToken());
+      user.setRefreshToken(userEntity.getRefreshToken());
       user.setPoints(userEntity.getPoints());
       user.setVotes(userEntity.getVotes());
     }
