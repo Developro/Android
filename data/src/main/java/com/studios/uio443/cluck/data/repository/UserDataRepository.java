@@ -15,6 +15,7 @@
  */
 package com.studios.uio443.cluck.data.repository;
 
+import com.google.gson.JsonObject;
 import com.studios.uio443.cluck.data.entity.mapper.UserEntityDataMapper;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStore;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStoreFactory;
@@ -28,6 +29,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * {@link UserRepository} for retrieving user data.
@@ -71,6 +74,10 @@ public class UserDataRepository implements UserRepository {
   @Override
   public Observable<User> auth(String user, String password) {
     // т.к. у нас максимально тонкий клиент, то юзать UserDataStore не будем
-    return this.userDataStoreFactory.getCluckyApiImpl().auth(user, password).map(this.userEntityDataMapper::transform);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("login", user);
+    jsonObject.addProperty("password", password);
+    return this.userDataStoreFactory.getCluckyApiImpl().auth(
+            RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())).map(this.userEntityDataMapper::transform);
   }
 }

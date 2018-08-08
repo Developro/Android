@@ -4,7 +4,9 @@ import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.domain.User;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -20,5 +22,5 @@ public interface CluckyAPI {
     Observable<User> getUserRx(@Query("id") int id, @Query("APPID") String key);
 
     @POST("/api/auth/login")
-    Observable<UserEntity> auth(@Query("login") String login, @Query("password") String password);
+    Observable<UserEntity> auth(@Body RequestBody requestBody);
 }

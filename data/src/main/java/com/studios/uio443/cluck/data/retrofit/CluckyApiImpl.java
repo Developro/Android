@@ -12,6 +12,7 @@ import com.studios.uio443.cluck.data.exception.NetworkConnectionException;
 import com.studios.uio443.cluck.domain.User;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 
 public class CluckyApiImpl implements CluckyAPI {
@@ -36,10 +37,10 @@ public class CluckyApiImpl implements CluckyAPI {
     }
 
     @Override
-    public Observable<UserEntity> auth(String login, String password) {
+    public Observable<UserEntity> auth(RequestBody requestBody) {
         if (isThereInternetConnection()) {
             GetUser getUser = new GetUser();
-            return getUser.auth(login, password);
+            return getUser.auth(requestBody);
         } else {
             return Observable.error(new NetworkConnectionException());
         }

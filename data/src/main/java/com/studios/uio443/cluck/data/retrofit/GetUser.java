@@ -11,6 +11,7 @@ import com.studios.uio443.cluck.domain.User;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -62,10 +63,10 @@ public class GetUser {
         return service.getUserRx(userId, API_KEY);
     }
 
-    public Observable<UserEntity> auth(String user, String login) {
+    public Observable<UserEntity> auth(RequestBody requestBody) {
         CluckyAPI service = client.create(CluckyAPI.class);
 
-        return service.auth(user, login);
+        return service.auth(requestBody);
     }
 
 }
