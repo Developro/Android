@@ -40,14 +40,15 @@ public class MainActivity extends BaseActivity implements
 				NavigationView.OnNavigationItemSelectedListener {
 
 	public static final String FRAGMENT_ID = "fragment_id";
-	@Inject
-	MainActivityPresenter presenter;
 	public static final int RESULT_BACK_PRESSED = RESULT_FIRST_USER;
 	private static long back_pressed;
-	@Inject
-	MainRouter router;
 	int fragmentId;
 	boolean persmissionsGranted = false;
+
+	@Inject
+	MainActivityPresenter presenter;
+	@Inject
+	MainRouter router;
 
 	@BindView(R.id.toolbar)
 	Toolbar toolbar;

@@ -67,8 +67,7 @@ public class UserDataRepository implements UserRepository {
 
   @Override
   public Observable<User> userProfile(int userId) {
-    GetUser getUser = new GetUser();
-    return getUser.getUserById(userId);
+    return GetUser.getInstance().getUserById(userId);
   }
 
   @Override

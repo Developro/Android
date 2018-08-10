@@ -39,8 +39,7 @@ public class CluckyApiImpl implements CluckyAPI {
     @Override
     public Observable<UserEntity> auth(RequestBody requestBody) {
         if (isThereInternetConnection()) {
-            GetUser getUser = new GetUser();
-            return getUser.auth(requestBody);
+            return GetUser.getInstance().auth(requestBody);
         } else {
             return Observable.error(new NetworkConnectionException());
         }

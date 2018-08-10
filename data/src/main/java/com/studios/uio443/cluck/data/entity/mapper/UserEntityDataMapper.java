@@ -16,6 +16,7 @@
 package com.studios.uio443.cluck.data.entity.mapper;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
+import com.studios.uio443.cluck.data.retrofit.GetUser;
 import com.studios.uio443.cluck.domain.User;
 
 import java.util.ArrayList;
@@ -54,6 +55,10 @@ public class UserEntityDataMapper {
       user.setRefreshToken(userEntity.getRefreshToken());
       user.setPoints(userEntity.getPoints());
       user.setVotes(userEntity.getVotes());
+
+      // пока точно не знаю куда воткнуть, самый простой способ это сюда
+      if (GetUser.tokenIsEmpty())
+        GetUser.setToken(userEntity.getAccessToken());
     }
     return user;
   }
