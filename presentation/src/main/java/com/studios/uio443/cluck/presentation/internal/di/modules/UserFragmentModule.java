@@ -15,13 +15,18 @@
  */
 package com.studios.uio443.cluck.presentation.internal.di.modules;
 
+import com.studios.uio443.cluck.presentation.view.UserProfileView;
+import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
+
+import dagger.Binds;
 import dagger.Module;
 
 /**
  * Dagger module that provides user related collaborators.
  */
 @Module
-public class UserModule {
+public abstract class UserFragmentModule {
 
-  public UserModule() {}
+  @Binds
+  public abstract UserProfileView userProfileViewFragment(UserProfileFragment userProfileFragment);
 }

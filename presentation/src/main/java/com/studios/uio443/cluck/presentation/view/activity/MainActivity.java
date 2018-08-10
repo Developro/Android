@@ -16,8 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.MainActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.MainActivityPresenter;
@@ -25,9 +24,13 @@ import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.router.MainRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.studios.uio443.cluck.presentation.util.Consts.PERMISSION_REQUEST_CODE;
 
@@ -143,6 +146,10 @@ public class MainActivity extends BaseActivity implements
 			}
 			case R.id.nav_settings: {
 				router.showSettingsFragment();
+				break;
+			}
+			case R.id.nav_profile: {
+				router.showProfileFragment();
 				break;
 			}
 			case R.id.nav_about: {

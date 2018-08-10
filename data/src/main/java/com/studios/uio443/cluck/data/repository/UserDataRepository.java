@@ -19,7 +19,6 @@ import com.google.gson.JsonObject;
 import com.studios.uio443.cluck.data.entity.mapper.UserEntityDataMapper;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStore;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStoreFactory;
-import com.studios.uio443.cluck.data.retrofit.GetUser;
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.repository.UserRepository;
 
@@ -67,7 +66,12 @@ public class UserDataRepository implements UserRepository {
 
   @Override
   public Observable<User> userProfile(int userId) {
-    return GetUser.getInstance().getUserById(userId);
+    return this.userDataStoreFactory.getCluckyApiImpl().getUser(userId).map(this.userEntityDataMapper::transform);
+  }
+
+  @Override
+  public Observable<User> currentUserProfile() {
+    return this.userDataStoreFactory.getCluckyApiImpl().getCurrentUser().map(this.userEntityDataMapper::transform);
   }
 
   @Override

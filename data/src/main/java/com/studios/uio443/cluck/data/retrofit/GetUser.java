@@ -8,7 +8,6 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.data.retrofit.interceptor.AuthorizationRequestInterceptor;
 import com.studios.uio443.cluck.data.util.Consts;
-import com.studios.uio443.cluck.domain.User;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -67,15 +66,19 @@ public class GetUser {
     }
 
     public synchronized static boolean tokenIsEmpty() {
-        return token.isEmpty();
+        return (token == null || token.equals(""));
     }
 
     public UserEntity getUser() {
         return user;
     }
 
-    public Observable<User> getUserById(int userId) {
-        return service.getUserRx(userId, API_KEY);
+    public Observable<UserEntity> getUserById(int userId) {
+        return service.getUser(userId);
+    }
+
+    public Observable<UserEntity> getCurrentUser() {
+        return service.getCurrentUser();
     }
 
     public Observable<UserEntity> auth(RequestBody requestBody) {

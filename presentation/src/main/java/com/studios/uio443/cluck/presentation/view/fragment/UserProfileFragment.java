@@ -11,10 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
 import com.fernandocejas.arrow.checks.Preconditions;
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.model.UserModel;
@@ -23,6 +20,11 @@ import com.studios.uio443.cluck.presentation.view.UserProfileView;
 import com.studios.uio443.cluck.presentation.view.component.AutoLoadImageView;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Fragment that shows details of a certain user.
@@ -152,7 +154,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 	 */
 	private void loadUserDetails() {
 		if (this.userProfilePresenter != null) {
-			this.userProfilePresenter.initialize(currentUserId());
+			this.userProfilePresenter.initialize();
 		}
 	}
 

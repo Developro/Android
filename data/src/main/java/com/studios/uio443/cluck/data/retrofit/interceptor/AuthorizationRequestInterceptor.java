@@ -23,7 +23,8 @@ public class AuthorizationRequestInterceptor implements Interceptor {
         Request originalRequest = chain.request();
         if (originalRequest.body() == null
                 || originalRequest.header("Authorization") != null
-                || token.isEmpty()) {
+                || token == null
+                || token.equals("")) {
             return chain.proceed(originalRequest);
         }
 

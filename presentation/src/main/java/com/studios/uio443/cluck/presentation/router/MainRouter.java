@@ -5,6 +5,8 @@ public interface MainRouter {
 
 	void showSettingsFragment();
 
+    void showProfileFragment();
+
 	void showAboutFragment();
 
 	void showFeedbackFragment();

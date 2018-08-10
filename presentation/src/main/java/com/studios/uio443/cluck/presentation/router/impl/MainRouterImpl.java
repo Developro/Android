@@ -8,13 +8,14 @@ import com.studios.uio443.cluck.presentation.view.fragment.AboutFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.FeedbackFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.MainFragment;
 import com.studios.uio443.cluck.presentation.view.fragment.SettingsFragment;
+import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
 
 import javax.inject.Inject;
 
 public class MainRouterImpl extends BaseRouterImpl<MainActivity> implements MainRouter {
 
 	@Inject
-	public MainRouterImpl(MainActivity activity) {
+	MainRouterImpl(MainActivity activity) {
 		super(activity);
 	}
 
@@ -26,6 +27,11 @@ public class MainRouterImpl extends BaseRouterImpl<MainActivity> implements Main
 	@Override
 	public void showSettingsFragment() {
 		replaceFragment(R.id.main_container, new SettingsFragment());
+	}
+
+	@Override
+	public void showProfileFragment() {
+		replaceFragment(R.id.main_container, new UserProfileFragment());
 	}
 
 	@Override
