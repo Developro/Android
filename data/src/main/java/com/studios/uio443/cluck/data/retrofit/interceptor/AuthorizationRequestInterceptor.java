@@ -18,11 +18,15 @@ public class AuthorizationRequestInterceptor implements Interceptor {
         this.token = token;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
-        if (originalRequest.body() == null
-                || originalRequest.header("Authorization") != null
+
+        if (originalRequest.header("Authorization") != null
                 || token == null
                 || token.equals("")) {
             return chain.proceed(originalRequest);

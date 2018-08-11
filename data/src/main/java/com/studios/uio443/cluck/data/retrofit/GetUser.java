@@ -28,14 +28,16 @@ public class GetUser {
     private Retrofit client;
     private UserEntity user = null;
     private CluckyAPI service;
-    private static String token = null;
+    private String token = null;
+    private AuthorizationRequestInterceptor authorizationRequestInterceptor;
 
     private GetUser() {
         Log.d(Consts.TAG, "GetUser constructor");
-        AuthorizationRequestInterceptor authorizationRequestInterceptor
-                = new AuthorizationRequestInterceptor(token);
+
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        authorizationRequestInterceptor = new AuthorizationRequestInterceptor(token);
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
@@ -60,12 +62,12 @@ public class GetUser {
         return instance;
     }
 
-    public synchronized static void setToken(String newToken) {
+    public void setToken(String newToken) {
         token = newToken;
-        instance = null;
+        authorizationRequestInterceptor.setToken(newToken);
     }
 
-    public synchronized static boolean tokenIsEmpty() {
+    public boolean tokenIsEmpty() {
         return (token == null || token.equals(""));
     }
 

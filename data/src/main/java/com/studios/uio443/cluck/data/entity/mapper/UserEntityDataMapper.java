@@ -57,8 +57,8 @@ public class UserEntityDataMapper {
       user.setVotes(userEntity.getVotes());
 
       // пока точно не знаю куда воткнуть, самый простой способ это сюда
-      if (GetUser.tokenIsEmpty())
-        GetUser.setToken(userEntity.getAccessToken());
+      if (GetUser.getInstance().tokenIsEmpty())
+        GetUser.getInstance().setToken(userEntity.getAccessToken());
     }
     return user;
   }
