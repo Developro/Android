@@ -17,6 +17,9 @@ package com.studios.uio443.cluck.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User Entity used in the data layer.
  */
@@ -37,12 +40,6 @@ public class UserEntity {
   @SerializedName("login")
   private String login;
 
-  @SerializedName("accessToken")
-  private String accessToken;
-
-  @SerializedName("refreshToken")
-  private String refreshToken;
-
   @SerializedName("points")
   private int points;
 
@@ -52,10 +49,49 @@ public class UserEntity {
   @SerializedName("nickName")
   private String nickName;
 
-  public UserEntity() {
-    //empty
+    @SerializedName("status")
+    private Integer status;
+
+    @SerializedName("message")
+    private String message;
+
+    @SerializedName("result")
+    private List<ResultEntity> resultEntity = null;
+
+    @SerializedName("error")
+    private Object error;
+
+    public Integer getStatus() {
+        return status;
   }
 
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<ResultEntity> getResultEntity() {
+        return resultEntity;
+    }
+
+    public void setResultEntity(List<ResultEntity> result) {
+        this.resultEntity = result;
+    }
+
+    public Object getError() {
+        return error;
+    }
+
+    public void setError(Object error) {
+        this.error = error;
+    }
   public int getUserId() {
     return userId;
   }
@@ -89,19 +125,42 @@ public class UserEntity {
   }
 
   public String getAccessToken() {
-    return accessToken;
+      if (this.resultEntity == null || this.resultEntity.size() == 0) {
+          return null;
+      } else {
+          return this.resultEntity.get(0).getAccessToken();
+      }
   }
 
   public void setAccessToken(String accessToken) {
-    this.accessToken = accessToken;
+
+      if (this.resultEntity == null) {
+          this.resultEntity = new ArrayList<>();
+      }
+      if (this.resultEntity.size() == 0) {
+          resultEntity.add(new ResultEntity(accessToken, null));
+      } else {
+          resultEntity.get(0).setAccessToken(accessToken);
+      }
   }
 
   public String getRefreshToken() {
-    return refreshToken;
+      if (this.resultEntity == null || this.resultEntity.size() == 0) {
+          return null;
+      } else {
+          return this.resultEntity.get(0).getRefreshToken();
+      }
   }
 
   public void setRefreshToken(String refreshToken) {
-    this.refreshToken = refreshToken;
+      if (this.resultEntity == null) {
+          this.resultEntity = new ArrayList<>();
+      }
+      if (this.resultEntity.size() == 0) {
+          resultEntity.add(new ResultEntity(null, refreshToken));
+      } else {
+          resultEntity.get(0).setRefreshToken(refreshToken);
+      }
   }
 
   public int getPoints() {

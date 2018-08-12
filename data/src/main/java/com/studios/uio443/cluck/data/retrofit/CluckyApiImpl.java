@@ -9,10 +9,9 @@ import android.net.NetworkInfo;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.data.exception.NetworkConnectionException;
-import com.studios.uio443.cluck.domain.User;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
+import okhttp3.RequestBody;
 
 public class CluckyApiImpl implements CluckyAPI {
 
@@ -26,20 +25,27 @@ public class CluckyApiImpl implements CluckyAPI {
     }
 
     @Override
-    public Call<UserEntity> getUser(int id, String key) {
-        return null;
-    }
-
-    @Override
-    public Observable<User> getUserRx(int id, String key) {
-        return null;
-    }
-
-    @Override
-    public Observable<UserEntity> auth(String login, String password) {
+    public Observable<UserEntity> getUser(int id) {
         if (isThereInternetConnection()) {
-            GetUser getUser = new GetUser();
-            return getUser.auth(login, password);
+            return GetUser.getInstance().getUserById(id);
+        } else {
+            return Observable.error(new NetworkConnectionException());
+        }
+    }
+
+    @Override
+    public Observable<UserEntity> getCurrentUser() {
+        if (isThereInternetConnection()) {
+            return GetUser.getInstance().getCurrentUser();
+        } else {
+            return Observable.error(new NetworkConnectionException());
+        }
+    }
+
+    @Override
+    public Observable<UserEntity> auth(RequestBody requestBody) {
+        if (isThereInternetConnection()) {
+            return GetUser.getInstance().auth(requestBody);
         } else {
             return Observable.error(new NetworkConnectionException());
         }

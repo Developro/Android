@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
@@ -88,7 +89,8 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
                 return;
             }
 
-            view().showProgressDialog(); //start MainActivity
+			//view().showProgressDialog(); //start MainActivity
+			view().showLoginSuccess();
         }
 
         @Override

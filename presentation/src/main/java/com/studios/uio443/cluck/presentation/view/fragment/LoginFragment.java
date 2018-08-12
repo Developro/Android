@@ -1,25 +1,33 @@
 package com.studios.uio443.cluck.presentation.view.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.studios.uio443.cluck.presentation.R;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
+import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by zundarik
@@ -144,12 +152,21 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 						}, 3000);
 	}
 
+    @Override
+    public void showLoginSuccess() {
+        Intent mainActivity = new Intent(getActivity(), MainActivity.class);
+        mainActivity
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().startActivity(mainActivity);
+        getActivity().finish();
+    }
+
 	@Override
 	public void showLoginFailed() {
 		Log.e(Consts.TAG, "LoginFragment.showLoginFailed");
 		Toast.makeText(getActivity(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
 
-		btnLogin.setEnabled(false);
+        btnLogin.setEnabled(true);
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import com.studios.uio443.cluck.presentation.internal.di.Scope.FragmentScope;
 import com.studios.uio443.cluck.presentation.router.MainRouter;
 import com.studios.uio443.cluck.presentation.router.impl.MainRouterImpl;
 import com.studios.uio443.cluck.presentation.view.fragment.MainFragment;
+import com.studios.uio443.cluck.presentation.view.fragment.UserProfileFragment;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -26,4 +28,8 @@ public interface MainActivityModule {
 	@FragmentScope
 	@ContributesAndroidInjector(modules = {MainFragmentModule.class})
 	MainFragment mainFragment();
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = {UserFragmentModule.class})
+    UserProfileFragment userProfileFragment();
 }

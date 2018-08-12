@@ -50,7 +50,9 @@ public class UserModel {
   }
 
   public String getFullName() {
-    return fullName;
+    // для теста
+    //return fullName;
+    return "Test Userovich";
   }
 
   public void setFullName(String fullName) {

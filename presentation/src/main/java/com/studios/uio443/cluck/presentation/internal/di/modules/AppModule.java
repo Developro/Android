@@ -1,6 +1,7 @@
 package com.studios.uio443.cluck.presentation.internal.di.modules;
 
 import android.content.Context;
+
 import com.studios.uio443.cluck.data.cache.UserCache;
 import com.studios.uio443.cluck.data.cache.UserCacheImpl;
 import com.studios.uio443.cluck.data.executor.JobExecutor;
@@ -14,12 +15,14 @@ import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
 import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.studios.uio443.cluck.presentation.view.activity.UserListActivity;
+import com.studios.uio443.cluck.presentation.view.activity.UserProfileActivity;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
-
-import javax.inject.Singleton;
 
 @Module(includes = {AndroidSupportInjectionModule.class})
 public abstract class AppModule {
@@ -71,4 +74,8 @@ public abstract class AppModule {
 	@ActivityScope
 	@ContributesAndroidInjector(modules = {UserListActivityModule.class})
 	abstract UserListActivity mainUserListActivity();
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = {UserActivityModule.class})
+    abstract UserProfileActivity mainUserProfileActivity();
 }
