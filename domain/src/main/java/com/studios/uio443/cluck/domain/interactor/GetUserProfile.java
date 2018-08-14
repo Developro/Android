@@ -30,10 +30,7 @@ public class GetUserProfile  extends UseCase<User, GetUserProfile.Params>  {
         if (params.isAuth)
             return this.userRepository.auth(params.user, params.password);
         else {
-            if (params.isCurrentUser)
-                return this.userRepository.currentUserProfile();
-            else
-                return this.userRepository.userProfile(params.userId);
+            return this.userRepository.currentUserProfile(params.userId);
         }
 
     }
@@ -44,13 +41,8 @@ public class GetUserProfile  extends UseCase<User, GetUserProfile.Params>  {
 
         private int userId;
         private boolean isAuth = false;
-        private boolean isCurrentUser = false;
         private String user;
         private String password;
-
-        private Params() {
-            this.isCurrentUser = true;
-        }
 
         private Params(int userId) {
             this.userId = userId;
@@ -64,10 +56,6 @@ public class GetUserProfile  extends UseCase<User, GetUserProfile.Params>  {
 
         public static Params forUser(int userId) {
             return new Params(userId);
-        }
-
-        public static Params forCurrentUser() {
-            return new Params();
         }
 
         public static Params auth(String user, String password) {

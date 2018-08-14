@@ -154,7 +154,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 	 */
 	private void loadUserDetails() {
 		if (this.userProfilePresenter != null) {
-			this.userProfilePresenter.initialize();
+			this.userProfilePresenter.initialize(currentUserId());
 		}
 	}
 

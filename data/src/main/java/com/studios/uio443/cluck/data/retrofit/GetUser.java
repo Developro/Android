@@ -79,8 +79,8 @@ public class GetUser {
         return service.getUser(userId);
     }
 
-    public Observable<UserEntity> getCurrentUser() {
-        return service.getCurrentUser();
+    public Observable<UserEntity> getCurrentUser(int userId) {
+        return service.getCurrentUser(userId);
     }
 
     public Observable<UserEntity> auth(RequestBody requestBody) {

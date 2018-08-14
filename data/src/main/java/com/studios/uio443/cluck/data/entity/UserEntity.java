@@ -16,6 +16,7 @@
 package com.studios.uio443.cluck.data.entity;
 
 import com.google.gson.annotations.SerializedName;
+import com.studios.uio443.cluck.data.util.JWTUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,29 +26,29 @@ import java.util.List;
  */
 public class UserEntity {
 
-  @SerializedName("id")
-  private int userId;
+    @SerializedName("id")
+    private int userId;
 
-  @SerializedName("cover_url")
-  private String coverUrl;
+    @SerializedName("cover_url")
+    private String coverUrl;
 
-  @SerializedName("full_name")
-  private String fullname;
+    @SerializedName("full_name")
+    private String fullname;
 
-  @SerializedName("email")
-  private String email;
+    @SerializedName("email")
+    private String email;
 
-  @SerializedName("login")
-  private String login;
+    @SerializedName("login")
+    private String login;
 
-  @SerializedName("points")
-  private int points;
+    @SerializedName("points")
+    private int points;
 
-  @SerializedName("votes")
-  private int votes;
+    @SerializedName("votes")
+    private int votes;
 
-  @SerializedName("nickName")
-  private String nickName;
+    @SerializedName("nickName")
+    private String nickName;
 
     @SerializedName("status")
     private Integer status;
@@ -92,98 +93,106 @@ public class UserEntity {
     public void setError(Object error) {
         this.error = error;
     }
-  public int getUserId() {
-    return userId;
-  }
 
-  public void setUserId(int userId) {
+    public int getUserId() {
+        if (userId == 0 || getAccessToken() != null) {
+            try {
+                userId = JWTUtils.getIntParamFromJWTBody(getAccessToken(), "id");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return userId;
+    }
+
+    public void setUserId(int userId) {
     this.userId = userId;
-  }
+    }
 
-  public String getCoverUrl() {
-    return coverUrl;
-  }
+    public String getCoverUrl() {
+        return coverUrl;
+    }
 
-  public String getFullname() {
+    public String getFullname() {
     return fullname;
-  }
+    }
 
-  public void setFullname(String fullname) {
+    public void setFullname(String fullname) {
     this.fullname = fullname;
-  }
+    }
 
-  public String getEmail() {
+    public String getEmail() {
     return email;
-  }
+    }
 
-  public String getLogin() {
+    public String getLogin() {
     return login;
-  }
+    }
 
-  public void setLogin(String login) {
+    public void setLogin(String login) {
     this.login = login;
-  }
+    }
 
-  public String getAccessToken() {
-      if (this.resultEntity == null || this.resultEntity.size() == 0) {
-          return null;
-      } else {
-          return this.resultEntity.get(0).getAccessToken();
-      }
-  }
+    public String getAccessToken() {
+        if (this.resultEntity == null || this.resultEntity.size() == 0) {
+            return null;
+        } else {
+            return this.resultEntity.get(0).getAccessToken();
+        }
+    }
 
-  public void setAccessToken(String accessToken) {
+    public void setAccessToken(String accessToken) {
 
-      if (this.resultEntity == null) {
-          this.resultEntity = new ArrayList<>();
-      }
-      if (this.resultEntity.size() == 0) {
-          resultEntity.add(new ResultEntity(accessToken, null));
-      } else {
-          resultEntity.get(0).setAccessToken(accessToken);
-      }
-  }
+        if (this.resultEntity == null) {
+            this.resultEntity = new ArrayList<>();
+        }
+        if (this.resultEntity.size() == 0) {
+            resultEntity.add(new ResultEntity(accessToken, null));
+        } else {
+            resultEntity.get(0).setAccessToken(accessToken);
+        }
+    }
 
-  public String getRefreshToken() {
-      if (this.resultEntity == null || this.resultEntity.size() == 0) {
-          return null;
-      } else {
-          return this.resultEntity.get(0).getRefreshToken();
-      }
-  }
+    public String getRefreshToken() {
+        if (this.resultEntity == null || this.resultEntity.size() == 0) {
+            return null;
+        } else {
+            return this.resultEntity.get(0).getRefreshToken();
+        }
+    }
 
-  public void setRefreshToken(String refreshToken) {
-      if (this.resultEntity == null) {
-          this.resultEntity = new ArrayList<>();
-      }
-      if (this.resultEntity.size() == 0) {
-          resultEntity.add(new ResultEntity(null, refreshToken));
-      } else {
-          resultEntity.get(0).setRefreshToken(refreshToken);
-      }
-  }
+    public void setRefreshToken(String refreshToken) {
+        if (this.resultEntity == null) {
+            this.resultEntity = new ArrayList<>();
+        }
+        if (this.resultEntity.size() == 0) {
+            resultEntity.add(new ResultEntity(null, refreshToken));
+        } else {
+            resultEntity.get(0).setRefreshToken(refreshToken);
+        }
+    }
 
-  public int getPoints() {
+    public int getPoints() {
     return points;
-  }
+    }
 
-  public void setPoints(int points) {
+    public void setPoints(int points) {
     this.points = points;
-  }
+    }
 
-  public int getVotes() {
+    public int getVotes() {
     return votes;
-  }
+    }
 
-  public void setVotes(int votes) {
+    public void setVotes(int votes) {
     this.votes = votes;
-  }
+    }
 
-  public String getNickName() {
+    public String getNickName() {
     return nickName;
-  }
+    }
 
-  public void setNickName(String nickName) {
+    public void setNickName(String nickName) {
     this.nickName = nickName;
   }
 }

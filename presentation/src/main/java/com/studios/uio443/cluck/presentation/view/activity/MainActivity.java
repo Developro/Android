@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.studios.uio443.cluck.presentation.R;
+import com.studios.uio443.cluck.presentation.model.UserHolder;
 import com.studios.uio443.cluck.presentation.mvp.MainActivityVP;
 import com.studios.uio443.cluck.presentation.presenter.MainActivityPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
@@ -26,6 +27,7 @@ import com.studios.uio443.cluck.presentation.util.Consts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -149,7 +151,7 @@ public class MainActivity extends BaseActivity implements
 				break;
 			}
 			case R.id.nav_profile: {
-				router.showProfileFragment();
+				router.showProfileFragment(Objects.requireNonNull(UserHolder.getInstance().getUser()).getUserId());
 				break;
 			}
 			case R.id.nav_about: {

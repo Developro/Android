@@ -67,14 +67,14 @@ public class UserProfilePresenter implements Presenter {
    * Initializes the presenter by showing/hiding proper views
    * and retrieving user details.
    */
-  public void initialize() {
+  public void initialize(int userId) {
     this.hideViewRetry();
     this.showViewLoading();
-    this.getUserDetails();
+    this.getUserDetails(userId);
   }
 
-  private void getUserDetails() {
-    this.getUserProfileUseCase.execute(new UserProfileObserver(), Params.forCurrentUser());
+  private void getUserDetails(int userId) {
+    this.getUserProfileUseCase.execute(new UserProfileObserver(), Params.forUser(userId));
   }
 
   private void showViewLoading() {
