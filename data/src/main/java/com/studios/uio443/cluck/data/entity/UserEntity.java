@@ -26,30 +26,6 @@ import java.util.List;
  */
 public class UserEntity {
 
-    @SerializedName("id")
-    private int userId;
-
-    @SerializedName("cover_url")
-    private String coverUrl;
-
-    @SerializedName("full_name")
-    private String fullname;
-
-    @SerializedName("email")
-    private String email;
-
-    @SerializedName("login")
-    private String login;
-
-    @SerializedName("points")
-    private int points;
-
-    @SerializedName("votes")
-    private int votes;
-
-    @SerializedName("nickName")
-    private String nickName;
-
     @SerializedName("status")
     private Integer status;
 
@@ -61,6 +37,8 @@ public class UserEntity {
 
     @SerializedName("error")
     private Object error;
+
+    private int userId;
 
     public Integer getStatus() {
         return status;
@@ -95,7 +73,10 @@ public class UserEntity {
     }
 
     public int getUserId() {
-        if (userId == 0 || getAccessToken() != null) {
+        if (this.resultEntity != null && this.resultEntity.size() != 0) {
+            userId = this.resultEntity.get(0).getUserId();
+        }
+        if (userId == 0 && getAccessToken() != null && !getAccessToken().isEmpty()) {
             try {
                 userId = JWTUtils.getIntParamFromJWTBody(getAccessToken(), "id");
             } catch (Exception e) {
@@ -106,31 +87,39 @@ public class UserEntity {
     }
 
     public void setUserId(int userId) {
-    this.userId = userId;
+        this.userId = userId;
     }
 
     public String getCoverUrl() {
+        String coverUrl = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            coverUrl = resultEntity.get(0).getCoverUrl();
+        }
         return coverUrl;
     }
 
     public String getFullname() {
-    return fullname;
-    }
-
-    public void setFullname(String fullname) {
-    this.fullname = fullname;
+        String fullname = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            fullname = resultEntity.get(0).getFullname();
+        }
+        return fullname;
     }
 
     public String getEmail() {
-    return email;
+        String email = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            email = resultEntity.get(0).getEmail();
+        }
+        return email;
     }
 
     public String getLogin() {
-    return login;
-    }
-
-    public void setLogin(String login) {
-    this.login = login;
+        String login = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            login = resultEntity.get(0).getLogin();
+        }
+        return login;
     }
 
     public String getAccessToken() {
@@ -173,26 +162,26 @@ public class UserEntity {
     }
 
     public int getPoints() {
-    return points;
-    }
-
-    public void setPoints(int points) {
-    this.points = points;
+        int points = 0;
+        if (resultEntity != null && resultEntity.size() != 0) {
+            points = resultEntity.get(0).getPoints();
+        }
+        return points;
     }
 
     public int getVotes() {
-    return votes;
-    }
-
-    public void setVotes(int votes) {
-    this.votes = votes;
+        int votes = 0;
+        if (resultEntity != null && resultEntity.size() != 0) {
+            votes = resultEntity.get(0).getVotes();
+        }
+        return votes;
     }
 
     public String getNickName() {
-    return nickName;
+        String nickName = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            nickName = resultEntity.get(0).getNickName();
+        }
+        return nickName;
     }
-
-    public void setNickName(String nickName) {
-    this.nickName = nickName;
-  }
 }

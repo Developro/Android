@@ -18,6 +18,12 @@
       android:freezesText="true"
       />
 
+  <TextView
+      android:id="@+id/tv_email"
+      style="@style/AppTheme.TextViewTitle"
+      android:freezesText="true"
+      android:gravity="center" />
+
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
