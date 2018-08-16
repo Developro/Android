@@ -15,6 +15,7 @@
  */
 package com.studios.uio443.cluck.test.presenter;
 
+
 import android.content.Context;
 
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
@@ -64,6 +65,6 @@ public class UserProfilePresenterTest {
 
       verify(mockUserProfileView).hideRetry();
       verify(mockUserProfileView).showLoading();
-    verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
+      verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
   }
 }

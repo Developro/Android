@@ -1,6 +1,7 @@
 package com.studios.uio443.cluck.presentation.view.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -195,6 +196,11 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 		return valid;
 	}
+
+    @Override
+    public Context context() {
+        return getActivity().getApplicationContext();
+    }
 
 	@Override
 	public void VKSdkLogin() {

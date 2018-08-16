@@ -112,7 +112,7 @@ dependencies {
   androidTestImplementation presentationTestDependencies.dexmaker
   androidTestImplementation presentationTestDependencies.dexmakerMockito
   androidTestImplementation presentationTestDependencies.espresso
-  androidTestImplementation presentationTestDependencies.testingSupportLib
+  //androidTestImplementation presentationTestDependencies.testingSupportLib
 
   //Development
   implementation developmentDependencies.leakCanary
