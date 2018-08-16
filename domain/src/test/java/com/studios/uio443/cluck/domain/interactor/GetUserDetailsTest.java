@@ -19,13 +19,14 @@ import com.studios.uio443.cluck.domain.executor.PostExecutionThread;
 import com.studios.uio443.cluck.domain.executor.ThreadExecutor;
 import com.studios.uio443.cluck.domain.interactor.GetUserDetails.Params;
 import com.studios.uio443.cluck.domain.repository.UserRepository;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;

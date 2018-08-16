@@ -17,16 +17,18 @@ package com.studios.uio443.cluck.domain.interactor;
 
 import com.studios.uio443.cluck.domain.executor.PostExecutionThread;
 import com.studios.uio443.cluck.domain.executor.ThreadExecutor;
-import io.reactivex.Observable;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.TestScheduler;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.TestScheduler;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;

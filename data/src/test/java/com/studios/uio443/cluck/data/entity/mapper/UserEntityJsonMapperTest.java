@@ -15,15 +15,17 @@
  */
 package com.studios.uio443.cluck.data.entity.mapper;
 
-import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.google.gson.JsonSyntaxException;
-import java.util.Collection;
+import com.studios.uio443.cluck.data.entity.UserEntity;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Collection;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
