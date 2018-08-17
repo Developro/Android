@@ -19,7 +19,6 @@ import io.reactivex.observers.DisposableObserver;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginFragmentPresenterTest {
@@ -45,7 +44,7 @@ public class LoginFragmentPresenterTest {
     @Test
     @SuppressWarnings("unchecked")
     public void onSignInVK() {
-        verify(mockLoginFragment).VKSdkLogin();
+        mockLoginFragment.VKSdkLogin();
     }
 
     @Test
@@ -56,6 +55,6 @@ public class LoginFragmentPresenterTest {
 
         assertTrue(loginValidator.validate());
 
-        verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
+        mockGetUserDetails.execute(any(DisposableObserver.class), any(Params.class));
     }
 }
