@@ -1,5 +1,6 @@
 package com.studios.uio443.cluck.data.retrofit;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class GetUser {
     private CluckyAPI service;
     private String token = null;
     private AuthorizationRequestInterceptor authorizationRequestInterceptor;
+    private Context context;
 
     private GetUser() {
         Log.d(Consts.TAG, "GetUser constructor");
@@ -69,6 +71,15 @@ public class GetUser {
 
     public boolean tokenIsEmpty() {
         return (token == null || token.equals(""));
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+        authorizationRequestInterceptor.setContext(this.context);
+    }
+
+    public boolean contextIsEmpty() {
+        return (context == null);
     }
 
     public UserEntity getUser() {

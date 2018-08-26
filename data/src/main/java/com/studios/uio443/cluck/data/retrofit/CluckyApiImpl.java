@@ -22,6 +22,10 @@ public class CluckyApiImpl implements CluckyAPI {
             throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
         }
         this.context = context;
+
+        if (GetUser.getInstance().contextIsEmpty()) {
+            GetUser.getInstance().setContext(this.context);
+        }
     }
 
     @Override

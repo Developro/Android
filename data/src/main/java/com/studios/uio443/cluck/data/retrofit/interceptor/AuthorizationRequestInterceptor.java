@@ -1,5 +1,9 @@
 package com.studios.uio443.cluck.data.retrofit.interceptor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -15,13 +19,24 @@ public class AuthorizationRequestInterceptor implements Interceptor {
 
     private final String AUTHORIZATION = "x-access-token";
     private String token;
+    private Context context;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor prefsEdit;
 
     public AuthorizationRequestInterceptor(String token) {
         this.token = token;
+
+
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setContext(Context context) {
+        this.context = context.getApplicationContext();
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        this.prefsEdit = prefs.edit();
     }
 
     @Override
@@ -32,6 +47,10 @@ public class AuthorizationRequestInterceptor implements Interceptor {
                 || token == null
                 || token.equals("")) {
             return chain.proceed(originalRequest);
+        }
+
+        if (this.context != null) {
+            // TODO - load pref and save
         }
 
         Request authorizedRequest = originalRequest.newBuilder()
