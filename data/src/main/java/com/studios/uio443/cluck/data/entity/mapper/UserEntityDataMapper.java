@@ -55,6 +55,7 @@ public class UserEntityDataMapper {
       user.setRefreshToken(userEntity.getRefreshToken());
       user.setPoints(userEntity.getPoints());
       user.setVotes(userEntity.getVotes());
+      user.setExpDate(userEntity.getExpDate());
 
       // пока точно не знаю куда воткнуть, самый простой способ это сюда
       if (GetUser.getInstance().tokenIsEmpty())

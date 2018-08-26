@@ -39,6 +39,7 @@ public class UserEntity {
     private Object error;
 
     private int userId;
+    private int expDate;
 
     public Integer getStatus() {
         return status;
@@ -84,6 +85,17 @@ public class UserEntity {
             }
         }
         return userId;
+    }
+
+    public int getExpDate() {
+        if (expDate == 0 && getAccessToken() != null && !getAccessToken().isEmpty()) {
+            try {
+                expDate = JWTUtils.getIntParamFromJWTBody(getAccessToken(), "exp");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return expDate;
     }
 
     public void setUserId(int userId) {
