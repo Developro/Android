@@ -2,12 +2,15 @@ package com.studios.uio443.cluck.presentation;
 
 import android.content.Intent;
 import android.widget.Toast;
+
 import com.squareup.leakcanary.LeakCanary;
+import com.studios.uio443.cluck.data.util.SharedPreferencesUtil;
 import com.studios.uio443.cluck.presentation.internal.di.components.DaggerAppComponent;
 import com.studios.uio443.cluck.presentation.view.activity.LoginActivity;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 import com.vk.sdk.VKSdk;
+
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
@@ -49,6 +52,8 @@ public class App extends DaggerApplication {
 		vkAccessTokenTracker.startTracking();
 		VKSdk.initialize(this);
 
+		// init shared pref
+		SharedPreferencesUtil.initSharedPreferences(this.getApplicationContext());
 	}
 
 	/**
