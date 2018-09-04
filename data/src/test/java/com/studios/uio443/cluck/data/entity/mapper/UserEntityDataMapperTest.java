@@ -17,13 +17,15 @@ package com.studios.uio443.cluck.data.entity.mapper;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.domain.User;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -34,12 +36,12 @@ import static org.mockito.Mockito.mock;
 public class UserEntityDataMapperTest {
 
   private static final int FAKE_USER_ID = 123;
-  private static final String FAKE_FULLNAME = "Tony Stark";
+  private static final String FAKE_MESSAGE = "Message";
 
   private UserEntityDataMapper userEntityDataMapper;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     userEntityDataMapper = new UserEntityDataMapper();
   }
 
@@ -50,7 +52,7 @@ public class UserEntityDataMapperTest {
 
     assertThat(user, is(instanceOf(User.class)));
     assertThat(user.getUserId(), is(FAKE_USER_ID));
-    assertThat(user.getFullName(), is(FAKE_FULLNAME));
+    assertThat(user.getFullName(), is(FAKE_MESSAGE));
   }
 
   @Test
@@ -58,7 +60,7 @@ public class UserEntityDataMapperTest {
     UserEntity mockUserEntityOne = mock(UserEntity.class);
     UserEntity mockUserEntityTwo = mock(UserEntity.class);
 
-    List<UserEntity> userEntityList = new ArrayList<UserEntity>(5);
+    List<UserEntity> userEntityList = new ArrayList<>(5);
     userEntityList.add(mockUserEntityOne);
     userEntityList.add(mockUserEntityTwo);
 
@@ -72,7 +74,7 @@ public class UserEntityDataMapperTest {
   private UserEntity createFakeUserEntity() {
     UserEntity userEntity = new UserEntity();
     userEntity.setUserId(FAKE_USER_ID);
-    userEntity.setFullname(FAKE_FULLNAME);
+    userEntity.setMessage(FAKE_MESSAGE);
 
     return userEntity;
   }

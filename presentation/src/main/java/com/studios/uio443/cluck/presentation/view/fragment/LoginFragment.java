@@ -1,6 +1,7 @@
 package com.studios.uio443.cluck.presentation.view.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.studios.uio443.cluck.presentation.presenter.LoginFragmentPresenter;
 import com.studios.uio443.cluck.presentation.presenter.PresenterManager;
 import com.studios.uio443.cluck.presentation.router.LoginRouter;
 import com.studios.uio443.cluck.presentation.util.Consts;
+import com.studios.uio443.cluck.presentation.util.LoginValidator;
 import com.studios.uio443.cluck.presentation.view.activity.MainActivity;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
@@ -171,30 +173,24 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 
 	@Override
 	public boolean validate() {
-		boolean valid = true;
+		boolean valid;
 
-		String email = loginEmailInput.getText().toString();
-		String password = loginPasswordInput.getText().toString();
+		LoginValidator loginValidator = new LoginValidator(getActivity(), loginEmailInput.getText().toString(), loginPasswordInput.getText().toString());
 
-		if (email.isEmpty()
-			// del email validate (def user is "user")
-			//|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-						) {
-			loginEmailInput.setError(getString(R.string.enter_valid_email));
-			valid = false;
-		} else {
-			loginEmailInput.setError(null);
-		}
+		valid = loginValidator.validate();
 
-		if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-			loginPasswordInput.setError(getString(R.string.password_length_error));
-			valid = false;
-		} else {
-			loginPasswordInput.setError(null);
+		if (!valid) {
+			loginEmailInput.setError(loginValidator.getLoginError());
+			loginPasswordInput.setError(loginValidator.getPasswordError());
 		}
 
 		return valid;
 	}
+
+    @Override
+    public Context context() {
+        return getActivity().getApplicationContext();
+    }
 
 	@Override
 	public void VKSdkLogin() {

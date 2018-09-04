@@ -20,14 +20,17 @@ import com.studios.uio443.cluck.data.entity.mapper.UserEntityDataMapper;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStore;
 import com.studios.uio443.cluck.data.repository.datasource.UserDataStoreFactory;
 import com.studios.uio443.cluck.domain.User;
-import io.reactivex.Observable;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;

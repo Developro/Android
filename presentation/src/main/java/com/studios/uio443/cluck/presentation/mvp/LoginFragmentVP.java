@@ -1,5 +1,7 @@
 package com.studios.uio443.cluck.presentation.mvp;
 
+import android.content.Context;
+
 /**
  * Created by zundarik
  */
@@ -15,6 +17,8 @@ public interface LoginFragmentVP {
 		void showLoginSuccess();
 
 		boolean validate();
+
+        Context context();
 	}
 
 	interface Presenter {

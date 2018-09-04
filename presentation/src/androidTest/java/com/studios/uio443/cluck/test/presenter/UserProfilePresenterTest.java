@@ -15,10 +15,11 @@
  */
 package com.studios.uio443.cluck.test.presenter;
 
+
 import android.content.Context;
 
-import com.studios.uio443.cluck.domain.interactor.GetUserDetails;
-import com.studios.uio443.cluck.domain.interactor.GetUserDetails.Params;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
+import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.presenter.UserProfilePresenter;
 import com.studios.uio443.cluck.presentation.view.UserProfileView;
@@ -27,7 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -45,7 +46,8 @@ public class UserProfilePresenterTest {
   @Mock private Context mockContext;
     @Mock
     private UserProfileView mockUserProfileView;
-  @Mock private GetUserDetails mockGetUserDetails;
+    @Mock
+    private GetUserProfile mockGetUserDetails;
   @Mock private UserModelDataMapper mockUserModelDataMapper;
 
   @Before
@@ -63,6 +65,6 @@ public class UserProfilePresenterTest {
 
       verify(mockUserProfileView).hideRetry();
       verify(mockUserProfileView).showLoading();
-    verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
+      verify(mockGetUserDetails).execute(any(DisposableObserver.class), any(Params.class));
   }
 }

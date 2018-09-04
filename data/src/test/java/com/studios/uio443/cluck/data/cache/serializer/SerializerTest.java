@@ -16,10 +16,11 @@
 package com.studios.uio443.cluck.data.cache.serializer;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -52,7 +53,6 @@ public class SerializerTest {
 
     assertThat(userEntityOne.getUserId(), is(userEntityTwo.getUserId()));
     assertThat(userEntityOne.getFullname(), is(equalTo(userEntityTwo.getFullname())));
-    assertThat(userEntityOne.getFollowers(), is(userEntityTwo.getFollowers()));
   }
 
   @Test
@@ -61,6 +61,5 @@ public class SerializerTest {
 
     assertThat(userEntity.getUserId(), is(1));
     assertThat(userEntity.getFullname(), is("Simon Hill"));
-    assertThat(userEntity.getFollowers(), is(7484));
   }
 }

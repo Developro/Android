@@ -39,7 +39,7 @@ ext {
   jUnitVersion = '4.12'
   assertJVersion = '1.7.1'
   mockitoVersion = '2.7.21'
-  dexmakerVersion = '1.2'
+  dexmakerVersion = '2.2.0'
   espressoVersion = '3.0.2'
   testingSupportLibVersion = '0.1'
 
@@ -73,8 +73,8 @@ ext {
       junit:              "junit:junit:${jUnitVersion}",
       runner:             "com.android.support.test:runner:$runnerVersion",
       mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-      dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-      dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+      dexmaker:           "com.linkedin.dexmaker:dexmaker:${dexmakerVersion}",
+      dexmakerMockito:    "com.linkedin.dexmaker:dexmaker-mockito:${dexmakerVersion}",
       espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
       testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
   ]
