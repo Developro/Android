@@ -49,12 +49,13 @@ public class UserModelDataMapper {
     userModel.setCoverUrl(user.getCoverUrl());
     userModel.setFullName(user.getFullName());
     userModel.setEmail(user.getEmail());
-      userModel.setAccessToken(user.getAccessToken());
-      userModel.setLogin(user.getLogin());
-      userModel.setNickName(user.getNickName());
-      userModel.setPoints(user.getPoints());
-      userModel.setRefreshToken(user.getRefreshToken());
-      userModel.setVotes(user.getVotes());
+    userModel.setAccessToken(user.getAccessToken());
+    userModel.setLogin(user.getLogin());
+    userModel.setNickName(user.getNickName());
+    userModel.setPoints(user.getPoints());
+    userModel.setRefreshToken(user.getRefreshToken());
+    userModel.setVotes(user.getVotes());
+    userModel.setExpDate(user.getExpDate());
 
     return userModel;
   }

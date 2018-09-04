@@ -86,8 +86,6 @@ public class LoginFragment extends BaseFragment implements LoginFragmentVP.View 
 		super.onViewCreated(view, savedInstanceState);
 		ButterKnife.bind(this, view);
 
-		//TODO чтение последнего логина из префа
-
 		if (savedInstanceState != null) {
 			loginEmailInput.setText(savedInstanceState.getString(LOGIN, ""));
 			loginPasswordInput.setText(savedInstanceState.getString(LOGIN, ""));

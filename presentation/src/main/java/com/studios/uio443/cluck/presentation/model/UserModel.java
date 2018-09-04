@@ -36,6 +36,7 @@ public class UserModel {
   private int points;
   private int votes;
   private String nickName;
+  private int expDate;
 
   public int getUserId() {
     return userId;
@@ -121,5 +122,13 @@ public class UserModel {
 
   public void setNickName(String nickName) {
     this.nickName = nickName;
+  }
+
+  public int getExpDate() {
+    return expDate;
+  }
+
+  public void setExpDate(int expDate) {
+    this.expDate = expDate;
   }
 }

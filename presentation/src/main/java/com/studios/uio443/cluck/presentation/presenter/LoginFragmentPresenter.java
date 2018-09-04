@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.studios.uio443.cluck.data.retrofit.GetUser;
+import com.studios.uio443.cluck.data.util.JWTUtils;
+import com.studios.uio443.cluck.data.util.SharedPreferencesUtil;
 import com.studios.uio443.cluck.domain.User;
 import com.studios.uio443.cluck.domain.interactor.DefaultObserver;
 import com.studios.uio443.cluck.domain.interactor.GetUserProfile;
@@ -12,11 +15,14 @@ import com.studios.uio443.cluck.domain.interactor.GetUserProfile.Params;
 import com.studios.uio443.cluck.presentation.internal.di.Scope.ActivityScope;
 import com.studios.uio443.cluck.presentation.mapper.UserModelDataMapper;
 import com.studios.uio443.cluck.presentation.model.UserHolder;
+import com.studios.uio443.cluck.presentation.model.UserModel;
 import com.studios.uio443.cluck.presentation.mvp.FragmentNavigation;
 import com.studios.uio443.cluck.presentation.mvp.LoginFragmentVP;
 import com.studios.uio443.cluck.presentation.util.Consts;
 
 import javax.inject.Inject;
+
+import static com.studios.uio443.cluck.data.util.Consts.ACCESS_TOKEN_TAG;
 
 /**
  * Created by zundarik
@@ -49,6 +55,19 @@ public class LoginFragmentPresenter extends BasePresenter<UserHolder, LoginFragm
 	@Override
 	public void bindView(@NonNull LoginFragmentVP.View view) {
 		super.bindView(view);
+
+        // если уже задан access token, то открываем сразу форму
+        String accessToken = SharedPreferencesUtil.getPropertyWithDecrypt(ACCESS_TOKEN_TAG, "");
+        if (!accessToken.isEmpty()) {
+            try {
+                UserHolder.getInstance().setUser(new UserModel(JWTUtils.getIntParamFromJWTBody(accessToken, "id")));
+                GetUser.getInstance().setToken(accessToken);
+                view().showLoginSuccess();
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 		// Let's not reload data if it's already here
 		if (model == null && !isLoadingData) {

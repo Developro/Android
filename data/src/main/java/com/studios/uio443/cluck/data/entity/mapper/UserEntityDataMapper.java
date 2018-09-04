@@ -17,14 +17,20 @@ package com.studios.uio443.cluck.data.entity.mapper;
 
 import com.studios.uio443.cluck.data.entity.UserEntity;
 import com.studios.uio443.cluck.data.retrofit.GetUser;
+import com.studios.uio443.cluck.data.util.SharedPreferencesUtil;
 import com.studios.uio443.cluck.domain.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import static com.studios.uio443.cluck.data.util.Consts.ACCESS_TOKEN_TAG;
+import static com.studios.uio443.cluck.data.util.Consts.EXP_DATE_TAG;
+import static com.studios.uio443.cluck.data.util.Consts.REFRESH_TOKEN_TAG;
 
 /**
  * Mapper class used to transform {@link UserEntity} (in the data layer) to {@link User} in the
@@ -55,10 +61,23 @@ public class UserEntityDataMapper {
       user.setRefreshToken(userEntity.getRefreshToken());
       user.setPoints(userEntity.getPoints());
       user.setVotes(userEntity.getVotes());
+      user.setExpDate(userEntity.getExpDate());
 
       // пока точно не знаю куда воткнуть, самый простой способ это сюда
-      if (GetUser.getInstance().tokenIsEmpty())
+      if (GetUser.getInstance().tokenIsEmpty() && userEntity.getAccessToken() != null) {
         GetUser.getInstance().setToken(userEntity.getAccessToken());
+        SharedPreferencesUtil.savePropertyWithEncrypt(ACCESS_TOKEN_TAG, userEntity.getAccessToken());
+      }
+      // тут также сохранить нужные нам свойства, будем с ними работать
+      if (userEntity.getExpDate() != 0) {
+        int expiresIn = userEntity.getExpDate();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.SECOND, expiresIn);
+        SharedPreferencesUtil.saveProperty(EXP_DATE_TAG, c.getTimeInMillis());
+      }
+
+      if (userEntity.getRefreshToken() != null)
+        SharedPreferencesUtil.savePropertyWithEncrypt(REFRESH_TOKEN_TAG, userEntity.getRefreshToken());
     }
     return user;
   }
