@@ -30,8 +30,9 @@ public class MainRouterImpl extends BaseRouterImpl<MainActivity> implements Main
 	}
 
 	@Override
-	public void showProfileFragment() {
-		replaceFragment(R.id.main_container, new UserProfileFragment());
+	public void showProfileFragment(int userId) {
+		//replaceFragment(R.id.main_container, new UserProfileFragment());
+		replaceFragment(R.id.main_container, UserProfileFragment.forUser(userId));
 	}
 
 	@Override

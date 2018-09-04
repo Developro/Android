@@ -34,9 +34,9 @@ public class CluckyApiImpl implements CluckyAPI {
     }
 
     @Override
-    public Observable<UserEntity> getCurrentUser() {
+    public Observable<UserEntity> getCurrentUser(int user_id) {
         if (isThereInternetConnection()) {
-            return GetUser.getInstance().getCurrentUser();
+            return GetUser.getInstance().getCurrentUser(user_id);
         } else {
             return Observable.error(new NetworkConnectionException());
         }

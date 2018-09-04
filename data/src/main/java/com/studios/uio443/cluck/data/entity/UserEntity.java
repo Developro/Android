@@ -16,6 +16,7 @@
 package com.studios.uio443.cluck.data.entity;
 
 import com.google.gson.annotations.SerializedName;
+import com.studios.uio443.cluck.data.util.JWTUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,30 +25,6 @@ import java.util.List;
  * User Entity used in the data layer.
  */
 public class UserEntity {
-
-  @SerializedName("id")
-  private int userId;
-
-  @SerializedName("cover_url")
-  private String coverUrl;
-
-  @SerializedName("full_name")
-  private String fullname;
-
-  @SerializedName("email")
-  private String email;
-
-  @SerializedName("login")
-  private String login;
-
-  @SerializedName("points")
-  private int points;
-
-  @SerializedName("votes")
-  private int votes;
-
-  @SerializedName("nickName")
-  private String nickName;
 
     @SerializedName("status")
     private Integer status;
@@ -60,6 +37,8 @@ public class UserEntity {
 
     @SerializedName("error")
     private Object error;
+
+    private int userId;
 
     public Integer getStatus() {
         return status;
@@ -92,98 +71,117 @@ public class UserEntity {
     public void setError(Object error) {
         this.error = error;
     }
-  public int getUserId() {
-    return userId;
-  }
 
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
+    public int getUserId() {
+        if (this.resultEntity != null && this.resultEntity.size() != 0) {
+            userId = this.resultEntity.get(0).getUserId();
+        }
+        if (userId == 0 && getAccessToken() != null && !getAccessToken().isEmpty()) {
+            try {
+                userId = JWTUtils.getIntParamFromJWTBody(getAccessToken(), "id");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return userId;
+    }
 
-  public String getCoverUrl() {
-    return coverUrl;
-  }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-  public String getFullname() {
-    return fullname;
-  }
+    public String getCoverUrl() {
+        String coverUrl = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            coverUrl = resultEntity.get(0).getCoverUrl();
+        }
+        return coverUrl;
+    }
 
-  public void setFullname(String fullname) {
-    this.fullname = fullname;
-  }
+    public String getFullname() {
+        String fullname = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            fullname = resultEntity.get(0).getFullname();
+        }
+        return fullname;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getEmail() {
+        String email = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            email = resultEntity.get(0).getEmail();
+        }
+        return email;
+    }
 
-  public String getLogin() {
-    return login;
-  }
+    public String getLogin() {
+        String login = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            login = resultEntity.get(0).getLogin();
+        }
+        return login;
+    }
 
-  public void setLogin(String login) {
-    this.login = login;
-  }
+    public String getAccessToken() {
+        if (this.resultEntity == null || this.resultEntity.size() == 0) {
+            return null;
+        } else {
+            return this.resultEntity.get(0).getAccessToken();
+        }
+    }
 
-  public String getAccessToken() {
-      if (this.resultEntity == null || this.resultEntity.size() == 0) {
-          return null;
-      } else {
-          return this.resultEntity.get(0).getAccessToken();
-      }
-  }
+    public void setAccessToken(String accessToken) {
 
-  public void setAccessToken(String accessToken) {
+        if (this.resultEntity == null) {
+            this.resultEntity = new ArrayList<>();
+        }
+        if (this.resultEntity.size() == 0) {
+            resultEntity.add(new ResultEntity(accessToken, null));
+        } else {
+            resultEntity.get(0).setAccessToken(accessToken);
+        }
+    }
 
-      if (this.resultEntity == null) {
-          this.resultEntity = new ArrayList<>();
-      }
-      if (this.resultEntity.size() == 0) {
-          resultEntity.add(new ResultEntity(accessToken, null));
-      } else {
-          resultEntity.get(0).setAccessToken(accessToken);
-      }
-  }
+    public String getRefreshToken() {
+        if (this.resultEntity == null || this.resultEntity.size() == 0) {
+            return null;
+        } else {
+            return this.resultEntity.get(0).getRefreshToken();
+        }
+    }
 
-  public String getRefreshToken() {
-      if (this.resultEntity == null || this.resultEntity.size() == 0) {
-          return null;
-      } else {
-          return this.resultEntity.get(0).getRefreshToken();
-      }
-  }
+    public void setRefreshToken(String refreshToken) {
+        if (this.resultEntity == null) {
+            this.resultEntity = new ArrayList<>();
+        }
+        if (this.resultEntity.size() == 0) {
+            resultEntity.add(new ResultEntity(null, refreshToken));
+        } else {
+            resultEntity.get(0).setRefreshToken(refreshToken);
+        }
+    }
 
-  public void setRefreshToken(String refreshToken) {
-      if (this.resultEntity == null) {
-          this.resultEntity = new ArrayList<>();
-      }
-      if (this.resultEntity.size() == 0) {
-          resultEntity.add(new ResultEntity(null, refreshToken));
-      } else {
-          resultEntity.get(0).setRefreshToken(refreshToken);
-      }
-  }
+    public int getPoints() {
+        int points = 0;
+        if (resultEntity != null && resultEntity.size() != 0) {
+            points = resultEntity.get(0).getPoints();
+        }
+        return points;
+    }
 
-  public int getPoints() {
-    return points;
-  }
+    public int getVotes() {
+        int votes = 0;
+        if (resultEntity != null && resultEntity.size() != 0) {
+            votes = resultEntity.get(0).getVotes();
+        }
+        return votes;
+    }
 
-  public void setPoints(int points) {
-    this.points = points;
-  }
-
-  public int getVotes() {
-    return votes;
-  }
-
-  public void setVotes(int votes) {
-    this.votes = votes;
-  }
-
-  public String getNickName() {
-    return nickName;
-  }
-
-  public void setNickName(String nickName) {
-    this.nickName = nickName;
-  }
+    public String getNickName() {
+        String nickName = "";
+        if (resultEntity != null && resultEntity.size() != 0) {
+            nickName = resultEntity.get(0).getNickName();
+        }
+        return nickName;
+    }
 }

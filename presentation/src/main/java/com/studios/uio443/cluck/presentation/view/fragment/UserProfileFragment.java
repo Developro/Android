@@ -39,6 +39,8 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 	AutoLoadImageView iv_cover;
 	@BindView(R.id.tv_fullname)
 	TextView tv_fullname;
+	@BindView(R.id.tv_email)
+	TextView tv_email;
 	@BindView(R.id.tv_points)
 	TextView tv_points;
 	@BindView(R.id.tv_votes)
@@ -112,8 +114,9 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 		if (user != null) {
 			this.iv_cover.setImageUrl(user.getCoverUrl());
 			this.tv_fullname.setText(user.getFullName());
-			this.tv_points.setText(user.getPoints());
-			this.tv_votes.setText(user.getVotes());
+			this.tv_email.setText(user.getEmail());
+			this.tv_points.setText(String.valueOf(user.getPoints()));
+			this.tv_votes.setText(String.valueOf(user.getVotes()));
 		}
 	}
 
@@ -154,7 +157,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileView
 	 */
 	private void loadUserDetails() {
 		if (this.userProfilePresenter != null) {
-			this.userProfilePresenter.initialize();
+			this.userProfilePresenter.initialize(currentUserId());
 		}
 	}
 

@@ -39,7 +39,7 @@ public interface UserRepository {
 
   Observable<User> userProfile(final int userId);
 
-  Observable<User> currentUserProfile();
+  Observable<User> currentUserProfile(final int userId);
 
   Observable<User> auth(final String user, final String password);
 }

@@ -12,6 +12,8 @@ import okhttp3.Response;
 
 public class AuthorizationRequestInterceptor implements Interceptor {
 
+
+    private final String AUTHORIZATION = "x-access-token";
     private String token;
 
     public AuthorizationRequestInterceptor(String token) {
@@ -26,14 +28,14 @@ public class AuthorizationRequestInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
 
-        if (originalRequest.header("Authorization") != null
+        if (originalRequest.header(AUTHORIZATION) != null
                 || token == null
                 || token.equals("")) {
             return chain.proceed(originalRequest);
         }
 
         Request authorizedRequest = originalRequest.newBuilder()
-                .header("Authorization", token)
+                .header(AUTHORIZATION, token)
                 .method(originalRequest.method(), originalRequest.body())
                 .build();
         return chain.proceed(authorizedRequest);

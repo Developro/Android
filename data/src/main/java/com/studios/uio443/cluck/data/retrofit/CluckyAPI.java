@@ -7,6 +7,7 @@ import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CluckyAPI {
@@ -16,9 +17,8 @@ public interface CluckyAPI {
     @GET("/api/users")
     Observable<UserEntity> getUser(@Query("id") int id);
 
-    @GET("/api/users")
-    Observable<UserEntity> getCurrentUser();
-
+    @GET("/api/users/{user_id}")
+    Observable<UserEntity> getCurrentUser(@Path("user_id") int user_id);
 
     @POST("/api/auth/login")
     Observable<UserEntity> auth(@Body RequestBody requestBody);

@@ -70,8 +70,8 @@ public class UserDataRepository implements UserRepository {
   }
 
   @Override
-  public Observable<User> currentUserProfile() {
-    return this.userDataStoreFactory.getCluckyApiImpl().getCurrentUser().map(this.userEntityDataMapper::transform);
+  public Observable<User> currentUserProfile(int userId) {
+    return this.userDataStoreFactory.getCluckyApiImpl().getCurrentUser(userId).map(this.userEntityDataMapper::transform);
   }
 
   @Override
